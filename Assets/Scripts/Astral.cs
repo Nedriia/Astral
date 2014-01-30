@@ -1,59 +1,36 @@
 ﻿using UnityEngine;
+using Holoville.HOTween;
 using System.Collections;
 using System.Collections.Generic;
 public class Astral : MonoBehaviour {
 
-    public List<GameObject> prisonerInventory;
-
-    private GameObject currentlyPossessing;
     private GameObject currentlyViewing;
-    private NavMeshAgent swappingTo;
-    private MotionBlur mb;
-    private ColorCorrectionCurves ccc;
-    private SimpleMouseRotator sMR;
-    private FirstPersonHeadBob headBob;
+	private Animation eyes;
+    private bool eyesOpen;
 
 	// Use this for initialization
 	void Start () {
-        swappingTo = gameObject.GetComponent<NavMeshAgent>();
-        mb = gameObject.GetComponentInChildren<MotionBlur>();
-        ccc = gameObject.GetComponentInChildren<ColorCorrectionCurves>();
-        sMR = gameObject.GetComponent<SimpleMouseRotator>();
-        headBob = gameObject.GetComponent<FirstPersonHeadBob>();
+        eyesOpen = true;
+		eyes = gameObject.GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        swap();
+
 	}
 
-    private void swap() {
-        if ( Input.GetKeyDown( KeyCode.Q ) ) {
-            swappingTo.enabled = true;
-            mb.enabled = true;
-            ccc.enabled = true;
-            headBob.enabled = false;
-            sMR.enabled = false;
-            swappingTo.SetDestination(prisonerInventory[0].transform.position);
-        }
-
-        if (swappingTo.enabled) {
-            if ( swappingTo.remainingDistance <= 2 && !swappingTo.pathPending ) {
-
-                swappingTo.enabled = false;
-                mb.enabled = false;
-                ccc.enabled = false;
-                sMR.enabled = true;
-                headBob.enabled = true;
-
+    //true for in, false for out
+    public void bodyTransition( bool entering ) {
+            if ( entering ) {
+                eyes.Play();
+                eyesOpen = false;
+            } else {
+                eyes.Play("Eyes Open");
+                eyesOpen = true;
             }
-        }
+
     }
 
-    private bool inAstralForm() {
-
-        return true;
-    }
 
     private void addPrisoner( GameObject prisoner ) {
 
