@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using Holoville.HOTween;
 using System.Collections;
-using System.Collections.Generic;
-public class Astral : MonoBehaviour {
+
+public class Astral : MonoBehaviour, Controllable {
 
     private GameObject currentlyViewing;
 	private Animation eyes;
     private bool eyesOpen;
-
+    //used for disabling and enabling movement
+    private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
+    private FirstPersonCharacter characterMover;
 	// Use this for initialization
 	void Start () {
         eyesOpen = true;
 		eyes = gameObject.GetComponent<Animation>();
+        mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
+        mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
+        characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
 	}
 	
 	// Update is called once per frame
@@ -54,5 +59,17 @@ public class Astral : MonoBehaviour {
 
     private void getHint() {
 
+    }
+
+    public void startControlling() {
+        mouseRotatorLR.enabled = true;
+        mouseRotatorUD.enabled = true;
+        characterMover.enabled = true;
+    }
+
+    public void stopControlling() {
+        mouseRotatorLR.enabled = false;
+        mouseRotatorUD.enabled = false;
+        characterMover.enabled = false;
     }
 }
