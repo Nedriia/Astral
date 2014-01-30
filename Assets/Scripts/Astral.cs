@@ -2,7 +2,7 @@
 using Holoville.HOTween;
 using System.Collections;
 
-public class Astral : MonoBehaviour, Controllable {
+public class Astral : MonoBehaviour, Possessable {
 
     private GameObject currentlyViewing;
 	private Animation eyes;
@@ -33,7 +33,6 @@ public class Astral : MonoBehaviour, Controllable {
                 eyes.Play("Eyes Open");
                 eyesOpen = true;
             }
-
     }
 
 

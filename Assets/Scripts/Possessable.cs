@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-interface Controllable {
+interface Possessable {
 
+    void bodyTransition(bool entering);
     void startControlling();
     void stopControlling();
 }

@@ -346,6 +346,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 95: {fileID: 9500002}
+  - 111: {fileID: 11100000}
   m_Layer: 10
   m_Name: Prisoner
   m_TagString: Player
@@ -2380,6 +2381,22 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!111 &11100000
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100044}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f59c6f6dea61d864c9d567990cfab437, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f59c6f6dea61d864c9d567990cfab437, type: 2}
+  - {fileID: 7400000, guid: 0d24463213189b84294e0768f3938aef, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1

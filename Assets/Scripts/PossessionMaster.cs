@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class PossessionMaster : MonoBehaviour {
 
     public Astral Julia;
+    public FreeLookCam prisonerCamera;
 
     private List<Prisoner> prisonerInventory;
     private Prisoner currentlyPossessing;
     private static bool astralForm;
-
 	// Use this for initialization
 	void Start () {
 	    
@@ -66,9 +66,18 @@ public class PossessionMaster : MonoBehaviour {
     //transtions in or out of specified prisoner
     private void transitionP( Prisoner curPrisoner, bool enter ) {
         if (enter) {
-
+            currentlyPossessing = curPrisoner;
+            curPrisoner.bodyTransition(true);
+            //enable third person camera rig and set on target
+            prisonerCamera.enabled = true;
+            prisonerCamera.SetTarget(curPrisoner.gameObject.transform);
+            curPrisoner.startControlling();
         } else {
-
+            currentlyPossessing = null;
+            curPrisoner.bodyTransition(false);
+            //disable third person camera rig
+            prisonerCamera.enabled = false;
+            curPrisoner.stopControlling();
         }
     }
 }
