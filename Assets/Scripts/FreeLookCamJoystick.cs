@@ -1,6 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class FreeLookCam : AbstractTargetFollower
+//The free look camera that works with a virtual joystick
+public class FreeLookCamJoystick : AbstractTargetFollower
 {
 	// This script is designed to be placed on the root object of a camera rig,
 	// comprising 3 gameobjects, each parented to the next:
@@ -22,6 +23,7 @@ public class FreeLookCam : AbstractTargetFollower
     private Transform pivot;                            // The pivot.
     private ThirdPersonCharacter character;             // Reference to the character controller.
     private const float LookDistance = 100f;            // How far in front of the pivot the character's look target is.
+	private float x, y; //Variables that are used to dictate rotation with the joystick
 	private float smoothX = 0;
 	private float smoothY = 0;
 	private float smoothXvelocity = 0;
@@ -36,6 +38,10 @@ public class FreeLookCam : AbstractTargetFollower
 
 	}
 	
+	private void OnEnable() {
+		EasyJoystick.On_JoystickMove += On_JoystickMove;
+		EasyJoystick.On_JoystickMoveEnd += On_JoystickMoveEnd;
+	}
 
 	void Update() {
 		HandleRotationMovement();
@@ -49,10 +55,6 @@ public class FreeLookCam : AbstractTargetFollower
 
 	void HandleRotationMovement()
 	{
-		// Read the user input
-		var x = CrossPlatformInput.GetAxis ("Mouse X");
-		var y = CrossPlatformInput.GetAxis ("Mouse Y");
-	
 		// smooth the user input
 		if (turnSmoothing > 0)
 		{
@@ -87,5 +89,17 @@ public class FreeLookCam : AbstractTargetFollower
 	
 	}
 
-
+	private void On_JoystickMove(MovingJoystick move) {
+		if (move.joystickName == "Right Joystick") {
+			x = move.joystickAxis.x * turnSpeed;
+			y = -(move.joystickAxis.y * turnSpeed);
+		}
+	}
+	
+	private void On_JoystickMoveEnd(MovingJoystick move) {
+		if (move.joystickName == "Right Joystick") {
+			x = 0f;
+			y = 0f;
+		}
+	}
 }
