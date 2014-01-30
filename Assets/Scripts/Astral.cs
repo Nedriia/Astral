@@ -10,15 +10,30 @@ public class Astral : MonoBehaviour, Possessable {
     //used for disabling and enabling movement
     private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
     private FirstPersonCharacter characterMover;
+    private bool disabledOnSceneStart = true;
+
 	// Use this for initialization
 	void Start () {
+        disabledOnSceneStart = false;
         eyesOpen = true;
 		eyes = gameObject.GetComponent<Animation>();
         mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
         mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
         characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
 	}
-	
+
+    //if julia was disabled on the screen start we never get her component references
+    //adding them here will grab them when we enable her
+    void OnEnable() {
+        if (disabledOnSceneStart) {
+            eyes = gameObject.GetComponent<Animation>();
+            mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
+            mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
+            characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
+            disabledOnSceneStart = false;
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
 
@@ -30,7 +45,7 @@ public class Astral : MonoBehaviour, Possessable {
                 eyes.Play();
                 eyesOpen = false;
             } else {
-                eyes.Play("Eyes Open");
+                eyes.Play("Eyes Close");
                 eyesOpen = true;
             }
     }

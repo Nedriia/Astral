@@ -50,13 +50,13 @@ public class Prisoner : MonoBehaviour, Possessable {
             eyes.Play();
             eyesOpen = false;
         } else {
-            eyes.Play("Eyes Open");
+            eyes.Play("Eyes Close");
             eyesOpen = true;
         }
     }
 
     public void startControlling() {
-        userControl.enabled = false;
+        userControl.enabled = true;
     }
 
     public void stopControlling() {

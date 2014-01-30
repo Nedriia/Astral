@@ -6,13 +6,21 @@ public class PossessionMaster : MonoBehaviour {
 
     public Astral Julia;
     public FreeLookCam prisonerCamera;
+    public Prisoner startingPossessedPrisoner;
 
     private List<Prisoner> prisonerInventory;
     private Prisoner currentlyPossessing;
     private static bool astralForm;
 	// Use this for initialization
 	void Start () {
-	    
+        //we are starting in a prisoner
+        if (startingPossessedPrisoner != null) {
+            astralForm = true;  //this looks decieving, it will be changed to false in the swap function
+            swap(startingPossessedPrisoner);
+        //we are staring in Julia
+        } else {
+            astralForm = true;
+        }
 	}
 	
 	// Update is called once per frame
@@ -55,10 +63,12 @@ public class PossessionMaster : MonoBehaviour {
         if (enter) {
             Julia.gameObject.SetActive(true);
             Julia.bodyTransition(true);
+            astralForm = true;
             Julia.startControlling();
         } else {
             Julia.stopControlling();
             Julia.bodyTransition(false);
+            astralForm = false;
             Julia.gameObject.SetActive(false);
         }
     }
@@ -69,14 +79,14 @@ public class PossessionMaster : MonoBehaviour {
             currentlyPossessing = curPrisoner;
             curPrisoner.bodyTransition(true);
             //enable third person camera rig and set on target
-            prisonerCamera.enabled = true;
+            prisonerCamera.gameObject.SetActive(true);
             prisonerCamera.SetTarget(curPrisoner.gameObject.transform);
             curPrisoner.startControlling();
         } else {
             currentlyPossessing = null;
             curPrisoner.bodyTransition(false);
             //disable third person camera rig
-            prisonerCamera.enabled = false;
+            prisonerCamera.gameObject.SetActive(false);
             curPrisoner.stopControlling();
         }
     }
