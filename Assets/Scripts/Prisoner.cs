@@ -12,6 +12,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 	protected GameObject selectedItem;
 
     private Animation eyes;
+    private Animator prisonerAnimator;
     private ThirdPersonUserControl userControl;
 	//inventory
 	
@@ -23,6 +24,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 		isPossessed = false;
         eyes = prisonerCamera.gameObject.GetComponent<Animation>();
         userControl = gameObject.GetComponent<ThirdPersonUserControl>();
+        prisonerAnimator = gameObject.GetComponent<Animator>();
 
 	}
 	
@@ -67,6 +69,8 @@ public class Prisoner : MonoBehaviour, Possessable {
 
     public void stopControlling() {
         userControl.enabled = false;
+        prisonerAnimator.SetFloat("Forward", 0);
+        prisonerAnimator.SetFloat("Turn", 0);
     }
 	/*
 	private void onTriggerEnter(Collider other) {

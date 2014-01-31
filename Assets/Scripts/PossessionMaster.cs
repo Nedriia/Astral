@@ -6,20 +6,20 @@ public class PossessionMaster : MonoBehaviour {
 
     public Astral Julia;
     public FreeLookCam prisonerCamera;
-    public Prisoner startingPossessedPrisoner;
+    public Prisoner startingPosPrisoner;
 
     private List<Prisoner> prisonerInventory;
     private Prisoner currentlyPossessing;
     private static bool astralForm;
 	// Use this for initialization
 	void Start () {
+        prisonerInventory = new List<Prisoner>();
         //we are starting in a prisoner
-        if (startingPossessedPrisoner != null) {
-            astralForm = true;  //this looks decieving, it will be changed to false in the swap function
-            StartCoroutine(swap(startingPossessedPrisoner));
+        if (startingPosPrisoner != null) {
+            StartCoroutine(possesionStart(true));
         //we are staring in Julia
         } else {
-            astralForm = true;
+            StartCoroutine(possesionStart(false));
         }
 	}
 	
@@ -97,4 +97,17 @@ public class PossessionMaster : MonoBehaviour {
         return waitTime;
     }
 
+    private IEnumerator possesionStart(bool startAsPrisoner) {
+        if (startAsPrisoner) {
+            Julia.gameObject.SetActive(false);
+            astralForm = false;
+            yield return new WaitForSeconds(transitionP(startingPosPrisoner, true));
+            currentlyPossessing.startControlling();
+        } else {
+            astralForm = true;
+            prisonerCamera.gameObject.SetActive(false);
+            yield return new WaitForSeconds(transitionJ(true));
+            Julia.startControlling();
+        }
+    }
 }

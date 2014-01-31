@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GuiManager : MonoBehaviour {
 
-    public EasyButton enterAstral;
+    public EasyButton enterAstral, swap;
     public PossessionMaster possMaster;
+
+    private int curPosIndex;
 	// Use this for initialization
 	void Start () {
-        EasyButton.On_ButtonUp += On_ButtonUp;	
+        EasyButton.On_ButtonUp += On_ButtonUp;
+        curPosIndex = 0;
 	}
 	
 	// Update is called once per frame
@@ -17,11 +21,30 @@ public class GuiManager : MonoBehaviour {
         } else {
             enterAstral.isActivated = true;
         }
+
+        if ((possMaster.getInventory().Count == 0) || (!possMaster.AstralForm && possMaster.getInventory().Count == 1)) {
+            swap.isActivated = false;
+        } else {
+            swap.isActivated = true;
+        }
 	}
 
     void On_ButtonUp (string buttonName) {
         if (buttonName == "Enter Astral") {
             StartCoroutine(possMaster.enterAstral());
+        }
+        if (buttonName == "Swap") {
+            if (possMaster.AstralForm) {
+                StartCoroutine(possMaster.swap(possMaster.getInventory()[0]));
+            } else {
+                ++curPosIndex;
+                if (curPosIndex > possMaster.getInventory().Count) {
+                    curPosIndex = 0;
+                    StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
+                } else {
+                    StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
+                }
+            }
         }
     }
 }

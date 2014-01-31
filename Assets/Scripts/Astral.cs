@@ -78,6 +78,7 @@ public class Astral : MonoBehaviour, Possessable {
     }
 
     public void stopControlling() {
+        gameObject.rigidbody.velocity = Vector3.zero;
         mouseRotatorLR.enabled = false;
         mouseRotatorUD.enabled = false;
         characterMover.enabled = false;
