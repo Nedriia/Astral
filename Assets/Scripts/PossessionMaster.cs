@@ -38,8 +38,12 @@ public class PossessionMaster : MonoBehaviour {
     //enters astral form when in prisoner
     public IEnumerator enterAstral() {
         //Prisoner to Julia
+        Vector3 juliaNewPosition = new Vector3(currentlyPossessing.transform.position.x,currentlyPossessing.transform.position.y+0.2f,currentlyPossessing.transform.position.z+0.5f);
+        //Vector3 juliaNewPosition = currentlyPossessing.transform.position;
         yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
         prisonerCamera.gameObject.SetActive(false);
+        Julia.gameObject.SetActive(true);
+        Julia.transform.position = juliaNewPosition; //this will need to be edited
         yield return new WaitForSeconds(transitionJ(true));
         Julia.startControlling();
     }
@@ -50,6 +54,7 @@ public class PossessionMaster : MonoBehaviour {
         if ( astralForm && ( currentlyPossessing == null ) ) {
             //wait for julia out animation to finish
             yield return new WaitForSeconds(transitionJ(false));
+            Julia.gameObject.SetActive(false);
             //wait for prisoner in animation to finish
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
             curPrisoner.startControlling();
@@ -67,14 +72,12 @@ public class PossessionMaster : MonoBehaviour {
     private float transitionJ( bool enter ) {
         float waitTime = 0;
         if (enter) {
-            Julia.gameObject.SetActive(true);
             waitTime = Julia.bodyTransition(true);
             astralForm = true;
         } else {
             Julia.stopControlling();
             waitTime = Julia.bodyTransition(false);
             astralForm = false;
-            Julia.gameObject.SetActive(false);
         }
         return waitTime;
     }
