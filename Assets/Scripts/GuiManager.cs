@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class GuiManager : MonoBehaviour {
 
-    public EasyButton enterAstral, swap;
+    public EasyButton enterAstral, swap, addPrisoner;
     public PossessionMaster possMaster;
-
+    public Astral julia;
     private int curPosIndex;
 	// Use this for initialization
 	void Start () {
@@ -27,6 +27,12 @@ public class GuiManager : MonoBehaviour {
         } else {
             swap.isActivated = true;
         }
+
+        if (julia.CurrentlyViewing != null && !possMaster.getInventory().Contains(julia.CurrentlyViewing)) {
+            addPrisoner.isActivated = true;
+        } else {
+            addPrisoner.isActivated = false;
+        }
 	}
 
     void On_ButtonUp (string buttonName) {
@@ -45,6 +51,9 @@ public class GuiManager : MonoBehaviour {
                     StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
                 }
             }
+        }
+        if (buttonName == "Add Prisoner") {
+            julia.addPrisoner();
         }
     }
 }

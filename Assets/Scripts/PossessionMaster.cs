@@ -29,7 +29,6 @@ public class PossessionMaster : MonoBehaviour {
 
     public bool AstralForm {
         get { return astralForm; }
-        set { astralForm = value; }
     }
 
     public List<Prisoner> getInventory() { 

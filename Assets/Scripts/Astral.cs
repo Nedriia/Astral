@@ -4,7 +4,9 @@ using System.Collections;
 
 public class Astral : MonoBehaviour, Possessable {
 
-    private GameObject currentlyViewing;
+    public PossessionMaster possMess;
+
+    private static Prisoner currentlyViewing;
 	private Animation eyes;
     //used for disabling and enabling movement
     private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
@@ -50,9 +52,16 @@ public class Astral : MonoBehaviour, Possessable {
         return waitTime;
     }
 
+    public Prisoner CurrentlyViewing {
+        get { return currentlyViewing; }
+    }
 
-    private void addPrisoner( GameObject prisoner ) {
+    public void addPrisoner() {
+        possMess.getInventory().Add(currentlyViewing);
+    }
 
+    public void addPrisoner( Prisoner prisoner ) {
+        possMess.getInventory().Add(prisoner);
     }
 
     private void astralWalls( bool wallTransparent ) {
@@ -82,5 +91,17 @@ public class Astral : MonoBehaviour, Possessable {
         mouseRotatorLR.enabled = false;
         mouseRotatorUD.enabled = false;
         characterMover.enabled = false;
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Prisoner")) {
+            currentlyViewing = other.gameObject.GetComponent<Prisoner>();
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Prisoner")) {
+            currentlyViewing = null;
+        }
     }
 }
