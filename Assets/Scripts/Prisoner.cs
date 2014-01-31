@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class Prisoner : MonoBehaviour, Possessable {
-	
+    
+    public FreeLookCam prisonerCamera;
+
 	protected int health;
 	protected float speed;
 	protected float jumpVelocity;
@@ -10,19 +12,18 @@ public class Prisoner : MonoBehaviour, Possessable {
 	protected GameObject selectedItem;
 
     private Animation eyes;
-    private bool eyesOpen;
     private ThirdPersonUserControl userControl;
 	//inventory
 	
 	// Use this for initialization
 	private void Start () {
-        eyesOpen = false;
 		health = 100;
 		speed = 5.0f;
 		jumpVelocity = 10.0f;
 		isPossessed = false;
-        eyes = gameObject.GetComponent<Animation>();
+        eyes = prisonerCamera.gameObject.GetComponent<Animation>();
         userControl = gameObject.GetComponent<ThirdPersonUserControl>();
+
 	}
 	
 	// Update is called once per frame
@@ -51,12 +52,10 @@ public class Prisoner : MonoBehaviour, Possessable {
         float waitTime = 0;
         if (entering) {
             eyes.Play();
-            eyesOpen = false;
-            waitTime = eyes["Eyes Open"].length;
+            waitTime = eyes["Prisoner Eyes Open"].length;
         } else {
-            eyes.Play("Eyes Close");
-            eyesOpen = true;
-            waitTime = eyes["Eyes Close"].length;
+            eyes.Play("Prisoner Eyes Close");
+            waitTime = eyes["Prisoner Eyes Close"].length;
         }
         return waitTime;
     }

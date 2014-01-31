@@ -6,7 +6,6 @@ public class Astral : MonoBehaviour, Possessable {
 
     private GameObject currentlyViewing;
 	private Animation eyes;
-    private bool eyesOpen;
     //used for disabling and enabling movement
     private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
     private FirstPersonCharacter characterMover;
@@ -15,7 +14,6 @@ public class Astral : MonoBehaviour, Possessable {
 	// Use this for initialization
 	void Start () {
         disabledOnSceneStart = false;
-        eyesOpen = true;
 		eyes = gameObject.GetComponent<Animation>();
         mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
         mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
@@ -44,11 +42,9 @@ public class Astral : MonoBehaviour, Possessable {
         float waitTime = 0;
         if ( entering ) {
             eyes.Play();
-            eyesOpen = false;
             waitTime = eyes["Eyes Open"].length;
         } else {
             eyes.Play("Eyes Close");
-            eyesOpen = true;
             waitTime = eyes["Eyes Close"].length;
         }
         return waitTime;

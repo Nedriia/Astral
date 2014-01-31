@@ -16,7 +16,7 @@ public class PossessionMaster : MonoBehaviour {
         //we are starting in a prisoner
         if (startingPossessedPrisoner != null) {
             astralForm = true;  //this looks decieving, it will be changed to false in the swap function
-            swap(startingPossessedPrisoner);
+            StartCoroutine(swap(startingPossessedPrisoner));
         //we are staring in Julia
         } else {
             astralForm = true;
@@ -25,7 +25,6 @@ public class PossessionMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
 	}
 
     public bool AstralForm {
@@ -38,56 +37,64 @@ public class PossessionMaster : MonoBehaviour {
     }
 
     //enters astral form when in prisoner
-    public void enterAstral() {
+    public IEnumerator enterAstral() {
         //Prisoner to Julia
-        transitionP(currentlyPossessing, false);
-        transitionJ(true);
+        yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
+        prisonerCamera.gameObject.SetActive(false);
+        yield return new WaitForSeconds(transitionJ(true));
+        Julia.startControlling();
     }
 
     //swaps to the specified prisoner
-    public void swap( Prisoner curPrisoner ) {
+    public IEnumerator swap( Prisoner curPrisoner ) {
         //Julia to prisoner
         if ( astralForm && ( currentlyPossessing == null ) ) {
-            transitionJ(false);
-            transitionP(curPrisoner, true);
+            //wait for julia out animation to finish
+            yield return new WaitForSeconds(transitionJ(false));
+            //wait for prisoner in animation to finish
+            yield return new WaitForSeconds(transitionP(curPrisoner, true));
+            curPrisoner.startControlling();
         //Prisoner to Prisoner
         } else if ( !astralForm && ( currentlyPossessing != null) ) {
-            transitionP(currentlyPossessing, false);
-            transitionP(curPrisoner, true);
+            //wait for prisoner out animation to finish
+            yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
+            //wait for in animation to finish
+            yield return new WaitForSeconds(transitionP(curPrisoner, true));
+            curPrisoner.startControlling();
         }
     }
 
     //transtions in or out of julia
-    private void transitionJ( bool enter ) {
-        
+    private float transitionJ( bool enter ) {
+        float waitTime = 0;
         if (enter) {
             Julia.gameObject.SetActive(true);
-            Julia.bodyTransition(true);
+            waitTime = Julia.bodyTransition(true);
             astralForm = true;
-            Julia.startControlling();
         } else {
             Julia.stopControlling();
-            Julia.bodyTransition(false);
+            waitTime = Julia.bodyTransition(false);
             astralForm = false;
             Julia.gameObject.SetActive(false);
         }
+        return waitTime;
     }
 
     //transtions in or out of specified prisoner
-    private void transitionP( Prisoner curPrisoner, bool enter ) {
+    private float transitionP( Prisoner curPrisoner, bool enter ) {
+        float waitTime = 0;
         if (enter) {
             //enable third person camera rig and set on target
             prisonerCamera.gameObject.SetActive(true);
             prisonerCamera.SetTarget(curPrisoner.gameObject.transform);
-            curPrisoner.bodyTransition(true);
+            waitTime = curPrisoner.bodyTransition(true);
             currentlyPossessing = curPrisoner;
-            curPrisoner.startControlling();
         } else {
             curPrisoner.stopControlling();
-            curPrisoner.bodyTransition(false);
+            waitTime = curPrisoner.bodyTransition(false);
             currentlyPossessing = null;
-            //disable third person camera rig
-            prisonerCamera.gameObject.SetActive(false);
         }
+        return waitTime;
     }
+
 }

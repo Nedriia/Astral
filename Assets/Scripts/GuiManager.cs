@@ -7,7 +7,7 @@ public class GuiManager : MonoBehaviour {
     public PossessionMaster possMaster;
 	// Use this for initialization
 	void Start () {
-	    
+        EasyButton.On_ButtonUp += On_ButtonUp;	
 	}
 	
 	// Update is called once per frame
@@ -18,4 +18,10 @@ public class GuiManager : MonoBehaviour {
             enterAstral.isActivated = true;
         }
 	}
+
+    void On_ButtonUp (string buttonName) {
+        if (buttonName == "Enter Astral") {
+            StartCoroutine(possMaster.enterAstral());
+        }
+    }
 }
