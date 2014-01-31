@@ -39,23 +39,23 @@ public class Astral : MonoBehaviour, Possessable {
 
 	}
 
-    //true for in, false for out
-    public void bodyTransition( bool entering ) {
-            if ( entering ) {
-                eyes.Play();
-                eyesOpen = false;
-            } else {
-                eyes.Play("Eyes Close");
-                eyesOpen = true;
-            }
+    //true for in, false for out, return amount of time to wait
+    public float bodyTransition(bool entering) {
+        float waitTime = 0;
+        if ( entering ) {
+            eyes.Play();
+            eyesOpen = false;
+            waitTime = eyes["Eyes Open"].length;
+        } else {
+            eyes.Play("Eyes Close");
+            eyesOpen = true;
+            waitTime = eyes["Eyes Close"].length;
+        }
+        return waitTime;
     }
 
 
     private void addPrisoner( GameObject prisoner ) {
-
-    }
-
-    private void enterAstralForm() {
 
     }
 

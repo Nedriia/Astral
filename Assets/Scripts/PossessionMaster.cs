@@ -76,18 +76,18 @@ public class PossessionMaster : MonoBehaviour {
     //transtions in or out of specified prisoner
     private void transitionP( Prisoner curPrisoner, bool enter ) {
         if (enter) {
-            currentlyPossessing = curPrisoner;
-            curPrisoner.bodyTransition(true);
             //enable third person camera rig and set on target
             prisonerCamera.gameObject.SetActive(true);
             prisonerCamera.SetTarget(curPrisoner.gameObject.transform);
+            curPrisoner.bodyTransition(true);
+            currentlyPossessing = curPrisoner;
             curPrisoner.startControlling();
         } else {
-            currentlyPossessing = null;
+            curPrisoner.stopControlling();
             curPrisoner.bodyTransition(false);
+            currentlyPossessing = null;
             //disable third person camera rig
             prisonerCamera.gameObject.SetActive(false);
-            curPrisoner.stopControlling();
         }
     }
 }

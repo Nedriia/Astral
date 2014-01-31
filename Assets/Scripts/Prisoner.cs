@@ -45,15 +45,22 @@ public class Prisoner : MonoBehaviour, Possessable {
 		}
 		
 	}
-    public void bodyTransition(bool entering) {
+
+    //true for in, false for out, return amount of time to wait
+    public float bodyTransition(bool entering) {
+        float waitTime = 0;
         if (entering) {
             eyes.Play();
             eyesOpen = false;
+            waitTime = eyes["Eyes Open"].length;
         } else {
             eyes.Play("Eyes Close");
             eyesOpen = true;
+            waitTime = eyes["Eyes Close"].length;
         }
+        return waitTime;
     }
+
 
     public void startControlling() {
         userControl.enabled = true;

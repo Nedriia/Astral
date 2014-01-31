@@ -3,7 +3,7 @@ using System.Collections;
 
 interface Possessable {
 
-    void bodyTransition(bool entering);
+    float bodyTransition(bool entering);
     void startControlling();
     void stopControlling();
 }
