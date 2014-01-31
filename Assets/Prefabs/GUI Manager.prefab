@@ -39,7 +39,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterAstral: {fileID: 0}
+  swap: {fileID: 0}
+  addPrisoner: {fileID: 0}
   possMaster: {fileID: 0}
+  julia: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
