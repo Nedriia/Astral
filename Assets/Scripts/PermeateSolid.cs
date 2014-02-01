@@ -14,12 +14,12 @@ public class PermeateSolid : MonoBehaviour {
 	private string tagName;
 	private Shader shaderDiff;
 	private Shader shaderTransDiff;
-    private PossessionMaster possMaster;
+    public PossessionMaster possMaster;
 
 	// Use this for initialization
 	private void Start () {
 		playerLayer = 8;
-		doorLayer = 9;
+		doorLayer = 10;
 		distFrom = 5.0f;
 		tagName = "Door";
 		shaderDiff = Shader.Find("Diffuse");

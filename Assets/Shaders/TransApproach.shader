@@ -15,7 +15,7 @@ SubShader {
 
  sampler2D _MainTex;
  fixed4 _Color;
- uniform float transVar = 0.7;
+ uniform float transVar;
 
  struct Input {
 	float2 uv_MainTex;
@@ -36,5 +36,5 @@ SubShader {
  ENDCG
 }
 
-Fallback "VertexLit"
+Fallback "Forward"
 }
