@@ -279,6 +279,7 @@ GameObject:
   - 4: {fileID: 15551633}
   - 33: {fileID: 15551635}
   - 23: {fileID: 15551634}
+  - 64: {fileID: 15551636}
   m_Layer: 0
   m_Name: separateWall
   m_TagString: Untagged
@@ -326,6 +327,19 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 15551632}
+  m_Mesh: {fileID: 4300014, guid: 4a9784574ae06f14dab28851346d9eab, type: 3}
+--- !u!64 &15551636
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15551632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
   m_Mesh: {fileID: 4300014, guid: 4a9784574ae06f14dab28851346d9eab, type: 3}
 --- !u!1 &16050367
 GameObject:
@@ -1885,6 +1899,7 @@ GameObject:
   - 33: {fileID: 68672901}
   - 23: {fileID: 68672900}
   - 95: {fileID: 68672899}
+  - 65: {fileID: 68672903}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -1948,6 +1963,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &68672903
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 68672898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 4.76837158e-07, z: 0}
 --- !u!1 &68959084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2084,6 +2111,7 @@ GameObject:
   - 33: {fileID: 72474452}
   - 23: {fileID: 72474451}
   - 95: {fileID: 72474450}
+  - 65: {fileID: 72474454}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -2147,6 +2175,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &72474454
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 72474449}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &73767524
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,6 +2735,7 @@ GameObject:
   - 33: {fileID: 98676874}
   - 23: {fileID: 98676873}
   - 95: {fileID: 98676872}
+  - 65: {fileID: 98676876}
   m_Layer: 0
   m_Name: floorWoodDiamond
   m_TagString: Untagged
@@ -2758,6 +2799,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &98676876
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 98676871}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000031, y: 2, z: 2}
+  m_Center: {x: 0, y: 2.98023224e-08, z: 1.1920929e-07}
 --- !u!1 &99978702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2993,6 +3046,7 @@ GameObject:
   - 33: {fileID: 108720031}
   - 23: {fileID: 108720030}
   - 95: {fileID: 108720029}
+  - 65: {fileID: 108720033}
   m_Layer: 0
   m_Name: secretHallFloor
   m_TagString: Untagged
@@ -3056,6 +3110,18 @@ Transform:
   m_LocalScale: {x: .0681601167, y: 3.41669345, z: .850000143}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &108720033
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 108720028}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.00004864, y: 2.00000095, z: 2.00000167}
+  m_Center: {x: 0, y: 0, z: 1.90734863e-06}
 --- !u!1 &109073016
 GameObject:
   m_ObjectHideFlags: 0
@@ -6653,6 +6719,7 @@ GameObject:
   - 33: {fileID: 214304800}
   - 23: {fileID: 214304799}
   - 95: {fileID: 214304798}
+  - 65: {fileID: 214304802}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -6716,6 +6783,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &214304802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 214304797}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &214367644
 Prefab:
   m_ObjectHideFlags: 0
@@ -6851,6 +6930,7 @@ GameObject:
   - 33: {fileID: 218566547}
   - 23: {fileID: 218566546}
   - 95: {fileID: 218566545}
+  - 65: {fileID: 218566549}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -6914,6 +6994,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &218566549
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 218566544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: -4.76837158e-07}
 --- !u!1 &218741161
 GameObject:
   m_ObjectHideFlags: 0
@@ -7657,6 +7749,7 @@ GameObject:
   - 33: {fileID: 258630839}
   - 23: {fileID: 258630838}
   - 95: {fileID: 258630837}
+  - 65: {fileID: 258630841}
   m_Layer: 0
   m_Name: windowWall2
   m_TagString: Untagged
@@ -7720,6 +7813,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &258630841
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 258630836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: .0686880052, z: -.0523869991}
 --- !u!1 &259956071
 GameObject:
   m_ObjectHideFlags: 0
@@ -7928,6 +8033,7 @@ GameObject:
   - 33: {fileID: 264690377}
   - 23: {fileID: 264690376}
   - 95: {fileID: 264690375}
+  - 65: {fileID: 264690379}
   m_Layer: 0
   m_Name: windowWall
   m_TagString: Untagged
@@ -7991,6 +8097,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &264690379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 264690374}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: .0686880052, z: -.0523869991}
 --- !u!1 &264947743
 GameObject:
   m_ObjectHideFlags: 0
@@ -8595,6 +8713,7 @@ GameObject:
   - 33: {fileID: 305674682}
   - 23: {fileID: 305674681}
   - 95: {fileID: 305674680}
+  - 65: {fileID: 305674684}
   m_Layer: 0
   m_Name: floorWoodDiamond
   m_TagString: Untagged
@@ -8658,6 +8777,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &305674684
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 305674679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000031, y: 2, z: 2}
+  m_Center: {x: 0, y: -4.76837158e-07, z: 0}
 --- !u!1 &305713228
 GameObject:
   m_ObjectHideFlags: 0
@@ -8782,6 +8913,7 @@ GameObject:
   - 33: {fileID: 307123262}
   - 23: {fileID: 307123261}
   - 95: {fileID: 307123260}
+  - 65: {fileID: 307123264}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -8845,6 +8977,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &307123264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 307123259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 2.38418579e-07, z: 0}
 --- !u!1 &307320308
 GameObject:
   m_ObjectHideFlags: 0
@@ -9281,6 +9425,7 @@ GameObject:
   - 33: {fileID: 321393312}
   - 23: {fileID: 321393311}
   - 95: {fileID: 321393310}
+  - 65: {fileID: 321393314}
   m_Layer: 0
   m_Name: hotelWallTHIN2
   m_TagString: Untagged
@@ -9344,6 +9489,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &321393314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 321393309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 2.38418579e-07, z: -4.76837158e-07}
 --- !u!1 &322377741
 GameObject:
   m_ObjectHideFlags: 0
@@ -9520,6 +9677,7 @@ GameObject:
   - 33: {fileID: 325502896}
   - 23: {fileID: 325502895}
   - 95: {fileID: 325502894}
+  - 65: {fileID: 325502898}
   m_Layer: 0
   m_Name: hotelWallTHIN2
   m_TagString: Untagged
@@ -9583,6 +9741,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &325502898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 325502893}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &325892994
 GameObject:
   m_ObjectHideFlags: 0
@@ -11824,6 +11994,7 @@ GameObject:
   - 33: {fileID: 415512385}
   - 23: {fileID: 415512384}
   - 95: {fileID: 415512383}
+  - 65: {fileID: 415512387}
   m_Layer: 0
   m_Name: secretHallFloor
   m_TagString: Untagged
@@ -11887,6 +12058,18 @@ Transform:
   m_LocalScale: {x: .0681601167, y: 3.41669297, z: .850000143}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &415512387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 415512382}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000062, y: 1.9999994, z: 2.00000048}
+  m_Center: {x: -7.62939453e-06, y: -2.38418579e-07, z: -1.1920929e-07}
 --- !u!1 &415975766
 GameObject:
   m_ObjectHideFlags: 0
@@ -12637,6 +12820,7 @@ GameObject:
   - 33: {fileID: 446507520}
   - 23: {fileID: 446507519}
   - 95: {fileID: 446507518}
+  - 65: {fileID: 446507522}
   m_Layer: 0
   m_Name: pinkwall
   m_TagString: Untagged
@@ -12700,6 +12884,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &446507522
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446507517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: -4.76837158e-07}
 --- !u!1 &448480565
 GameObject:
   m_ObjectHideFlags: 0
@@ -16244,6 +16440,7 @@ GameObject:
   - 33: {fileID: 622112537}
   - 23: {fileID: 622112536}
   - 95: {fileID: 622112535}
+  - 65: {fileID: 622112539}
   m_Layer: 0
   m_Name: windowWall
   m_TagString: Untagged
@@ -16307,6 +16504,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &622112539
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 622112534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: .0686880052, z: -.0523869991}
 --- !u!1 &622982531
 GameObject:
   m_ObjectHideFlags: 0
@@ -16727,6 +16936,7 @@ GameObject:
   - 33: {fileID: 646194988}
   - 23: {fileID: 646194987}
   - 95: {fileID: 646194986}
+  - 65: {fileID: 646194990}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -16790,6 +17000,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.50999999, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &646194990
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 646194985}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 4.76837158e-07, z: 0}
 --- !u!1 &649552774
 GameObject:
   m_ObjectHideFlags: 0
@@ -16854,6 +17076,7 @@ GameObject:
   - 4: {fileID: 656769710}
   - 33: {fileID: 656769712}
   - 23: {fileID: 656769711}
+  - 65: {fileID: 656769713}
   m_Layer: 0
   m_Name: separateWall
   m_TagString: Untagged
@@ -16902,6 +17125,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 656769709}
   m_Mesh: {fileID: 4300014, guid: 4a9784574ae06f14dab28851346d9eab, type: 3}
+--- !u!65 &656769713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 656769709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.2364074e-05, y: 2.00000262, z: 2.00000358}
+  m_Center: {x: .771704793, y: 1.83524373e-09, z: -3.36917472e-09}
 --- !u!1 &658474137
 GameObject:
   m_ObjectHideFlags: 0
@@ -18005,6 +18240,7 @@ GameObject:
   - 33: {fileID: 706950903}
   - 23: {fileID: 706950902}
   - 95: {fileID: 706950901}
+  - 65: {fileID: 706950905}
   m_Layer: 0
   m_Name: hotelWallTHIN2
   m_TagString: Untagged
@@ -18068,6 +18304,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &706950905
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 706950900}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &707611271
 GameObject:
   m_ObjectHideFlags: 0
@@ -18456,6 +18704,7 @@ GameObject:
   - 33: {fileID: 722140302}
   - 23: {fileID: 722140301}
   - 95: {fileID: 722140300}
+  - 65: {fileID: 722140304}
   m_Layer: 0
   m_Name: secretHallFloor
   m_TagString: Untagged
@@ -18519,6 +18768,18 @@ Transform:
   m_LocalScale: {x: .0681601167, y: 3.41669321, z: .850000143}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &722140304
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 722140299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000062, y: 1.99999928, z: 2.00000048}
+  m_Center: {x: 0, y: 4.76837158e-07, z: -1.1920929e-07}
 --- !u!1 &723789189
 GameObject:
   m_ObjectHideFlags: 0
@@ -23856,6 +24117,7 @@ GameObject:
   - 33: {fileID: 967800414}
   - 23: {fileID: 967800413}
   - 95: {fileID: 967800412}
+  - 65: {fileID: 967800416}
   m_Layer: 0
   m_Name: pinkwall
   m_TagString: Untagged
@@ -23919,6 +24181,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &967800416
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 967800411}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &968808284
 GameObject:
   m_ObjectHideFlags: 0
@@ -28841,6 +29115,7 @@ GameObject:
   - 33: {fileID: 1172175360}
   - 23: {fileID: 1172175359}
   - 95: {fileID: 1172175358}
+  - 65: {fileID: 1172175362}
   m_Layer: 0
   m_Name: hotelWallTHIN2
   m_TagString: Untagged
@@ -28904,6 +29179,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1172175362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172175357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 2.98023224e-08, z: -4.76837158e-07}
 --- !u!1 &1174515472
 GameObject:
   m_ObjectHideFlags: 0
@@ -29085,6 +29372,7 @@ GameObject:
   - 33: {fileID: 1178523208}
   - 23: {fileID: 1178523207}
   - 95: {fileID: 1178523206}
+  - 65: {fileID: 1178523210}
   m_Layer: 0
   m_Name: floorWoodDiamond
   m_TagString: Untagged
@@ -29148,6 +29436,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1178523210
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1178523205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000031, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: -2.98023224e-08}
 --- !u!1 &1180599124
 GameObject:
   m_ObjectHideFlags: 0
@@ -30939,6 +31239,7 @@ GameObject:
   - 33: {fileID: 1251912185}
   - 23: {fileID: 1251912184}
   - 95: {fileID: 1251912183}
+  - 65: {fileID: 1251912187}
   m_Layer: 0
   m_Name: hotelWallTHIN2
   m_TagString: Untagged
@@ -31002,6 +31303,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1251912187
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251912182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 4.76837158e-07, z: -4.76837158e-07}
 --- !u!1 &1252001230
 GameObject:
   m_ObjectHideFlags: 0
@@ -34621,6 +34934,7 @@ GameObject:
   - 4: {fileID: 1409174697}
   - 33: {fileID: 1409174696}
   - 23: {fileID: 1409174695}
+  - 65: {fileID: 1409174698}
   m_Layer: 0
   m_Name: Cube_001
   m_TagString: Untagged
@@ -34669,6 +34983,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 1144577022}
+--- !u!65 &1409174698
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1409174694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0, y: 2, z: 2}
+  m_Center: {x: -33.2221642, y: 0, z: 0}
 --- !u!1 &1410338022
 GameObject:
   m_ObjectHideFlags: 0
@@ -35455,6 +35781,7 @@ GameObject:
   - 33: {fileID: 1449101053}
   - 23: {fileID: 1449101052}
   - 95: {fileID: 1449101051}
+  - 65: {fileID: 1449101055}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -35518,6 +35845,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1449101055
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1449101050}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1450507849
 GameObject:
   m_ObjectHideFlags: 0
@@ -35585,6 +35924,7 @@ GameObject:
   - 33: {fileID: 1453731639}
   - 23: {fileID: 1453731638}
   - 95: {fileID: 1453731637}
+  - 65: {fileID: 1453731641}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -35648,6 +35988,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1453731641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453731636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1454171972
 GameObject:
   m_ObjectHideFlags: 0
@@ -36407,6 +36759,7 @@ GameObject:
   - 33: {fileID: 1484481812}
   - 23: {fileID: 1484481811}
   - 95: {fileID: 1484481810}
+  - 65: {fileID: 1484481814}
   m_Layer: 0
   m_Name: pinkwall
   m_TagString: Untagged
@@ -36470,6 +36823,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1484481814
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1484481809}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 2.98023224e-08, z: 0}
 --- !u!1 &1485896557
 GameObject:
   m_ObjectHideFlags: 0
@@ -37610,6 +37975,7 @@ GameObject:
   - 33: {fileID: 1534479102}
   - 23: {fileID: 1534479101}
   - 95: {fileID: 1534479100}
+  - 65: {fileID: 1534479104}
   m_Layer: 0
   m_Name: hotelWallTHIN2
   m_TagString: Untagged
@@ -37673,6 +38039,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1534479104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1534479099}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1538014456
 Prefab:
   m_ObjectHideFlags: 0
@@ -38703,6 +39081,7 @@ GameObject:
   - 33: {fileID: 1588316755}
   - 23: {fileID: 1588316754}
   - 95: {fileID: 1588316753}
+  - 65: {fileID: 1588316757}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -38766,6 +39145,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1588316757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1588316752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1589366707
 GameObject:
   m_ObjectHideFlags: 0
@@ -39266,6 +39657,7 @@ GameObject:
   - 33: {fileID: 1612958260}
   - 23: {fileID: 1612958259}
   - 95: {fileID: 1612958258}
+  - 65: {fileID: 1612958262}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -39329,6 +39721,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1612958262
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1612958257}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: -4.76837158e-07}
 --- !u!1 &1613749288
 GameObject:
   m_ObjectHideFlags: 0
@@ -41003,6 +41407,7 @@ GameObject:
   - 33: {fileID: 1683926127}
   - 23: {fileID: 1683926126}
   - 95: {fileID: 1683926125}
+  - 65: {fileID: 1683926129}
   m_Layer: 0
   m_Name: secretHallFloor
   m_TagString: Untagged
@@ -41066,6 +41471,18 @@ Transform:
   m_LocalScale: {x: .0681601167, y: 3.41669321, z: .850000143}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1683926129
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1683926124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000062, y: 1.99999928, z: 2.00000048}
+  m_Center: {x: -7.62939453e-06, y: 0, z: -1.1920929e-07}
 --- !u!1 &1688096076
 GameObject:
   m_ObjectHideFlags: 0
@@ -41397,6 +41814,7 @@ GameObject:
   - 33: {fileID: 1695050843}
   - 23: {fileID: 1695050842}
   - 95: {fileID: 1695050841}
+  - 65: {fileID: 1695050845}
   m_Layer: 0
   m_Name: floorWoodDiamond
   m_TagString: Untagged
@@ -41460,6 +41878,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1695050845
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1695050840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0000031, y: 2, z: 2}
+  m_Center: {x: 0, y: -4.76837158e-07, z: 0}
 --- !u!1 &1696433785
 GameObject:
   m_ObjectHideFlags: 0
@@ -41951,6 +42381,7 @@ GameObject:
   - 33: {fileID: 1730043523}
   - 23: {fileID: 1730043522}
   - 95: {fileID: 1730043521}
+  - 65: {fileID: 1730043525}
   m_Layer: 0
   m_Name: pinkwall
   m_TagString: Untagged
@@ -42014,6 +42445,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1730043525
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730043520}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1732622222
 GameObject:
   m_ObjectHideFlags: 0
@@ -44033,6 +44476,7 @@ GameObject:
   - 33: {fileID: 1811830236}
   - 23: {fileID: 1811830235}
   - 95: {fileID: 1811830234}
+  - 65: {fileID: 1811830238}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -44096,6 +44540,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -2.58999991, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1811830238
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1811830233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: -9.53674316e-07, z: 0}
 --- !u!1 &1813594317
 GameObject:
   m_ObjectHideFlags: 0
@@ -44412,6 +44868,7 @@ GameObject:
   - 33: {fileID: 1822337665}
   - 23: {fileID: 1822337664}
   - 95: {fileID: 1822337663}
+  - 65: {fileID: 1822337667}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -44475,6 +44932,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -2.58999991, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1822337667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1822337662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1822783809
 GameObject:
   m_ObjectHideFlags: 0
@@ -45626,6 +46095,7 @@ GameObject:
   - 33: {fileID: 1882475757}
   - 23: {fileID: 1882475756}
   - 95: {fileID: 1882475755}
+  - 65: {fileID: 1882475759}
   m_Layer: 0
   m_Name: hotelWallTHIN2
   m_TagString: Untagged
@@ -45689,6 +46159,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1882475759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1882475754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.00000095, z: 2.00000095}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1885661776
 GameObject:
   m_ObjectHideFlags: 0
@@ -46805,6 +47287,7 @@ GameObject:
   - 33: {fileID: 1938722100}
   - 23: {fileID: 1938722099}
   - 95: {fileID: 1938722098}
+  - 65: {fileID: 1938722102}
   m_Layer: 0
   m_Name: plasterWall
   m_TagString: Untagged
@@ -46868,6 +47351,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -2.5999999, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &1938722102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1938722097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1939857016
 GameObject:
   m_ObjectHideFlags: 0
@@ -50244,6 +50739,7 @@ GameObject:
   - 33: {fileID: 2061361276}
   - 23: {fileID: 2061361275}
   - 95: {fileID: 2061361274}
+  - 65: {fileID: 2061361278}
   m_Layer: 0
   m_Name: secretHallFloor
   m_TagString: Untagged
@@ -50307,6 +50803,18 @@ Transform:
   m_LocalScale: {x: .0681601167, y: 2.6500001, z: .850000143}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &2061361278
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2061361273}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.00000477, y: 1.99999928, z: 2.00000048}
+  m_Center: {x: 7.62939453e-06, y: -4.76837158e-07, z: 0}
 --- !u!1 &2061698679
 GameObject:
   m_ObjectHideFlags: 0
@@ -52340,6 +52848,7 @@ GameObject:
   - 33: {fileID: 2137060436}
   - 23: {fileID: 2137060435}
   - 95: {fileID: 2137060434}
+  - 65: {fileID: 2137060438}
   m_Layer: 0
   m_Name: pinkwall
   m_TagString: Untagged
@@ -52403,6 +52912,18 @@ Transform:
   m_LocalScale: {x: -.0681601167, y: -3.41669297, z: -1.8611275}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!65 &2137060438
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2137060433}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2138302262
 GameObject:
   m_ObjectHideFlags: 0
