@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Prisoner : MonoBehaviour, Possessable {
     
-    public FreeLookCamJoystick prisonerCamera;
+    public FreeLookCam prisonerCamera;
 
 	protected int health;
 	protected float speed;
@@ -13,7 +13,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 
     private Animation eyes;
     private Animator prisonerAnimator;
-    private ThirdPersonJoystickControl userControl;
+    private ThirdPersonUserControl userControl;
 	//inventory
 	
 	// Use this for initialization
@@ -23,7 +23,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 		jumpVelocity = 10.0f;
 		isPossessed = false;
         eyes = prisonerCamera.gameObject.GetComponent<Animation>();
-        userControl = gameObject.GetComponent<ThirdPersonJoystickControl>();
+        userControl = gameObject.GetComponent<ThirdPersonUserControl>();
         prisonerAnimator = gameObject.GetComponent<Animator>();
 
 	}
