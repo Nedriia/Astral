@@ -29,15 +29,15 @@ public class ControlManager : MonoBehaviour {
                 gui.gameObject.SetActive(true);
             }
         }
-        if (Input.GetKeyUp(KeyCode.E)) {
+        if (Input.GetKeyUp(KeyCode.E) && !possMaster.AstralForm) {
             StartCoroutine(possMaster.enterAstral());
         }
-        if (Input.GetKeyUp(KeyCode.Q)) {
+        if (Input.GetKeyUp(KeyCode.Q) && (possMaster.getInventory().Count >= 1)) {
             if (possMaster.AstralForm) {
                 StartCoroutine(possMaster.swap(possMaster.getInventory()[0]));
             } else {
                 ++curPosIndex;
-                if (curPosIndex > possMaster.getInventory().Count) {
+                if (curPosIndex > possMaster.getInventory().Count-1) {
                     curPosIndex = 0;
                     StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
                 } else {
@@ -45,7 +45,7 @@ public class ControlManager : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKeyUp(KeyCode.R)) {
+        if (Input.GetKeyUp(KeyCode.R) && (julia.CurrentlyViewing != null) && (!possMaster.getInventory().Contains(julia.CurrentlyViewing))) {
             julia.addPrisoner();
         }
 
