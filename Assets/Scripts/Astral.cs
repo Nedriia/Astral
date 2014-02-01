@@ -9,17 +9,17 @@ public class Astral : MonoBehaviour, Possessable {
     private static Prisoner currentlyViewing;
 	private Animation eyes;
     //used for disabling and enabling movement
-    private SimpleMouseRotatorJoystick mouseRotatorLR, mouseRotatorUD;
-    private FirstPersonCharacterJoystick characterMover;
+    private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
+    private FirstPersonCharacter characterMover;
     private bool disabledOnSceneStart = true;
 
 	// Use this for initialization
 	void Start () {
         disabledOnSceneStart = false;
 		eyes = gameObject.GetComponent<Animation>();
-        mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotatorJoystick>();
-        mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotatorJoystick>();
-        characterMover = gameObject.GetComponentInChildren<FirstPersonCharacterJoystick>();
+        mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
+        mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
+        characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
 	}
 
     //if julia was disabled on the screen start we never get her component references
@@ -27,9 +27,9 @@ public class Astral : MonoBehaviour, Possessable {
     void OnEnable() {
         if (disabledOnSceneStart) {
             eyes = gameObject.GetComponent<Animation>();
-            mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotatorJoystick>();
-            mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotatorJoystick>();
-            characterMover = gameObject.GetComponentInChildren<FirstPersonCharacterJoystick>();
+            mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
+            mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
+            characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
             disabledOnSceneStart = false;
         }
     }

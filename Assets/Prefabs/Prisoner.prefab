@@ -1317,7 +1317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -1615,7 +1615,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
   m_LocalRotation: {x: 0, y: .0557399318, z: 0, w: .998445392}
-  m_LocalPosition: {x: -16.8175888, y: -2.1956892, z: 15.9917831}
+  m_LocalPosition: {x: 7.91676426, y: 8.20529747, z: -3.86487675}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400024}
@@ -2447,10 +2447,10 @@ Animation:
   m_GameObject: {fileID: 100044}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: f59c6f6dea61d864c9d567990cfab437, type: 2}
+  m_Animation: {fileID: 7400000, guid: c7a669b42330f7441895c9373164c7b0, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: f59c6f6dea61d864c9d567990cfab437, type: 2}
-  - {fileID: 7400000, guid: 0d24463213189b84294e0768f3938aef, type: 2}
+  - {fileID: 7400000, guid: c7a669b42330f7441895c9373164c7b0, type: 2}
+  - {fileID: 7400000, guid: 1b8866d1eccc63e489b4b07973f937b9, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

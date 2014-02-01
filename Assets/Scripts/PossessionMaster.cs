@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PossessionMaster : MonoBehaviour {
 
     public Astral Julia;
-    public FreeLookCamJoystick prisonerCamera;
+    public FreeLookCam prisonerCamera;
     public Prisoner startingPosPrisoner;
 
     private List<Prisoner> prisonerInventory;
@@ -38,7 +38,7 @@ public class PossessionMaster : MonoBehaviour {
     //enters astral form when in prisoner
     public IEnumerator enterAstral() {
         //Prisoner to Julia
-        Vector3 juliaNewPosition = new Vector3(currentlyPossessing.transform.position.x,currentlyPossessing.transform.position.y+0.2f,currentlyPossessing.transform.position.z+0.5f);
+        Vector3 juliaNewPosition = new Vector3(currentlyPossessing.transform.position.x,currentlyPossessing.transform.position.y+1f,currentlyPossessing.transform.position.z+0.5f);
         //Vector3 juliaNewPosition = currentlyPossessing.transform.position;
         yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
         prisonerCamera.gameObject.SetActive(false);
