@@ -27,7 +27,7 @@ public class PossessionMaster : MonoBehaviour {
 	void Update () {
 	}
 
-    public bool AstralForm {
+    public static bool AstralForm {
         get { return astralForm; }
     }
 

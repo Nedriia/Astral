@@ -16,13 +16,13 @@ public class GuiManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (possMaster.AstralForm) {
+        if (PossessionMaster.AstralForm) {
             enterAstral.isActivated = false;
         } else {
             enterAstral.isActivated = true;
         }
 
-        if ((possMaster.getInventory().Count == 0) || (!possMaster.AstralForm && possMaster.getInventory().Count == 1)) {
+        if ((possMaster.getInventory().Count == 0) || (!PossessionMaster.AstralForm && possMaster.getInventory().Count == 1)) {
             swap.isActivated = false;
         } else {
             swap.isActivated = true;
@@ -40,11 +40,11 @@ public class GuiManager : MonoBehaviour {
             StartCoroutine(possMaster.enterAstral());
         }
         if (buttonName == "Swap") {
-            if (possMaster.AstralForm) {
+            if (PossessionMaster.AstralForm) {
                 StartCoroutine(possMaster.swap(possMaster.getInventory()[0]));
             } else {
                 ++curPosIndex;
-                if (curPosIndex > possMaster.getInventory().Count) {
+                if (curPosIndex > possMaster.getInventory().Count-1) {
                     curPosIndex = 0;
                     StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
                 } else {
