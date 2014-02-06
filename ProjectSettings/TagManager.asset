@@ -8,6 +8,7 @@ TagManager:
   - Smelly
   - 
   - Fire
+  - Prisoner
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -17,10 +18,10 @@ TagManager:
   Builtin Layer 5: 
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: Vehicles
-  User Layer 9: Ball
-  User Layer 10: Characters
-  User Layer 11: Floor
+  User Layer 8: Player
+  User Layer 9: Prisoner
+  User Layer 10: 
+  User Layer 11: 
   User Layer 12: 
   User Layer 13: 
   User Layer 14: 

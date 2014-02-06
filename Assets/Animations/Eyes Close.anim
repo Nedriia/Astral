@@ -1,0 +1,419 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Eyes Close
+  serializedVersion: 4
+  m_AnimationType: 1
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -3.80956408e-07, y: .171098098, z: .150000423}
+        inSlope: {x: 2.93043399e-07, y: -.177315563, z: -3.20948089e-07}
+        outSlope: {x: 2.93043399e-07, y: -.177315563, z: -3.20948089e-07}
+        tangentMode: 610419980
+      - time: .5
+        value: {x: -2.34434708e-07, y: .0824403167, z: .150000259}
+        inSlope: {x: 2.93043428e-07, y: -.142018631, z: -3.20948089e-07}
+        outSlope: {x: 2.93043428e-07, y: -.142018631, z: -3.20948089e-07}
+        tangentMode: 0
+      - time: .916666687
+        value: {x: -1.12333282e-07, y: .0379729383, z: .150000125}
+        inSlope: {x: 2.93043399e-07, y: -.0749686435, z: -3.20948089e-07}
+        outSlope: {x: 2.93043399e-07, y: -.0749686435, z: -3.20948089e-07}
+        tangentMode: 0
+      - time: 1.14999998
+        value: {x: -4.39565042e-08, y: .0278893039, z: .150000051}
+        inSlope: {x: 2.93043399e-07, y: -.043215584, z: -3.20948089e-07}
+        outSlope: {x: 2.93043399e-07, y: -.043215584, z: -3.20948089e-07}
+        tangentMode: 0
+      - time: 1.29999995
+        value: {x: 0, y: .0278893039, z: .150000006}
+        inSlope: {x: 2.93043399e-07, y: 0, z: -3.20948089e-07}
+        outSlope: {x: 2.93043399e-07, y: 0, z: -3.20948089e-07}
+        tangentMode: 1919242272
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: Head Joint/First Person Camera/Upper Lid
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -3.80956408e-07, y: -.141896993, z: .150000423}
+        inSlope: {x: 0, y: .05007172, z: 0}
+        outSlope: {x: 0, y: .05007172, z: 0}
+        tangentMode: 612582320
+      - time: .916666687
+        value: {x: -3.80956408e-07, y: -.0959979147, z: .150000423}
+        inSlope: {x: 0, y: .0284630377, z: 0}
+        outSlope: {x: 0, y: .0284630377, z: 0}
+        tangentMode: 0
+      - time: 1.14999998
+        value: {x: -3.80956408e-07, y: -.0943985656, z: .150000423}
+        inSlope: {x: 0, y: .0068543544, z: 0}
+        outSlope: {x: 0, y: .0068543544, z: 0}
+        tangentMode: 0
+      - time: 1.29999995
+        value: {x: -3.80956408e-07, y: -.0943985656, z: .150000423}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 1919242272
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: Head Joint/First Person Camera/Lower Lid
+  m_ScaleCurves: []
+  m_FloatCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 4.62307739
+        outSlope: 4.62307739
+        tangentMode: 10
+      - time: 1.29999995
+        value: 6.01000023
+        inSlope: 4.62307739
+        outSlope: 4.62307739
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blurSize
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 2d7914440ac9e4b22a60e4303888e90c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      - time: 1.29999995
+        value: .100000001
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: strengthX
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 7d5488e098d8f4eb492591bb089fe793, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 1.29999995
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Enabled
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 2d7914440ac9e4b22a60e4303888e90c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 1.29999995
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Enabled
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 7d5488e098d8f4eb492591bb089fe793, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      - time: 1.29999995
+        value: .100000001
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: strengthY
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 7d5488e098d8f4eb492591bb089fe793, type: 3}
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: 1.29999995
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -3.80956408e-07
+        inSlope: 2.93043399e-07
+        outSlope: 2.93043399e-07
+        tangentMode: 10
+      - time: 1.29999995
+        value: 0
+        inSlope: 2.93043399e-07
+        outSlope: 2.93043399e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: Head Joint/First Person Camera/Upper Lid
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .171098098
+        inSlope: -.177315563
+        outSlope: -.177315563
+        tangentMode: 10
+      - time: .5
+        value: .0824403167
+        inSlope: -.142018631
+        outSlope: -.142018631
+        tangentMode: 10
+      - time: .916666687
+        value: .0379729383
+        inSlope: -.0749686435
+        outSlope: -.0749686435
+        tangentMode: 10
+      - time: 1.14999998
+        value: .0278893039
+        inSlope: -.043215584
+        outSlope: -.043215584
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: Head Joint/First Person Camera/Upper Lid
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .150000423
+        inSlope: -3.20948089e-07
+        outSlope: -3.20948089e-07
+        tangentMode: 10
+      - time: 1.29999995
+        value: .150000006
+        inSlope: -3.20948089e-07
+        outSlope: -3.20948089e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: Head Joint/First Person Camera/Upper Lid
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -3.80956408e-07
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 1.29999995
+        value: -3.80956408e-07
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: Head Joint/First Person Camera/Lower Lid
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.141896993
+        inSlope: .05007172
+        outSlope: .05007172
+        tangentMode: 10
+      - time: .916666687
+        value: -.0959979147
+        inSlope: .0284630377
+        outSlope: .0284630377
+        tangentMode: 10
+      - time: 1.14999998
+        value: -.0943985656
+        inSlope: .0068543544
+        outSlope: .0068543544
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: Head Joint/First Person Camera/Lower Lid
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .150000423
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 1.29999995
+        value: .150000423
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: Head Joint/First Person Camera/Lower Lid
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 4.62307739
+        outSlope: 4.62307739
+        tangentMode: 10
+      - time: 1.29999995
+        value: 6.01000023
+        inSlope: 4.62307739
+        outSlope: 4.62307739
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: blurSize
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 2d7914440ac9e4b22a60e4303888e90c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      - time: 1.29999995
+        value: .100000001
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: strengthX
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 7d5488e098d8f4eb492591bb089fe793, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 1.29999995
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Enabled
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 2d7914440ac9e4b22a60e4303888e90c, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 1.29999995
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Enabled
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 7d5488e098d8f4eb492591bb089fe793, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      - time: 1.29999995
+        value: .100000001
+        inSlope: .0769230798
+        outSlope: .0769230798
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: strengthY
+    path: Head Joint/First Person Camera
+    classID: 114
+    script: {fileID: 11500000, guid: 7d5488e098d8f4eb492591bb089fe793, type: 3}
+  m_EulerEditorCurves: []
+  m_Events: []
