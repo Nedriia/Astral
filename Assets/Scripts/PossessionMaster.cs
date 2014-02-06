@@ -13,6 +13,9 @@ public class PossessionMaster : MonoBehaviour {
     private static bool astralForm;
 	// Use this for initialization
 	void Start () {
+        Julia = GameObject.Find("Julia").GetComponent<Astral>();
+        prisonerCamera = GameObject.Find("Astral Camera Rig").GetComponent<FreeLookCam>();
+    
         prisonerInventory = new List<Prisoner>();
         //we are starting in a prisoner
         if (startingPosPrisoner != null) {
