@@ -91,6 +91,7 @@ public class PossessionMaster : MonoBehaviour {
         if (enter) {
             //enable third person camera rig and set on target
             prisonerCamera.gameObject.SetActive(true);
+            prisonerCamera.gameObject.transform.position = currentlyPossessing.transform.position;
             prisonerCamera.SetTarget(curPrisoner.gameObject.transform);
             waitTime = curPrisoner.bodyTransition(true);
             currentlyPossessing = curPrisoner;
