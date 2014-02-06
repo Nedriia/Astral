@@ -18,7 +18,6 @@ public class Prisoner : MonoBehaviour, Possessable {
 	
 	// Use this for initialization
 	private void Start () {
-        prisonerCamera = GameObject.Find("Astral Camera Rig").GetComponent<FreeLookCam>();
 		health = 100;
 		speed = 5.0f;
 		jumpVelocity = 10.0f;
