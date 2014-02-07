@@ -2586,7 +2586,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 0cacedce112930b40a8c1b85c285a398, type: 2}
       propertyPath: camZoom
-      value: -1.20000005
+      value: -.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cacedce112930b40a8c1b85c285a398, type: 2}
@@ -5394,6 +5394,7 @@ GameObject:
   - 114: {fileID: 1745505310}
   - 114: {fileID: 1745505309}
   - 65: {fileID: 1745505307}
+  - 114: {fileID: 1745505308}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -5499,6 +5500,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
+--- !u!114 &1745505308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1745505300}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b4768c3683045e4bfdb2e78272970c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshhold: .25
+  intensity: .75
+  blurSize: 1
+  resolution: 0
+  blurIterations: 1
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!114 &1745505309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6852,7 +6871,7 @@ MonoBehaviour:
   prisonerCamera: {fileID: 19078402}
   camPivVert: 1.34000003
   camPivHor: 0
-  camZoom: -1.20000005
+  camZoom: -.5
 --- !u!95 &2145716283
 Animator:
   serializedVersion: 2
