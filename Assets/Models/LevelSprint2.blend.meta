@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: 9e593d733a00778449d408ac5ba00ee8
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature_001
+    100002: Bone_002
+    100004: Bone_003
+    100006: Bone_004
+    100008: ceiling
+    100010: chest
+    100012: female_body_basemesh_001
+    100014: fingers_l
+    100016: fingers_r
+    100018: floor
+    100020: hand_l
+    100022: hand_r
+    100024: hip
+    100026: //RootNode
+    100028: lowerArm_l
+    100030: lowerArm_r
+    100032: lowerLeg_l
+    100034: lowerLeg_l_001
+    100036: lowerLeg_l_002
+    100038: lowerLeg_r
+    100040: lowerLeg_r_001
+    100042: lowerLeg_r_002
+    100044: shoulder_l
+    100046: shoulder_r
+    100048: thumb_l
+    100050: thumb_r
+    100052: upperArm_l
+    100054: upperArm_r
+    100056: upperLeg_l
+    100058: upperLeg_r
+    100060: wall_bounding
+    100062: wall_hall
+    100064: wall_rooms
+    400000: Armature_001
+    400002: Bone_002
+    400004: Bone_003
+    400006: Bone_004
+    400008: ceiling
+    400010: chest
+    400012: female_body_basemesh_001
+    400014: fingers_l
+    400016: fingers_r
+    400018: floor
+    400020: hand_l
+    400022: hand_r
+    400024: hip
+    400026: //RootNode
+    400028: lowerArm_l
+    400030: lowerArm_r
+    400032: lowerLeg_l
+    400034: lowerLeg_l_001
+    400036: lowerLeg_l_002
+    400038: lowerLeg_r
+    400040: lowerLeg_r_001
+    400042: lowerLeg_r_002
+    400044: shoulder_l
+    400046: shoulder_r
+    400048: thumb_l
+    400050: thumb_r
+    400052: upperArm_l
+    400054: upperArm_r
+    400056: upperLeg_l
+    400058: upperLeg_r
+    400060: wall_bounding
+    400062: wall_hall
+    400064: wall_rooms
+    2300000: ceiling
+    2300002: floor
+    2300004: wall_bounding
+    2300006: wall_hall
+    2300008: wall_rooms
+    3300000: ceiling
+    3300002: floor
+    3300004: wall_bounding
+    3300006: wall_hall
+    3300008: wall_rooms
+    4300000: wall_hall
+    4300002: ceiling
+    4300004: wall_bounding
+    4300006: wall_rooms
+    4300008: floor
+    4300010: female_body_basemesh_001
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: female_body_basemesh_001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
