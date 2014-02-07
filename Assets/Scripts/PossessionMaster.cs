@@ -94,21 +94,19 @@ public class PossessionMaster : MonoBehaviour {
             prisonerCamera.gameObject.SetActive(true);
             prisonerCamera.gameObject.transform.position = curPrisoner.transform.position;
             
-            //must disable than enable walls script to set zoom level
-            //protFrmWalls.enabled = false;
-            //set our current prisoners camra pivot positioning and zoom level
-            Debug.Log(prisonerCamera.gameObject.transform.childCount);
+            //set our current prisoners camera pivot positioning and zoom level
             Vector3 pivotPosition = prisonerCamera.gameObject.transform.GetChild(0).localPosition;
             Vector3 cameraZoom = prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition;
-            protFrmWalls.closestDistance = curPrisoner.camZoom;
-            //cameraZoom.z = curPrisoner.camZoom;
+            //must disable than enable walls script to set zoom level
+            protFrmWalls.enabled = false;
+            cameraZoom.z = curPrisoner.camZoom;
             pivotPosition.y = curPrisoner.camPivVert;
             pivotPosition.x = curPrisoner.camPivHor;
 
-            //prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition = cameraZoom;
+            prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition = cameraZoom;
             prisonerCamera.gameObject.transform.GetChild(0).localPosition = pivotPosition;
 
-            //protFrmWalls.enabled = true;
+            protFrmWalls.enabled = true;
             prisonerCamera.SetTarget(curPrisoner.gameObject.transform);
             waitTime = curPrisoner.bodyTransition(true);
             currentlyPossessing = curPrisoner;

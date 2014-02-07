@@ -23,21 +23,21 @@ public class ProtectCameraFromWallClip : MonoBehaviour
     private RayHitComparer rayHitComparer;              // variable to compare raycast hit distances
 
 
-	void Start() {
+	void OnEnable() {
 
         // find the camera in the object hierarchy
 		cam = GetComponentInChildren<Camera>().transform;
 		pivot = cam.parent;
 		originalDist = cam.localPosition.magnitude;
 		currentDist = originalDist;
-
+        Debug.Log(originalDist);
         // create a new RayHitComparer
         rayHitComparer = new RayHitComparer();
 	}
 	
 
 	void LateUpdate() {
-
+        Debug.Log("Original: " + originalDist + "Current: " + currentDist + "Closest: " + closestDistance);
         // initially set the target distance
 		float targetDist = originalDist;
 
@@ -92,7 +92,7 @@ public class ProtectCameraFromWallClip : MonoBehaviour
 
 		// visualise the cam clip effect in the editor
 		Debug.DrawRay(ray.origin, -pivot.forward * (targetDist + sphereCastRadius), hitSomething ? Color.red : Color.green);
-
+        Debug.Log(originalDist);
         // hit something so move the camera to a better position
 	    protecting = hitSomething;
 		currentDist = Mathf.SmoothDamp(currentDist, targetDist, ref moveVelocity, currentDist > targetDist ? clipMoveTime : returnTime );
@@ -110,8 +110,4 @@ public class ProtectCameraFromWallClip : MonoBehaviour
 		}	
 	}
 
-    public float OriginalDistance {
-        set { originalDist = value; }
-        get { return originalDist;  }
-    }
 }
