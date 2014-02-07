@@ -6,6 +6,7 @@ public class PossessionMaster : MonoBehaviour {
 
     public Astral Julia;
     public FreeLookCam prisonerCamera;
+    public ProtectCameraFromWallClip protFrmWalls;
     public Prisoner startingPosPrisoner;
 
     private List<Prisoner> prisonerInventory;
@@ -15,7 +16,7 @@ public class PossessionMaster : MonoBehaviour {
 	void Start () {
         Julia = GameObject.Find("Julia").GetComponent<Astral>();
         prisonerCamera = GameObject.Find("Astral Camera Rig").GetComponent<FreeLookCam>();
-    
+        protFrmWalls = GameObject.Find("Astral Camera Rig").GetComponent<ProtectCameraFromWallClip>();
         prisonerInventory = new List<Prisoner>();
         //we are starting in a prisoner
         if (startingPosPrisoner != null) {
@@ -54,7 +55,7 @@ public class PossessionMaster : MonoBehaviour {
     //swaps to the specified prisoner
     public IEnumerator swap( Prisoner curPrisoner ) {
         //Julia to prisoner
-        if ( astralForm && ( currentlyPossessing == null ) ) {
+        if ( astralForm && (currentlyPossessing == null)) {
             //wait for julia out animation to finish
             yield return new WaitForSeconds(transitionJ(false));
             Julia.gameObject.SetActive(false);
@@ -62,7 +63,7 @@ public class PossessionMaster : MonoBehaviour {
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
             curPrisoner.startControlling();
         //Prisoner to Prisoner
-        } else if ( !astralForm && ( currentlyPossessing != null) ) {
+        } else if (!astralForm && (currentlyPossessing != null)) {
             //wait for prisoner out animation to finish
             yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
             //wait for in animation to finish
@@ -72,7 +73,7 @@ public class PossessionMaster : MonoBehaviour {
     }
 
     //transtions in or out of julia
-    private float transitionJ( bool enter ) {
+    private float transitionJ(bool enter) {
         float waitTime = 0;
         if (enter) {
             waitTime = Julia.bodyTransition(true);
@@ -86,12 +87,28 @@ public class PossessionMaster : MonoBehaviour {
     }
 
     //transtions in or out of specified prisoner
-    private float transitionP( Prisoner curPrisoner, bool enter ) {
+    private float transitionP(Prisoner curPrisoner, bool enter) {
         float waitTime = 0;
         if (enter) {
             //enable third person camera rig and set on target
             prisonerCamera.gameObject.SetActive(true);
-            prisonerCamera.gameObject.transform.position = currentlyPossessing.transform.position;
+            prisonerCamera.gameObject.transform.position = curPrisoner.transform.position;
+            
+            //must disable than enable walls script to set zoom level
+            //protFrmWalls.enabled = false;
+            //set our current prisoners camra pivot positioning and zoom level
+            Debug.Log(prisonerCamera.gameObject.transform.childCount);
+            Vector3 pivotPosition = prisonerCamera.gameObject.transform.GetChild(0).localPosition;
+            Vector3 cameraZoom = prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition;
+            protFrmWalls.closestDistance = curPrisoner.camZoom;
+            //cameraZoom.z = curPrisoner.camZoom;
+            pivotPosition.y = curPrisoner.camPivVert;
+            pivotPosition.x = curPrisoner.camPivHor;
+
+            //prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition = cameraZoom;
+            prisonerCamera.gameObject.transform.GetChild(0).localPosition = pivotPosition;
+
+            //protFrmWalls.enabled = true;
             prisonerCamera.SetTarget(curPrisoner.gameObject.transform);
             waitTime = curPrisoner.bodyTransition(true);
             currentlyPossessing = curPrisoner;

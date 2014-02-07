@@ -342,8 +342,8 @@ MonoBehaviour:
   moveSpeed: 7
   turnSpeed: 10
   turnSmoothing: .100000001
-  tiltMax: 75
-  tiltMin: 45
+  tiltMax: 65
+  tiltMin: 35
   lockCursor: 0
 --- !u!124 &12400000
 Behaviour:

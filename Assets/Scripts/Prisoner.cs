@@ -4,6 +4,7 @@ using System.Collections;
 public class Prisoner : MonoBehaviour, Possessable {
     
     public FreeLookCam prisonerCamera;
+    public float camPivVert = 2f, camPivHor = 0f, camZoom = -1f;
 
 	protected int health;
 	protected float speed;

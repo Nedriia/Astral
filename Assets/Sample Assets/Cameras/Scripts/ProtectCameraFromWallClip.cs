@@ -109,4 +109,9 @@ public class ProtectCameraFromWallClip : MonoBehaviour
 			return ((RaycastHit)x).distance.CompareTo(((RaycastHit)y).distance);
 		}	
 	}
+
+    public float OriginalDistance {
+        set { originalDist = value; }
+        get { return originalDist;  }
+    }
 }
