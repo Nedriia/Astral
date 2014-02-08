@@ -17,6 +17,11 @@ public class ToggleLight : MonoBehaviour {
 		originalIntensity = lightAffected.intensity;
 	}
 	
+	//Resets the light back to its original intensity - used for the Light prisoner
+	public void resetIntensity() {
+		lightAffected.intensity = originalIntensity;
+	}
+	
 	//Plays a fade when the player enters or exits the light trigger
 	private void playFade(bool enterLight) {
 		//if (tween != null && tween.isComplete == false) tween.Complete();
