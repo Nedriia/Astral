@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Holoville.HOTween;
 
 //Placed on all lights that the light prisoner can absorb. It must have the same effect regardless of what the light has attached to it
 //So, what we need to do is have each light flicker in the SAME way when the light prisoner is under, and we must disable all the other properties when this happens
@@ -9,11 +8,12 @@ public class AbsorbableLight : MonoBehaviour {
 	private Light lightAffected; //The light absorbed or put back into
 	private float originalIntensity; //The original intensity of the light
 	
+	private LightFlicker flicker; //The light's special flicker that gets added when the prisoner is under the light
+	private LightFade fade; //The light's special fade that gets added when the prisoner takes the light
+	
 	//We need these properties to ensure that all lights that are on behave the same way, regardless of what they have attached
 	private LightFlicker originalFlicker; //The light's original flicker
-	private LightFlicker flicker; //The light's special flicker that gets added when the prisoner is under the light
 	private LightFade originalFade; //The light's original fade
-	private LightFade fade; //The light's special fade that gets added when the prisoner takes the light
 	private ToggleLight toggle; //The light's toggle
 	
 	//Use this for initialization
@@ -21,15 +21,12 @@ public class AbsorbableLight : MonoBehaviour {
 		lightAffected = this.gameObject.GetComponent<Light>();
 		if (lightAffected != null) originalIntensity = lightAffected.intensity;
 		
-		originalFlicker = this.gameObject.GetComponent<LightFlicker>();
 		flicker = null;
-		originalFade = this.gameObject.GetComponent<LightFade>();
 		fade = null;
-		toggle = this.gameObject.GetComponent<ToggleLight>();
 		
-		//Create a new sequence that reverses the order it's played when it's completed and repeats an infinite number of times
-		//tweenSequence = new Sequence(new SequenceParms().Loops(-1).OnComplete(onComplete));
-		//tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", getFinalIntensity()));
+		originalFlicker = this.gameObject.GetComponent<LightFlicker>();
+		originalFade = this.gameObject.GetComponent<LightFade>();
+		toggle = this.gameObject.GetComponent<ToggleLight>();
 	}
 	
 	//Gets the light affected
@@ -37,14 +34,14 @@ public class AbsorbableLight : MonoBehaviour {
 		get { return lightAffected; }
 	}
 	
+	//Gets the original intensity of the light
+	public float getOrigIntensity {
+		get { return originalIntensity; }
+	}
+	
 	//Gets the special flicker
 	public LightFlicker getSpecialFlicker {
 		get { return flicker; }
-	}
-	
-	public void onComplete() {
-		//tweenSequence.Stop();
-		//tweenSequence.
 	}
 	
 	//Makes the light start flickering when the light prisoner goes under it. This flicker is special and is the same for each light that can be taken
@@ -64,13 +61,15 @@ public class AbsorbableLight : MonoBehaviour {
 	//Reverts the light back to its original state when the light prisoner leaves it
 	public void stopTake() {
 		Destroy(flicker);
-		modifyLightTypes(true);
 		
+		//Turn the original properties back on and reset the light's intensity to its original value
+		modifyLightTypes(true);
 		lightAffected.intensity = originalIntensity;
 	}
 	
 	//Enables or disables the types of light
 	private void modifyLightTypes(bool enabled) {
+		//Enable or disable the original flickers or fades to not interfere with the actions the light prisoner does
 		if (originalFlicker != null) originalFlicker.enabled = enabled;
 		if (originalFade != null) {
 			if (enabled == true) originalFade.restart();
@@ -90,22 +89,33 @@ public class AbsorbableLight : MonoBehaviour {
 	}
 	
 	//Gives light to the light prisoner
-	public Light takeLight() {
+	public AbsorbableLight takeLight() {
+		//Bring the light back to normal intensity
 		lightAffected.intensity = originalIntensity;
 		
+		//Destroy the temp flicker and add a temp fade
 		Destroy(flicker);
-		fade = this.gameObject.AddComponent("LightFade") as LightFade;
-		fade.specialFade(true, lightAffected, originalIntensity);
+		addTempFade(true);
 		
-		return lightAffected;
+		//Return this component to get the light values and original intensity
+		return this;
 	}
 	
 	//Gives light from the light prisoner to this light
 	public void placeLight(Light light) {
 		//lightAffected = light;
 		
+		//Reset the intensity of the light and change its color to the new light's color
+		lightAffected.intensity = 0f;
+		lightAffected.color = light.color;
+		
+		//Add a temp fade
+		addTempFade(false);
+	}
+	
+	private void addTempFade(bool take) {
 		fade = this.gameObject.AddComponent("LightFade") as LightFade;
-		fade.specialFade(false, lightAffected, originalIntensity);
+		fade.specialFade(take, lightAffected, originalIntensity);
 	}
 	
 	//Update is called once per frame
