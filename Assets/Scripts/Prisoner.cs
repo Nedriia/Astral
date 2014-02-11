@@ -31,6 +31,8 @@ public class Prisoner : MonoBehaviour, Possessable {
 	
 	// Update is called once per frame
 	private void Update () {
+        Debug.Log(transform.forward);
+        Debug.DrawRay(transform.position, transform.forward*4, Color.cyan);
 		if (Input.GetKeyDown(KeyCode.R))
 		{
 			//deleteFromInventory ();

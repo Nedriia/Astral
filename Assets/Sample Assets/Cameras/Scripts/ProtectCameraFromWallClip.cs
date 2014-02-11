@@ -37,7 +37,7 @@ public class ProtectCameraFromWallClip : MonoBehaviour
 	
 
 	void LateUpdate() {
-        Debug.Log("Original: " + originalDist + "Current: " + currentDist + "Closest: " + closestDistance);
+
         // initially set the target distance
 		float targetDist = originalDist;
 
@@ -92,7 +92,7 @@ public class ProtectCameraFromWallClip : MonoBehaviour
 
 		// visualise the cam clip effect in the editor
 		Debug.DrawRay(ray.origin, -pivot.forward * (targetDist + sphereCastRadius), hitSomething ? Color.red : Color.green);
-        Debug.Log(originalDist);
+
         // hit something so move the camera to a better position
 	    protecting = hitSomething;
 		currentDist = Mathf.SmoothDamp(currentDist, targetDist, ref moveVelocity, currentDist > targetDist ? clipMoveTime : returnTime );
