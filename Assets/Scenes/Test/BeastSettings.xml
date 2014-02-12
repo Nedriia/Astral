@@ -19,7 +19,7 @@
     <ignoreLightLinks>false</ignoreLightLinks>
     <maxRayDepth>6</maxRayDepth>
     <maxShadowRays>10000</maxShadowRays>
-    <minShadowRays>0</minShadowRays>
+    <minShadowRays>1</minShadowRays>
     <reflectionDepth>2</reflectionDepth>
     <reflectionThreshold>0.001</reflectionThreshold>
     <shadowDepth>2</shadowDepth>
