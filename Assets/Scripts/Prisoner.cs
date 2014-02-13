@@ -4,6 +4,7 @@ using System.Collections;
 public class Prisoner : MonoBehaviour, Possessable {
     
     public FreeLookCam prisonerCamera;
+    public ProtectCameraFromWallClip protFrmWalls;
     public float camPivVert = 2f, camPivHor = 0f, camZoom = -1f;
 
 	protected int health;
@@ -31,8 +32,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 	
 	// Update is called once per frame
 	private void Update () {
-        Debug.Log(transform.forward);
-        Debug.DrawRay(transform.position, transform.forward*4, Color.cyan);
+        Debug.DrawRay(transform.position, transform.forward*1, Color.cyan);
 		if (Input.GetKeyDown(KeyCode.R))
 		{
 			//deleteFromInventory ();
@@ -68,10 +68,14 @@ public class Prisoner : MonoBehaviour, Possessable {
 
     public void startControlling() {
         userControl.enabled = true;
+        prisonerCamera.enabled = true;
+        protFrmWalls.enabled = true;
     }
 
     public void stopControlling() {
+        prisonerCamera.enabled = false;
         userControl.enabled = false;
+        protFrmWalls.enabled = false;
         prisonerAnimator.SetFloat("Forward", 0);
         prisonerAnimator.SetFloat("Turn", 0);
     }

@@ -1581,9 +1581,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
-  m_LocalRotation: {x: 0, y: .0557399318, z: 0, w: .998445392}
-  m_LocalPosition: {x: 6.16001081, y: -2.1956892, z: -18.8021049}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: -.722723663, z: 0, w: .691137135}
+  m_LocalPosition: {x: -12.8496418, y: -2.1956892, z: 13.4111853}
+  m_LocalScale: {x: .622677922, y: .622677922, z: .622677922}
   m_Children:
   - {fileID: 400024}
   m_Father: {fileID: 0}
@@ -2455,6 +2455,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prisonerCamera: {fileID: 0}
+  protFrmWalls: {fileID: 0}
+  camPivVert: 1.20000005
+  camPivHor: 0
+  camZoom: -.5
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

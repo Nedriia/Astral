@@ -30,7 +30,6 @@ public class ProtectCameraFromWallClip : MonoBehaviour
 		pivot = cam.parent;
 		originalDist = cam.localPosition.magnitude;
 		currentDist = originalDist;
-        Debug.Log(originalDist);
         // create a new RayHitComparer
         rayHitComparer = new RayHitComparer();
 	}

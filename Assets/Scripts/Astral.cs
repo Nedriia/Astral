@@ -6,7 +6,7 @@ public class Astral : MonoBehaviour, Possessable {
 
     public PossessionMaster possMess;
 
-    private static Prisoner currentlyViewing;
+    private Prisoner currentlyViewing;
 	private Animation eyes;
     //used for disabling and enabling movement
     private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
@@ -43,7 +43,7 @@ public class Astral : MonoBehaviour, Possessable {
     //true for in, false for out, return amount of time to wait
     public float bodyTransition(bool entering) {
         float waitTime = 0;
-        if ( entering ) {
+        if (entering) {
             eyes.Play();
             waitTime = eyes["Eyes Open"].length;
         } else {
