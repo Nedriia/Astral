@@ -3,12 +3,12 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - Item
-  - Dangerous
-  - Smelly
-  - 
-  - Fire
+  - DoorsWalls
+  - Lights
   - Prisoner
+  - 
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -19,8 +19,8 @@ TagManager:
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: Player
-  User Layer 9: Prisoner
-  User Layer 10: 
+  User Layer 9: DoorsWalls
+  User Layer 10: Prisoner
   User Layer 11: 
   User Layer 12: 
   User Layer 13: 

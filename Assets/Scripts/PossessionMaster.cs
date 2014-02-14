@@ -39,7 +39,9 @@ public class PossessionMaster : MonoBehaviour {
     public static bool AstralForm {
         get { return astralForm; }
     }
-
+    public Prisoner CurrentlyPossesing {
+        get { return currentlyPossessing; }
+    }
     public List<Prisoner> getInventory() { 
         return prisonerInventory; 
     }
@@ -49,6 +51,19 @@ public class PossessionMaster : MonoBehaviour {
         canSwap = false;
         //Prisoner to Julia
         Vector3 juliaNewPosition = new Vector3(currentlyPossessing.transform.position.x,currentlyPossessing.transform.position.y+0.2f,currentlyPossessing.transform.position.z+0.5f);
+        RaycastHit hit;
+        //if (currentlyPossessing.rigidbody.SweepTest(currentlyPossessing.transform.forward, out hit, 1))
+            // Debug.Log(hit.distance + "mts distance to obstacle " + "Name " + hit.collider.gameObject.name + currentlyPossessing.transform.forward);
+        
+        //Debug.Log("Behind " + currentlyPossessing.rigidbody.SweepTest(Quaternion.Euler(0, 180, 0) * currentlyPossessing.transform.forward, out hit, 1));
+        //Debug.Log(currentlyPossessing.rigidbody.SweepTest(currentlyPossessing.transform.forward, out hit, 1));
+        for (int i = 0; 15 * i < 360; ++i) {
+            if (currentlyPossessing.rigidbody.SweepTest(Quaternion.Euler(0, 15 * i, 0) * currentlyPossessing.transform.up, out hit, 1)) {
+                Debug.Log("Hit: True " + "HitDistance: " + hit.distance + " Name: " + hit.collider.gameObject.name);
+            } else {
+                Debug.Log("Hit: False");
+            }
+        }
         //Vector3 juliaNewPosition = currentlyPossessing.transform.position;
         yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
         prisonerCamera.gameObject.SetActive(false);
@@ -70,7 +85,7 @@ public class PossessionMaster : MonoBehaviour {
             //wait for prisoner in animation to finish
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
             StartCoroutine(panFromHead(curPrisoner));
-            //curPrisoner.startControlling();
+            //--curPrisoner.startControlling(); This is done in pan from head now
         //Prisoner to Prisoner
         } else if (!astralForm && (currentlyPossessing != null)) {
             canSwap = false;
@@ -79,7 +94,7 @@ public class PossessionMaster : MonoBehaviour {
             //wait for in animation to finish
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
             StartCoroutine(panFromHead(curPrisoner));
-            //curPrisoner.startControlling();
+            //--curPrisoner.startControlling(); This is done in pan from head now
         }
     }
 

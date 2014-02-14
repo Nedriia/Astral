@@ -11,7 +11,7 @@ public class Astral : MonoBehaviour, Possessable {
     //used for disabling and enabling movement
     private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
     private FirstPersonCharacter characterMover;
-    private bool disabledOnSceneStart = true;
+    private bool disabledOnSceneStart = true, isDead = false;
 
 	// Use this for initialization
 	void Start () {

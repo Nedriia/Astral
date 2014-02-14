@@ -79,6 +79,10 @@ public class Prisoner : MonoBehaviour, Possessable {
         prisonerAnimator.SetFloat("Forward", 0);
         prisonerAnimator.SetFloat("Turn", 0);
     }
+
+    public Animator PrisonerAnimator {
+        get { return prisonerAnimator; }
+    }
 	/*
 	private void onTriggerEnter(Collider other) {
 		Debug.Log("anything?");
