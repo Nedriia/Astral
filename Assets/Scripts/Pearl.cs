@@ -20,6 +20,7 @@ public class Pearl : Prisoner {
 	private ThirdPersonCharacter thirdPChar;
 	private ThirdPersonUserControl thirdPControl;
 	private Quaternion originRot;
+	private PossessionMaster posMast;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -35,6 +36,7 @@ public class Pearl : Prisoner {
 		navAgent = GetComponent<NavMeshAgent>();
 		thirdPChar = GetComponent<ThirdPersonCharacter>();
 		thirdPControl = GetComponent<ThirdPersonUserControl>();
+		posMast = GameObject.Find ("Possession Master").GetComponent<PossessionMaster>();
 
 
 		//Inherited variable re-initialization
@@ -90,7 +92,6 @@ public class Pearl : Prisoner {
 			}
 			case state.Terrified: {
 				if (isFleeing) {
-					thirdPChar.enabled = true;
 					thirdPControl.enabled = true;
 					navAgent.enabled = false;
 					isFleeing = false;
@@ -107,9 +108,11 @@ public class Pearl : Prisoner {
 				break;
 			}
 			case state.Paralyzed: {
+				Camera.main.transform.rotation = originRot;
 				scareInc = 0.0f;
 				if (isFleeing) {
 					currentTimeScream = 0.0f;
+				fleeToLight();
 				}
 				else {
 					currentTimeScream += Time.deltaTime;
@@ -155,10 +158,13 @@ public class Pearl : Prisoner {
 
 	private bool fleeToLight () {
 		if (lastKnownLight && lastKnownLight.light.enabled) {
-			thirdPChar.enabled = false;
+			if (PossessionMaster.CurrentlyPossesing && PossessionMaster.CurrentlyPossesing.gameObject == gameObject) {
+				StartCoroutine(posMast.enterAstral());
+			}
 			thirdPControl.enabled = false;
 			navAgent.enabled = true;
 			navAgent.destination = lastKnownLight.transform.position;
+			thirdPChar.Move( navAgent.desiredVelocity, false, false, lastKnownLight.transform.position );
 			//navAgent.destination = new Vector3(lastKnownLight.transform.position.x, 0.0f, lastKnownLight.transform.position.z);
 			isFleeing = true;
 			return true;

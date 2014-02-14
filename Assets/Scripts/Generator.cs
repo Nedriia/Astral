@@ -12,7 +12,7 @@ public class Generator : MonoBehaviour {
 	
 	private void OnCollisionStay(Collision collision) {
 		//Check if a prisoner touched the generator and the Z key was pressed
-		if (collision.gameObject.CompareTag("Prisoner") == true && Input.GetKeyDown(KeyCode.Z) == true) {
+		if (collision.gameObject.CompareTag("Prisoner") == true && PossessionMaster.CurrentlyPossesing != null && Input.GetKeyDown(KeyCode.Z) == true) {
 			//Exit possession form
 			StartCoroutine(posMaster.enterAstral());
 			

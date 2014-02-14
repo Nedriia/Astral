@@ -10,7 +10,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 	protected int health;
 	protected float speed;
 	protected float jumpVelocity;
-	protected bool isPossessed;
+    protected bool isPossessed, isdead;
 	protected GameObject selectedItem;
 
     private Animation eyes;
@@ -24,6 +24,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 		speed = 5.0f;
 		jumpVelocity = 10.0f;
 		isPossessed = false;
+        isdead = false;
         eyes = prisonerCamera.gameObject.GetComponent<Animation>();
         userControl = gameObject.GetComponent<ThirdPersonUserControl>();
         prisonerAnimator = gameObject.GetComponent<Animator>();
@@ -98,7 +99,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 		prisoneranim.enabled = false;
 		thirdperson.enabled = false;
 		this.enabled = false;
-		
+        isdead = true;
 		//Remove the prisoner from the prisoner inventory
 		GameObject.Find("Possession Master").GetComponent<PossessionMaster>().getInventory().Remove(this);
 		
@@ -113,6 +114,10 @@ public class Prisoner : MonoBehaviour, Possessable {
 
     public Animator PrisonerAnimator {
         get { return prisonerAnimator; }
+    }
+
+    public bool IsDead {
+        get { return isdead; }
     }
 	/*
 	private void onTriggerEnter(Collider other) {

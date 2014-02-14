@@ -45,12 +45,12 @@ public static class LightManager {
 							{
 								targetPos = new Vector3(j.transform.position.x, j.transform.position.y + 1.0f, j.transform.position.z);
 								tempDir = targetPos - i.transform.position;
-								if (Physics.Raycast(i.transform.position, tempDir, out hitRay, Mathf.Infinity, mask.value))
-									Debug.Log(hitRay.collider.gameObject.name);
+								if (Physics.Raycast(i.transform.position, tempDir, out hitRay, Mathf.Infinity, mask.value)) {
+									//Debug.Log(hitRay.collider.gameObject.name);
 								if (hitRay.collider.gameObject.name == obj.name)
 								{
 									isLit.Add(i);
-								}
+									} }
 							}
 						}
 					}

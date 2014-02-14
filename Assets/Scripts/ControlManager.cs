@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ControlManager : MonoBehaviour {
@@ -17,7 +17,7 @@ public class ControlManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //we make sure that we are not jumping 
-		bool prisonerGrounded = (PossessionMaster.CurrentlyPossesing == null) ? false : PossessionMaster.CurrentlyPossesing.PrisonerAnimator.GetBool("OnGround");
+        bool prisonerGrounded = (PossessionMaster.CurrentlyPossesing == null) ? false : PossessionMaster.CurrentlyPossesing.PrisonerAnimator.GetBool("OnGround");
 
         if (Input.GetKeyUp(KeyCode.E) && !PossessionMaster.AstralForm && possMaster.CanSwap && prisonerGrounded) {
             StartCoroutine(possMaster.enterAstral());
@@ -35,7 +35,7 @@ public class ControlManager : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKeyUp(KeyCode.R) && julia.CurrentlyViewing != null && !possMaster.getInventory().Contains(julia.CurrentlyViewing)) {
+        if (Input.GetKeyUp(KeyCode.R) && julia.CurrentlyViewing != null && !possMaster.getInventory().Contains(julia.CurrentlyViewing) && !julia.CurrentlyViewing.IsDead) {
             julia.addPrisoner();
         }
 	}

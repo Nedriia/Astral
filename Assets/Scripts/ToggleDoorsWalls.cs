@@ -21,15 +21,15 @@ public class ToggleDoorsWalls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Shader.SetGlobalFloat ("transVar", trans);
-		if (PossessionMaster.AstralForm && Input.GetKey(KeyCode.G)) {
-			Camera.main.renderingPath = RenderingPath.Forward;
+		if (PossessionMaster.AstralForm ) {
+			//Camera.main.renderingPath = RenderingPath.Forward;
 			foreach(GameObject i in tagList) {
 				i.renderer.material.shader = transAppShader;
 			}
 			Physics.IgnoreLayerCollision(playerLayer, hideLayer, true);
 		}
 		else {
-			Camera.main.renderingPath = RenderingPath.DeferredLighting;
+			//Camera.main.renderingPath = RenderingPath.DeferredLighting;
 			foreach(GameObject i in tagList) {
 				i.renderer.material.shader = diffuseShader;
 			}
