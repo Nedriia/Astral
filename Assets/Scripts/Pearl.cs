@@ -92,7 +92,6 @@ public class Pearl : Prisoner {
 			}
 			case state.Terrified: {
 				if (isFleeing) {
-					thirdPControl.enabled = true;
 					navAgent.enabled = false;
 					isFleeing = false;
 				}
@@ -161,7 +160,7 @@ public class Pearl : Prisoner {
 			if (PossessionMaster.CurrentlyPossesing && PossessionMaster.CurrentlyPossesing.gameObject == gameObject) {
 				StartCoroutine(posMast.enterAstral());
 			}
-			thirdPControl.enabled = false;
+			//thirdPControl.enabled = false;
 			navAgent.enabled = true;
 			navAgent.destination = lastKnownLight.transform.position;
 			thirdPChar.Move( navAgent.desiredVelocity, false, false, lastKnownLight.transform.position );
