@@ -33,7 +33,7 @@ public class Switch : MonoBehaviour {
 	//Check if a prisoner pulled the switch
 	private void OnTriggerStay(Collider other) {
 		//Check if it was a prisoner, the object isn't moving from the switch, and the player pressed the F key
-		if (objectManipulated != null && other.gameObject.tag == "Prisoner" && objectAnim.isPlaying == false && Input.GetKeyDown(KeyCode.F) == true) {
+		if (objectManipulated != null && other.gameObject.CompareTag("Prisoner") == true && objectAnim.isPlaying == false && Input.GetKeyDown(KeyCode.F) == true) {
 			//If the switch isn't activated, play the animation when it gets activated
 			if (activated == false) {
 				objectAnim.Play(objectAnimNames[0]);
