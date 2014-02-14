@@ -348,6 +348,8 @@ GameObject:
   - 95: {fileID: 9500002}
   - 114: {fileID: 11400004}
   - 111: {fileID: 11100000}
+  - 114: {fileID: 11400006}
+  - 220: {fileID: 22000000}
   m_Layer: 9
   m_Name: Prisoner
   m_TagString: Prisoner
@@ -1301,6 +1303,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400172}
+  - 108: {fileID: 10800000}
+  m_Layer: 0
+  m_Name: StoredLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -1581,11 +1599,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
-  m_LocalRotation: {x: 0, y: -.722723663, z: 0, w: .691137135}
-  m_LocalPosition: {x: -12.8496418, y: -2.1956892, z: 13.4111853}
-  m_LocalScale: {x: .622677922, y: .622677922, z: .622677922}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: 14, y: -3.65586185, z: -69.9157715}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400024}
+  - {fileID: 400172}
   m_Father: {fileID: 0}
 --- !u!4 &400046
 Transform:
@@ -2332,6 +2351,17 @@ Transform:
   - {fileID: 400016}
   - {fileID: 400030}
   m_Father: {fileID: 400002}
+--- !u!4 &400172
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .320213288, y: .996707439, z: -.0824929401}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400044}
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -2382,6 +2412,41 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!108 &10800000
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100172}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0
+  m_Range: .400000006
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 12100000, guid: 9bdb18c49d114cb4300035184241aa39, type: 2}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
 --- !u!111 &11100000
 Animation:
   m_ObjectHideFlags: 1
@@ -2456,9 +2521,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prisonerCamera: {fileID: 0}
   protFrmWalls: {fileID: 0}
-  camPivVert: 1.20000005
+  camPivVert: 2
   camPivHor: 0
-  camZoom: -.5
+  camZoom: -1
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0409b10eff349e34bb0c7471c184ca30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2631,6 +2707,19 @@ SkinnedMeshRenderer:
     m_Center: {x: .00395998359, y: .0153721869, z: .00114431977}
     m_Extent: {x: 1.00028789, y: .303704888, z: .71621716}
   m_DirtyAABB: 0
+--- !u!220 &22000000
+LightProbeGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100044}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: .124011926, y: .947520018, z: -.67982018}
+  - {x: -.0301856175, y: .854837656, z: .714944899}
+  - {x: -.802814543, y: .274816513, z: .111950986}
+  - {x: 1.10388577, y: .193930626, z: .0670574829}
+  - {x: -.0307350215, y: 2.03015971, z: -.00850772578}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
