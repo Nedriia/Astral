@@ -35,7 +35,7 @@ public class ControlManager : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKeyUp(KeyCode.R) && julia.CurrentlyViewing != null && !possMaster.getInventory().Contains(julia.CurrentlyViewing)) {
+        if (Input.GetKeyUp(KeyCode.R) && julia.CurrentlyViewing != null && !possMaster.getInventory().Contains(julia.CurrentlyViewing) && !julia.CurrentlyViewing.IsDead) {
             julia.addPrisoner();
         }
 	}
