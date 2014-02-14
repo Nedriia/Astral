@@ -302,7 +302,11 @@ public class ThirdPersonCharacter : MonoBehaviour {
 		// Used for the head look feature.
 		animator.SetLookAtPosition( lookPos );
 	}
-	
+
+	public float MoveSpeedMultiplier{
+		set { moveSpeedMultiplier = value;}
+		get { return moveSpeedMultiplier; }
+	}
 	
 	
 	void SetUpAnimator()

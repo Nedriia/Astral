@@ -10,7 +10,7 @@ public class PossessionMaster : MonoBehaviour {
     public Prisoner startingPosPrisoner;
 
     private List<Prisoner> prisonerInventory;
-    private Prisoner currentlyPossessing;
+    private static Prisoner currentlyPossessing;
     private static bool astralForm;
     private bool canSwap;
 
@@ -39,7 +39,7 @@ public class PossessionMaster : MonoBehaviour {
     public static bool AstralForm {
         get { return astralForm; }
     }
-    public Prisoner CurrentlyPossesing {
+    public static Prisoner CurrentlyPossesing {
         get { return currentlyPossessing; }
     }
     public List<Prisoner> getInventory() { 

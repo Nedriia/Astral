@@ -17,7 +17,7 @@ public class ControlManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //we make sure that we are not jumping 
-        bool prisonerGrounded = (possMaster.CurrentlyPossesing == null) ? false : possMaster.CurrentlyPossesing.PrisonerAnimator.GetBool("OnGround");
+		bool prisonerGrounded = (PossessionMaster.CurrentlyPossesing == null) ? false : PossessionMaster.CurrentlyPossesing.PrisonerAnimator.GetBool("OnGround");
 
         if (Input.GetKeyUp(KeyCode.E) && !PossessionMaster.AstralForm && possMaster.CanSwap && prisonerGrounded) {
             StartCoroutine(possMaster.enterAstral());

@@ -19,7 +19,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 	//inventory
 	
 	// Use this for initialization
-	private void Start () {
+	protected virtual void Start () {
 		health = 100;
 		speed = 5.0f;
 		jumpVelocity = 10.0f;
@@ -31,7 +31,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 	}
 	
 	// Update is called once per frame
-	private void Update () {
+	protected virtual void Update () {
         Debug.DrawRay(transform.position, transform.forward*1, Color.cyan);
 		if (Input.GetKeyDown(KeyCode.R))
 		{
