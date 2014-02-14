@@ -19,7 +19,7 @@
     <ignoreLightLinks>false</ignoreLightLinks>
     <maxRayDepth>6</maxRayDepth>
     <maxShadowRays>10000</maxShadowRays>
-    <minShadowRays>1</minShadowRays>
+    <minShadowRays>0</minShadowRays>
     <reflectionDepth>2</reflectionDepth>
     <reflectionThreshold>0.001</reflectionThreshold>
     <shadowDepth>2</shadowDepth>
@@ -82,7 +82,7 @@
     <diffuseBoost>1</diffuseBoost>
     <emissiveScale>1</emissiveScale>
     <enableCaustics>false</enableCaustics>
-    <enableGI>false</enableGI>
+    <enableGI>true</enableGI>
     <ignoreNonDiffuse>true</ignoreNonDiffuse>
     <prepassMaxSampleRate>0</prepassMaxSampleRate>
     <prepassMinSampleRate>-4</prepassMinSampleRate>

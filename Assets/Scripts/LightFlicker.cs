@@ -25,20 +25,6 @@ public class LightFlicker : MonoBehaviour {
 		resetFlicker();
 	}
 	
-	//The special flicker
-	public void specialFlicker() {
-		minInitialDuration = .5f;
-		maxInitialDuration = 1.5f;
-		minFlickerDuration = .1f;
-		maxFlickerDuration = .2f;
-		minFlicker = 1;
-		maxFlicker = 4;
-		dimAmount = -3;
-		dimLight = true;
-		
-		resetFlicker();
-	}
-	
 	public void resetFlicker() {
 		lightAffected = this.gameObject.GetComponent<Light>();
 		originalIntensity = lightAffected.intensity;
