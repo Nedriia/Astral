@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Prisoner : MonoBehaviour, Possessable {
@@ -79,6 +79,37 @@ public class Prisoner : MonoBehaviour, Possessable {
         prisonerAnimator.SetFloat("Forward", 0);
         prisonerAnimator.SetFloat("Turn", 0);
     }
+	
+	//Kills the prisoner
+	public void Die() {
+		//Get prisoner components
+		Rigidbody prisonerbody = this.gameObject.GetComponent<Rigidbody>();
+		Animator prisoneranim = this.gameObject.GetComponent<Animator>();
+		ThirdPersonCharacter thirdperson = this.gameObject.GetComponent<ThirdPersonCharacter>();
+		
+		//Modify the rigidbody to act like a ragdoll
+		prisonerbody.constraints = RigidbodyConstraints.None;
+		prisonerbody.angularDrag = 1f;
+		prisonerbody.useGravity = true;
+		prisonerbody.isKinematic = false;
+		prisonerbody.AddTorque(new Vector3(150, 0, 0));
+		
+		//Disable the prisoner animator and the thirdpersoncharacter and prisoner scripts
+		prisoneranim.enabled = false;
+		thirdperson.enabled = false;
+		this.enabled = false;
+		
+		//Remove the prisoner from the prisoner inventory
+		GameObject.Find("Possession Master").GetComponent<PossessionMaster>().getInventory().Remove(this);
+		
+		/*foreach (Transform child in prisoner.transform) {
+			foreach (Transform childc in child.transform) {
+				if (childc.renderer != null)
+					childc.renderer.material.color = new Color(139, 69, 19);
+			}
+		}*/
+	}
+	
 
     public Animator PrisonerAnimator {
         get { return prisonerAnimator; }
