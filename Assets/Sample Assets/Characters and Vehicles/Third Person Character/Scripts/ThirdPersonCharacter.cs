@@ -58,6 +58,9 @@ public class ThirdPersonCharacter : MonoBehaviour {
             Debug.LogError(" collider cannot be cast to CapsuleCollider");
 	    }
 	    SetUpAnimator();
+
+        //keeps the prisoners from looking dumb
+        Move(Vector3.zero, false, false, gameObject.transform.position + gameObject.transform.forward * 100);
 	}
 	
 	

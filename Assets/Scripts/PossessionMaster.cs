@@ -10,7 +10,7 @@ public class PossessionMaster : MonoBehaviour {
     public Prisoner startingPosPrisoner;
 
     private List<Prisoner> prisonerInventory;
-    private Prisoner currentlyPossessing;
+    private static Prisoner currentlyPossessing;
     private static bool astralForm;
     private bool canSwap;
 
@@ -39,7 +39,7 @@ public class PossessionMaster : MonoBehaviour {
     public static bool AstralForm {
         get { return astralForm; }
     }
-    public Prisoner CurrentlyPossesing {
+    public static Prisoner CurrentlyPossesing {
         get { return currentlyPossessing; }
     }
     public List<Prisoner> getInventory() { 
@@ -50,25 +50,34 @@ public class PossessionMaster : MonoBehaviour {
     public IEnumerator enterAstral() {
         canSwap = false;
         //Prisoner to Julia
-        Vector3 juliaNewPosition = new Vector3(currentlyPossessing.transform.position.x,currentlyPossessing.transform.position.y+0.2f,currentlyPossessing.transform.position.z+0.5f);
-        RaycastHit hit;
-        //if (currentlyPossessing.rigidbody.SweepTest(currentlyPossessing.transform.forward, out hit, 1))
-            // Debug.Log(hit.distance + "mts distance to obstacle " + "Name " + hit.collider.gameObject.name + currentlyPossessing.transform.forward);
-        
-        //Debug.Log("Behind " + currentlyPossessing.rigidbody.SweepTest(Quaternion.Euler(0, 180, 0) * currentlyPossessing.transform.forward, out hit, 1));
-        //Debug.Log(currentlyPossessing.rigidbody.SweepTest(currentlyPossessing.transform.forward, out hit, 1));
-        for (int i = 0; 15 * i < 360; ++i) {
-            if (currentlyPossessing.rigidbody.SweepTest(Quaternion.Euler(0, 15 * i, 0) * currentlyPossessing.transform.up, out hit, 1)) {
-                Debug.Log("Hit: True " + "HitDistance: " + hit.distance + " Name: " + hit.collider.gameObject.name);
-            } else {
-                Debug.Log("Hit: False");
-            }
+        Vector3 juliaNewPosition = currentlyPossessing.transform.position;
+        CapsuleCollider prisonerCapsule = currentlyPossessing.GetComponent<CapsuleCollider>();
+        Vector3 capsuleStart = currentlyPossessing.transform.position, capsuleEnd = Vector3.zero;
+        capsuleStart.y += prisonerCapsule.height;
+        capsuleEnd = capsuleStart;
+        capsuleEnd.y -= prisonerCapsule.height;
+
+        //make sure to spawn julia in a place where there is no collisions
+        if (!Physics.CapsuleCast(capsuleStart, capsuleEnd, prisonerCapsule.radius / 1.5f, currentlyPossessing.transform.forward, 1)) {
+            juliaNewPosition += currentlyPossessing.transform.forward;
+            Debug.Log("forward");
+        } else if (!Physics.CapsuleCast(capsuleStart, capsuleEnd, prisonerCapsule.radius / 1.5f, currentlyPossessing.transform.forward* -1, 1)) {
+            juliaNewPosition += (currentlyPossessing.transform.forward * -1);
+            Debug.Log("back");
+        } else if (!Physics.CapsuleCast(capsuleStart, capsuleEnd, prisonerCapsule.radius / 1.5f, currentlyPossessing.transform.right, 1)) {
+            juliaNewPosition += currentlyPossessing.transform.right;
+            Debug.Log("right");
+        } else if (!Physics.CapsuleCast(capsuleStart, capsuleEnd, prisonerCapsule.radius / 1.5f, currentlyPossessing.transform.right * -1, 1)) {
+            juliaNewPosition += (currentlyPossessing.transform.right * -1);
+            Debug.Log("left");
         }
+        //make him her a little higher so she doesnt fall through the floor
+        juliaNewPosition.y += 1;
         //Vector3 juliaNewPosition = currentlyPossessing.transform.position;
         yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
         prisonerCamera.gameObject.SetActive(false);
         Julia.gameObject.SetActive(true);
-        Julia.transform.position = juliaNewPosition; //this will need to be edited
+        Julia.transform.position = juliaNewPosition; 
         yield return new WaitForSeconds(transitionJ(true));
         Julia.startControlling();
         canSwap = true;

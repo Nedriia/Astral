@@ -45,7 +45,7 @@ public class AbsorbableLight : MonoBehaviour {
 	}
 	
 	//Makes the light start flickering when the light prisoner goes under it. This flicker is special and is the same for each light that can be taken
-	public void indicateTake() {
+	public void indicateTake(LightAbility lightAbility) {
 		if (canBeTaken() == true) {
 			//Disable the other lights, set this light back to its original intensity, and make it flicker
 			modifyLightTypes(false);
@@ -54,7 +54,7 @@ public class AbsorbableLight : MonoBehaviour {
 			
 			//Add a flicker
 			flicker = this.gameObject.AddComponent("LightFlicker") as LightFlicker;
-			flicker.specialFlicker();
+			lightAbility.specialflicker.setFlicker(flicker);
 		}
 	}
 	
@@ -89,20 +89,20 @@ public class AbsorbableLight : MonoBehaviour {
 	}
 	
 	//Gives light to the light prisoner
-	public AbsorbableLight takeLight() {
+	public AbsorbableLight takeLight(LightAbility lightAbility) {
 		//Bring the light back to normal intensity
 		lightAffected.intensity = originalIntensity;
 		
 		//Destroy the temp flicker and add a temp fade
 		Destroy(flicker);
-		addTempFade(true);
+		addTempFade(true, lightAbility);
 		
 		//Return this component to get the light values and original intensity
 		return this;
 	}
 	
 	//Gives light from the light prisoner to this light
-	public void placeLight(Light light) {
+	public void placeLight(Light light, LightAbility lightAbility) {
 		//lightAffected = light;
 		
 		//Reset the intensity of the light and change its color to the new light's color
@@ -110,12 +110,12 @@ public class AbsorbableLight : MonoBehaviour {
 		lightAffected.color = light.color;
 		
 		//Add a temp fade
-		addTempFade(false);
+		addTempFade(false, lightAbility);
 	}
 	
-	private void addTempFade(bool take) {
+	private void addTempFade(bool take, LightAbility lightAbility) {
 		fade = this.gameObject.AddComponent("LightFade") as LightFade;
-		fade.specialFade(take, lightAffected, originalIntensity);
+		lightAbility.specialfade.setFade(take, fade, originalIntensity, lightAffected);
 	}
 	
 	//Update is called once per frame

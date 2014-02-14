@@ -7,49 +7,55 @@ public class LightFade : MonoBehaviour {
 	public float totalFadeAmount; //The max amount to fade the light
 	public float totalDuration; //The total duration of the fade
 	public bool startDim; //Tells whether to start out dimming the light or not
+	[HideInInspector]
+	public bool callStart = true;
 	
 	private Light lightAffected; //The light to fade
 	private float originalIntensity; //The original intensity of the light; may be needed for reference
 	private Sequence tweenSequence; //The tween sequence to fade the light in and out
-
+	
 	//Use this for initialization
 	private void Start() {
-		lightAffected = gameObject.GetComponent<Light>();
-		originalIntensity = lightAffected.intensity;
-		
-		//Create a new sequence that reverses the order it's played when it's completed and repeats an infinite number of times
-		tweenSequence = new Sequence(new SequenceParms().Loops(-1));
-		tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", getFinalIntensity()));
-		tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", originalIntensity));
-		
-		//Play the sequence
-		tweenSequence.Play();
+		if (callStart == true) {
+			lightAffected = gameObject.GetComponent<Light>();
+			originalIntensity = lightAffected.intensity;
+			
+			//Create a new sequence that reverses the order it's played when it's completed and repeats an infinite number of times
+			tweenSequence = new Sequence(new SequenceParms().Loops(-1));
+			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", getFinalIntensity()));
+			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", originalIntensity));
+			
+			//Play the sequence
+			tweenSequence.Play();
+		}
 	}
 	
-	//Special fade for when the light is taken
-	public void specialFade(bool take, Light lightaffected, float originalintensity) {
-		lightAffected = lightaffected;
-		originalIntensity = originalintensity;
+	public void startSequence(bool take, float intensity, Light LightAffected) {
+		lightAffected = LightAffected;
+		originalIntensity = lightAffected.intensity;
 		
 		//Fade to 0 if you're taking the light
 		if (take == true) {
 			tweenSequence = new Sequence(new SequenceParms().Loops(1).OnComplete(onTakeComplete));
-			tweenSequence.Append(HOTween.To(lightAffected, 1.5f, "intensity", 0));
+			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", 0));
 		}
 		//Otherwise fade to the original intensity
 		else {
 			lightAffected.enabled = true;
 			tweenSequence = new Sequence(new SequenceParms().Loops(1).OnComplete(onPutComplete));
-			tweenSequence.Append(HOTween.To(lightAffected, 1.5f, "intensity", originalIntensity));
+			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", intensity));
 		}
+		
 		restart();
 	}
 	
 	//Resets the fade - used for light prisoner
 	public void reset() {
 		this.enabled = false;
-		tweenSequence.Restart();
-		tweenSequence.Pause();
+		if (tweenSequence != null) {
+			tweenSequence.Restart();
+			tweenSequence.Pause();
+		}
 	}
 	
 	//Restarts the fade - used for light prisoner
