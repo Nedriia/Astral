@@ -17,25 +17,25 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: -2.69331503, y: -2.77041173, z: -60.3973198}
-        inSlope: {x: 0, y: 0, z: -1}
-        outSlope: {x: 0, y: 0, z: -1}
-        tangentMode: 111162688
-      - time: 1
-        value: {x: -2.69331503, y: -2.77041173, z: -61.3973198}
-        inSlope: {x: 0, y: 0, z: -.5}
-        outSlope: {x: 0, y: 0, z: -.5}
+        value: {x: -2.69331503, y: 2.55315948, z: -60.3973198}
+        inSlope: {x: 0, y: -4.76837158e-07, z: -1}
+        outSlope: {x: 0, y: -4.76837158e-07, z: -1}
         tangentMode: 0
+      - time: 1
+        value: {x: -2.69331503, y: 2.553159, z: -61.3973198}
+        inSlope: {x: 0, y: -2.38418579e-07, z: -.5}
+        outSlope: {x: 0, y: -2.38418579e-07, z: -.5}
+        tangentMode: -1069547520
       - time: 1.01666665
-        value: {x: -2.69331503, y: -2.77041173, z: -61.3973198}
+        value: {x: -2.69331503, y: 2.553159, z: -61.3973198}
         inSlope: {x: 1.36948216, y: 0, z: 0}
         outSlope: {x: 1.36948216, y: 0, z: 0}
-        tangentMode: 10024
+        tangentMode: 552993980
       - time: 2
-        value: {x: 0, y: -2.77041173, z: -61.3973198}
+        value: {x: 0, y: 2.553159, z: -61.3973198}
         inSlope: {x: 2.73896432, y: 0, z: 0}
         outSlope: {x: 2.73896432, y: 0, z: 0}
-        tangentMode: 98394196
+        tangentMode: 552791760
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -98,22 +98,22 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -2.77041173
-        inSlope: 0
-        outSlope: 0
+        value: 2.55315948
+        inSlope: -4.76837158e-07
+        outSlope: -4.76837158e-07
         tangentMode: 10
       - time: 1
-        value: -2.77041173
-        inSlope: 0
-        outSlope: 0
+        value: 2.553159
+        inSlope: -2.38418579e-07
+        outSlope: -2.38418579e-07
         tangentMode: 10
       - time: 1.01666665
-        value: -2.77041173
+        value: 2.553159
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       - time: 2
-        value: -2.77041173
+        value: 2.553159
         inSlope: 0
         outSlope: 0
         tangentMode: 10
