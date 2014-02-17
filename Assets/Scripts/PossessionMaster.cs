@@ -91,7 +91,7 @@ public class PossessionMaster : MonoBehaviour {
             canSwap = false;
             Vector3 turnDirection =  curPrisoner.gameObject.transform.position - Julia.gameObject.transform.position;
             turnDirection.Normalize();
-            Julia.transform.GetComponent<SimpleMouseRotator>().enabled = false;
+            Julia.stopControlling();
             yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, turnSpeed, "rotation", Quaternion.LookRotation(turnDirection)).WaitForCompletion());
 
             //Fly from current position to prisoner

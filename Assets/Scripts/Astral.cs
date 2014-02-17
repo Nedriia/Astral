@@ -19,7 +19,7 @@ public class Astral : MonoBehaviour, Possessable {
 		eyes = gameObject.GetComponent<Animation>();
         possMess = GameObject.Find("Possession Master").GetComponent<PossessionMaster>();
         mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
-        mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
+        mouseRotatorUD = gameObject.GetComponentsInChildren<SimpleMouseRotator>()[1];
         characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
 	}
 
