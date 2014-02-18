@@ -24,6 +24,14 @@ ModelImporter:
     100036: wall_hall_torture_002
     100038: wall_hall_torture_003
     100040: wall_room
+    100042: wall_hall_hotel_003
+    100044: wall_hall_hotel_004
+    100046: wall_hall_hotel_005
+    100048: wall_hall_hotel_006
+    100050: wall_hall_hotel_007
+    100052: wall_hall_hotel_008
+    100054: wall_hall_hotel_009
+    100056: wall_hall_outside
     400000: ceiling
     400002: female_body_basemesh_001
     400004: floor
@@ -45,6 +53,14 @@ ModelImporter:
     400036: wall_hall_torture_002
     400038: wall_hall_torture_003
     400040: wall_room
+    400042: wall_hall_hotel_003
+    400044: wall_hall_hotel_004
+    400046: wall_hall_hotel_005
+    400048: wall_hall_hotel_006
+    400050: wall_hall_hotel_007
+    400052: wall_hall_hotel_008
+    400054: wall_hall_hotel_009
+    400056: wall_hall_outside
     2300000: ceiling
     2300002: female_body_basemesh_001
     2300004: floor
@@ -65,6 +81,14 @@ ModelImporter:
     2300034: wall_hall_torture_002
     2300036: wall_hall_torture_003
     2300038: wall_room
+    2300040: wall_hall_hotel_003
+    2300042: wall_hall_hotel_004
+    2300044: wall_hall_hotel_005
+    2300046: wall_hall_hotel_006
+    2300048: wall_hall_hotel_007
+    2300050: wall_hall_hotel_008
+    2300052: wall_hall_hotel_009
+    2300054: wall_hall_outside
     3300000: ceiling
     3300002: female_body_basemesh_001
     3300004: floor
@@ -85,6 +109,14 @@ ModelImporter:
     3300034: wall_hall_torture_002
     3300036: wall_hall_torture_003
     3300038: wall_room
+    3300040: wall_hall_hotel_003
+    3300042: wall_hall_hotel_004
+    3300044: wall_hall_hotel_005
+    3300046: wall_hall_hotel_006
+    3300048: wall_hall_hotel_007
+    3300050: wall_hall_hotel_008
+    3300052: wall_hall_hotel_009
+    3300054: wall_hall_outside
     4300000: Plane
     4300002: wall_hall_hotel
     4300004: wall_hall_exit
@@ -101,7 +133,15 @@ ModelImporter:
     4300026: wall_hall_torture_001
     4300028: wall_hall_hotel_002
     4300030: wall_room
+    4300032: wall_hall_hotel_008
+    4300034: wall_hall_hotel_007
     4300036: wall_hall1
+    4300038: wall_hall_hotel_009
+    4300040: wall_hall_hotel_006
+    4300042: wall_hall_hotel_005
+    4300044: wall_hall_hotel_004
+    4300046: wall_hall_hotel_003
+    4300048: wall_hall_outside
     7400000: Default Take
     9500000: //RootNode
   materials:
