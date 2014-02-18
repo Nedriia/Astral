@@ -4,12 +4,15 @@ using System.Collections.Generic;
 
 public class Pearl : Prisoner
 {
-
 	public float MAXFEAR = 6.0f;
 	public float MAXTIMESCREAM = 1.0f;
 	public float SCARERATE = 1.0f;
+	public float SCAREDECRATE = 3.0f;
 	public float scaredPercentage = 0.4f;
 	public float terrifiedPercentage = 0.6f;
+	public float lightDec1 = 0.3f;
+	public float lightDec2 = 0.5f;
+	public float lightDec3 = 0.8f;
 
 	private enum state
 	{
@@ -57,11 +60,6 @@ public class Pearl : Prisoner
 		fearManager ();
 		stateManager ();
 		fleeManager ();
-		if (isFleeing) {
-			thirdPChar.Move (navAgent.desiredVelocity, false, false, transform.forward);
-		}/* else {
-			thirdPChar.Move (Vector3.zero, false, false, transform.forward);
-		}*/
 	}
 
 	private void fearManager ()
@@ -85,7 +83,7 @@ public class Pearl : Prisoner
 			scaredState = state.NotScared;
 		else if (currentFear > 0.0f && currentFear <= MAXFEAR * scaredPercentage)
 			scaredState = state.Scared;
-		else if (currentFear > MAXFEAR * scaredPercentage && currentFear <= MAXFEAR * terrifiedPercentage)
+		else if (currentFear > MAXFEAR * scaredPercentage && currentFear <= MAXFEAR)
 			scaredState = state.Terrified;
 		else if (currentFear > MAXFEAR)
 			scaredState = state.Paralyzed;
@@ -129,52 +127,40 @@ public class Pearl : Prisoner
 		if (thirdPChar.MoveSpeedMultiplier != 1.0f && scaredState != state.Terrified) {
 			thirdPChar.MoveSpeedMultiplier = 1.0f;
 		}
-	}
-
-	private void fleeManager () {
-		if (isFleeing && scaredState != state.Paralyzed) {
-			navAgent.enabled = false;
-			isFleeing = false;
-			fleeCooldown = true;
-			currentTimeScream = 0.0f;
-		}
-		if (!isFleeing && scareInc == 0.0f) {
-			scareInc = SCARERATE;
-		}
-		if (fleeCooldown) {
-			cooldown += Time.deltaTime;
-			thirdPChar.Move (Vector3.zero, false, false, transform.forward);
-			if (cooldown >= 1.0f) {
-				fleeCooldown = false;
-				cooldown = 0.0f;
-			}
-		}
 		if (cameraRot && scaredState != state.Terrified) {
 			Camera.main.transform.rotation = originRot;
+			cameraRot = false;
 		}
-
 	}
 
 	private void detectLight ()
 	{
 		List<GameObject> lightList = new List<GameObject> ();
-		float radius, currRadius, yPos;
+		float radius, currRadius;
 
 		lightList = LightManager.getEncompassingLight (gameObject);
-		radius = currRadius = yPos = 0.0f;
+		radius = currRadius = 0.0f;
 		scareDec = 0.0f;
 		if (lightList.Count > 0) {
 			lightList.ForEach (delegate(GameObject i) {
-				if (i.light.type == LightType.Spot) {
-					yPos = i.transform.position.y * 1.1f;
-					radius = i.light.spotAngle / (i.light.range - yPos);
-				} else if (i.light.type == LightType.Point) {
-					yPos = i.transform.position.y;
-					radius = (i.light.range / yPos) * (i.light.intensity * 0.3f);
-				}
+				radius = LightManager.getRadius(i);
 				currRadius = Vector2.Distance (new Vector2 (i.transform.position.x, i.transform.position.z),
 				                              new Vector2 (gameObject.transform.position.x, gameObject.transform.position.z));
-				scareDec += (radius - currRadius) * i.light.intensity / 1;
+				Debug.Log("rad: " + radius + "cur: " + currRadius);
+			
+				if (currRadius > 0.0f && currRadius <= radius * lightDec1) {
+					scareDec += (SCAREDECRATE  * i.light.intensity / 5.0f );
+				} else if (currRadius > radius * lightDec1 && currRadius <= radius * lightDec2) {
+					scareDec += (SCAREDECRATE  * i.light.intensity / 5.0f ) / 2.0f;
+				}
+				else if (currRadius > radius * lightDec2 && currRadius <= radius) {
+					if (scaredState == state.Scared && (currentFear >= (MAXFEAR * scaredPercentage - 0.5f))) {
+						scareInc = 0.0f;
+					} else if (scaredState == state.Terrified || scaredState == state.Paralyzed) {
+						scareDec += 1.0f;
+					}
+					scareDec += 0.5f;
+				}
 				lastKnownLight = i;
 			});
 		}
@@ -198,6 +184,28 @@ public class Pearl : Prisoner
 			return true;
 		}
 		return false;
+	}
+	
+	private void fleeManager () {
+		if (isFleeing) {
+			thirdPChar.Move (navAgent.desiredVelocity, false, false, transform.forward);
+			if (scareDec > SCARERATE) {
+				navAgent.enabled = false;
+				isFleeing = false;
+				fleeCooldown = true;
+			}
+		}
+		if (scaredState != state.Paralyzed && scareInc == 0.0f) {
+			scareInc = SCARERATE;
+		}
+		if (fleeCooldown) {
+			cooldown += Time.deltaTime;
+			thirdPChar.Move (Vector3.zero, false, false, transform.forward);
+			if (cooldown >= 1.0f) {
+				fleeCooldown = false;
+				cooldown = 0.0f;
+			}
+		}
 	}
 
 	private void toggleCrawl ()
