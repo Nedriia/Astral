@@ -45,6 +45,15 @@ public class ControlManager : MonoBehaviour {
             julia.addPrisoner();
         }
 
+        if (Input.GetKeyUp(KeyCode.G)) {
+            if (!selectionMode) {
+                StartCoroutine(possMaster.selectSwap(true, possMaster.getInventory()[0]));
+                selectionMode = true;
+            } else {
+                StartCoroutine(possMaster.selectSwap(false, possMaster.getInventory()[0]));
+                selectionMode = false;
+            }
+        }
         if (Input.GetKeyUp(KeyCode.T)) {
             if (selectionMode) {
                 julia.gameObject.rigidbody.useGravity = true;

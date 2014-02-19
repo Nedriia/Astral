@@ -26,7 +26,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 		jumpVelocity = 10.0f;
 		isPossessed = false;
         isdead = false;
-        head = GameObject.Find("/Head").transform;
+        head = transform.Find("Head").transform;
         eyes = prisonerCamera.gameObject.GetComponent<Animation>();
         userControl = gameObject.GetComponent<ThirdPersonUserControl>();
         prisonerAnimator = gameObject.GetComponent<Animator>();
