@@ -8,6 +8,7 @@ using Holoville.HOTween;
 public class AbsorbableLight : MonoBehaviour {
 	private Light lightAffected; //The light absorbed or put back into
 	private float originalIntensity; //The original intensity of the light
+	private bool hasLight; //Checks if the light is actually in the source or not
 	
 	private LightFlicker flicker; //The light's special flicker that indicates when the prisoner can put light
 	private LightFade fade; //The light's special fade that gets added when the prisoner takes the light
@@ -22,7 +23,11 @@ public class AbsorbableLight : MonoBehaviour {
 	//Use this for initialization
 	private void Start() {
 		lightAffected = this.gameObject.GetComponent<Light>();
-		if (lightAffected != null) originalIntensity = lightAffected.intensity;
+		if (lightAffected != null) 
+		{
+			originalIntensity = lightAffected.intensity;
+			hasLight = lightAffected.enabled;
+		}
 		
 		flicker = null;
 		fade = null;
@@ -61,25 +66,30 @@ public class AbsorbableLight : MonoBehaviour {
 			modifyLightTypes(false);
 			
 			lightAffected.intensity = originalIntensity;
-			
+		
 			dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.dimTime, "intensity", originalIntensity - lightPrisoner.specialdim.dimAmount);
 			dimmer.autoKillOnComplete = true;
 			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, .2f);
 		}
 	}
 	
-	//Makes the light flicker when the light prisoner goes under it with light stored
+	//Makes the light brighten when the light prisoner goes under it with light stored
 	public void indicatePut(LightPrisoner lightPrisoner) {
-		if (canBePlaced() == true && flicker == null) {
+		if (canIndicatePlace() == true && flicker == null) {
 			//Disable the other lights, set this light back to its original intensity, and make it flicker
 			modifyLightTypes(false);
 			
+			if (dimmer != null) dimmer.Complete();
 			lightAffected.enabled = true;
-			lightAffected.intensity = originalIntensity;
+			lightAffected.intensity = 0f;
+			
+			dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.brightenTime, "intensity", originalIntensity + lightPrisoner.specialdim.brightenAmount);
+			dimmer.autoKillOnComplete = true;
+			//lightAffected.intensity = originalIntensity;
 		
 			//Add a flicker
-			flicker = this.gameObject.AddComponent("LightFlicker") as LightFlicker;
-			lightPrisoner.specialflicker.setFlicker(flicker);
+			//flicker = this.gameObject.AddComponent("LightFlicker") as LightFlicker;
+			//lightPrisoner.specialflicker.setFlicker(flicker);
 			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, .2f);
 		}
 	}
@@ -88,17 +98,23 @@ public class AbsorbableLight : MonoBehaviour {
 	public void stopTake(LightPrisoner lightPrisoner) {
 		//Turn the original properties back on and reset the light's intensity to its original value
 		modifyLightTypes(true);
+		if (dimmer != null) dimmer.Complete();
 		dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.dimTime, "intensity", originalIntensity);
 		dimmer.autoKillOnComplete = true;
 		if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, 0f);
 	}
 	
 	public void stopPut(LightPrisoner lightPrisoner) {
-		//Turn the original properties back on and reset the light's intensity to its original value
-		modifyLightTypes(true);
-		lightAffected.enabled = false;
-		Destroy(flicker);
-		if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, 0f);
+		if (hasLight == false) {
+			//Turn the original properties back on and reset the light's intensity to its original value
+			modifyLightTypes(true);
+			lightAffected.enabled = false;
+			if (dimmer != null) dimmer.Complete();
+			dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.brightenTime, "intensity", originalIntensity);
+			dimmer.autoKillOnComplete = true;
+			//Destroy(flicker);
+			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, 0f);
+		}
 	}
 	
 	//Enables or disables the types of light
@@ -114,18 +130,24 @@ public class AbsorbableLight : MonoBehaviour {
 	
 	//Checks if the light can be taken
 	public bool canBeTaken() {
-		return (lightAffected != null && lightAffected.enabled == true && fade == null);
+		return (lightAffected != null && hasLight == true && fade == null);
 	}
 	
 	//Checks if the light can be placed
 	public bool canBePlaced() {
-		return (lightAffected != null && (lightAffected.enabled == false || (lightAffected.enabled == true && flicker != null)) && fade == null);
+		return (lightAffected != null && hasLight == false && fade == null);
+	}
+	
+	//Checks if the light can be indicated that it's taken
+	public bool canIndicatePlace() {
+		return (lightAffected != null && hasLight == false && lightAffected.enabled == false && fade == null);
 	}
 	
 	//Gives light to the light prisoner
 	public AbsorbableLight takeLight(LightPrisoner lightPrisoner) {
 		//Bring the light back to normal intensity
 		lightAffected.intensity = originalIntensity;
+		hasLight = false;
 		
 		//End the dim and add a temp fade
 		dimmer.Kill();
@@ -139,8 +161,10 @@ public class AbsorbableLight : MonoBehaviour {
 	//Gives light from the light prisoner to this light
 	public void placeLight(Light light, LightPrisoner lightPrisoner) {
 		//lightAffected = light;
+		hasLight = true;
 		
-		Destroy(flicker);
+		//Destroy(flicker);
+		if (dimmer != null) dimmer.Complete();
 		
 		//Reset the intensity of the light and change its color to the new light's color
 		lightAffected.intensity = 0f;

@@ -122,6 +122,9 @@ public class LightPrisoner : Prisoner {
 	public class specialDim {
 		public float dimAmount;
 		public float dimTime;
+		
+		public float brightenAmount;
+		public float brightenTime;
 	}
 	
 	[Serializable]
