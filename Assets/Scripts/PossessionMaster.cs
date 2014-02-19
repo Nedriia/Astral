@@ -32,7 +32,7 @@ public class PossessionMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(astralForm);
+
 	}
 
     public bool CanSwap {
