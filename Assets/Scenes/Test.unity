@@ -9291,6 +9291,14 @@ Prefab:
       propertyPath: turnSpeed
       value: .400000006
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c0acb0e696c46a345855c10a0d15dcf6, type: 2}
+      propertyPath: selectionSwapSettings.zoomMultiple
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c0acb0e696c46a345855c10a0d15dcf6, type: 2}
+      propertyPath: selectionSwapSettings.aeFadeSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0acb0e696c46a345855c10a0d15dcf6, type: 2}
   m_RootGameObject: {fileID: 1587490167}
@@ -9405,9 +9413,9 @@ MonoBehaviour:
     popUp: 1.5
     popUpSpeed: .5
     popDownSpeed: .5
-    aeFadeSpeed: 1.5
+    aeFadeSpeed: 3
     rotateSpeed: .5
-    zoomMultiple: 2
+    zoomMultiple: 4
     zoomSpeed: .5
 --- !u!4 &1587490169
 Transform:
@@ -10382,7 +10390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a56537754f5f742ab87406a34d1896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trans: .5
+  trans: .699999988
 --- !u!95 &1770477177
 Animator:
   serializedVersion: 2
@@ -12793,7 +12801,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 450542765}
   m_GameObject: {fileID: 2126247067}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44af8091779fcb40801d5b284353dbe, type: 3}
   m_Name: 

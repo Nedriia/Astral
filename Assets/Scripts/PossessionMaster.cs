@@ -37,7 +37,7 @@ public class PossessionMaster : MonoBehaviour {
         julia = GameObject.Find("Julia").GetComponent<Astral>();
         origFovJulia = julia.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Camera>().fieldOfView;
         prisonerCamera = GameObject.Find("Prisoner Camera Rig").GetComponent<FreeLookCam>();
-        astralEffect = gameObject.GetComponent<AmplifyColorEffect>();
+        astralEffect = julia.gameObject.transform.GetChild(0).GetChild(0).GetComponent<AmplifyColorEffect>();
         prisonerInventory = new List<Prisoner>();
         canSwap = true;
         //we are starting in a prisoner
@@ -144,7 +144,7 @@ public class PossessionMaster : MonoBehaviour {
             julia.gameObject.SetActive(true);
             transitionJ(true);
             yield return StartCoroutine(HOTween.To(julia.gameObject.transform, turnSpeed, "rotation", Quaternion.LookRotation(turnDirection)).WaitForCompletion());
-            Vector3 endFlyPos = new Vector3(curPrisoner.gameObject.transform.position.x, (curPrisoner.gameObject.transform.position.y + 1f), curPrisoner.gameObject.transform.position.z);
+            Vector3 endFlyPos = new Vector3(curPrisoner.gameObject.transform.position.x, (curPrisoner.gameObject.transform.position.y + 1), curPrisoner.gameObject.transform.position.z);
             yield return StartCoroutine(HOTween.To(julia.gameObject.transform, flyThroughSpeed, "position", endFlyPos).WaitForCompletion());
             prisonerCamera.gameObject.SetActive(true);
             transitionJ(false);
@@ -216,7 +216,8 @@ public class PossessionMaster : MonoBehaviour {
                 yield return StartCoroutine(panHead(false, currentlyPossessing));
 
                 //fade out astral effect
-                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 0);
+                astralEffect.BlendAmount = 0;
+                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 0.7f);
 
                 //disable prisoner camera, enable julia camera
                 prisonerCamera.gameObject.SetActive(false);
@@ -261,7 +262,7 @@ public class PossessionMaster : MonoBehaviour {
                 transitionP(currentlyPossessing, true);
 
                 //fade in astral effect
-                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 1);
+                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 0);
 
                 //pan the camera out
                 yield return StartCoroutine(panHead(true, currentlyPossessing));
@@ -276,17 +277,19 @@ public class PossessionMaster : MonoBehaviour {
     //public IEnumerator selectSwap(bool enter, Prisoner highlighted) {}
 
     //this function is used to panFrom the head when we arrive on a prisoner
-    private IEnumerator panHead(bool entering, Prisoner curPrisoner) {
+    private IEnumerator panHead(bool panOut, Prisoner curPrisoner) {
         Vector3 cameraZoom = prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition;
         //this is used to set the vert look on prisoner entrance
         //prisonerCamera.gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(5, 0, 0);
-        if (entering) {
+        if (panOut) {
             cameraZoom.z = curPrisoner.camZoom;
             yield return StartCoroutine(HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), panOutSpeed, "localPosition", cameraZoom).WaitForCompletion());
             curPrisoner.startControlling();
             canSwap = true;
         } else {
-            yield return StartCoroutine(HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), panInSpeed, "localPosition", 0).WaitForCompletion());
+            cameraZoom.z = 0;
+            Debug.Log(curPrisoner.gameObject.transform.GetChild(0).position + ": " + curPrisoner.gameObject.transform.GetChild(0).name);
+            yield return StartCoroutine(HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), panInSpeed, "localPosition", cameraZoom ).WaitForCompletion());
         }
     }
 
