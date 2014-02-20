@@ -146,7 +146,7 @@ public class Pearl : Prisoner
 				radius = LightManager.getRadius(i);
 				currRadius = Vector2.Distance (new Vector2 (i.transform.position.x, i.transform.position.z),
 				                              new Vector2 (gameObject.transform.position.x, gameObject.transform.position.z));
-				Debug.Log("rad: " + radius + "cur: " + currRadius);
+				//Debug.Log("rad: " + radius + "cur: " + currRadius);
 			
 				if (currRadius > 0.0f && currRadius <= radius * lightDec1) {
 					scareDec += (SCAREDECRATE  * i.light.intensity / 5.0f );

@@ -8,6 +8,7 @@ public class PossessionMaster : MonoBehaviour {
     public Astral Julia;
     public FreeLookCam prisonerCamera;
     public Prisoner startingPosPrisoner;
+    public float flyThroughSpeed, turnSpeed;
 
     private List<Prisoner> prisonerInventory;
     private static Prisoner currentlyPossessing;
@@ -31,6 +32,7 @@ public class PossessionMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(astralForm);
 	}
 
     public bool CanSwap {
@@ -73,7 +75,6 @@ public class PossessionMaster : MonoBehaviour {
         }
         //make him her a little higher so she doesnt fall through the floor
         juliaNewPosition.y += 1;
-        //Vector3 juliaNewPosition = currentlyPossessing.transform.position;
         yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
         prisonerCamera.gameObject.SetActive(false);
         Julia.gameObject.SetActive(true);
@@ -88,22 +89,52 @@ public class PossessionMaster : MonoBehaviour {
         //Julia to prisoner
         if ( astralForm && (currentlyPossessing == null)) {
             canSwap = false;
+            Vector3 turnDirection =  curPrisoner.gameObject.transform.position - Julia.gameObject.transform.position;
+            turnDirection.Normalize();
+            Julia.stopControlling();
+            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, turnSpeed, "rotation", Quaternion.LookRotation(turnDirection)).WaitForCompletion());
+
+            //Fly from current position to prisoner
+            Vector3 endFlyPos = new Vector3(curPrisoner.gameObject.transform.position.x, (curPrisoner.gameObject.transform.position.y + 1f), curPrisoner.gameObject.transform.position.z);
+            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, flyThroughSpeed, "position", endFlyPos).WaitForCompletion());
+
             //wait for julia out animation to finish
             yield return new WaitForSeconds(transitionJ(false));
             Julia.gameObject.SetActive(false);
+
             //wait for prisoner in animation to finish
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
+
+            //pan the camera out from pivot
             StartCoroutine(panFromHead(curPrisoner));
-            //--curPrisoner.startControlling(); This is done in pan from head now
+
         //Prisoner to Prisoner
         } else if (!astralForm && (currentlyPossessing != null)) {
             canSwap = false;
+            Julia.gameObject.transform.position = currentlyPossessing.transform.position;
+            Vector3 turnDirection = curPrisoner.gameObject.transform.position - currentlyPossessing.gameObject.transform.position;
+            turnDirection.Normalize();
+            Julia.transform.GetComponent<SimpleMouseRotator>().enabled = false;
+
             //wait for prisoner out animation to finish
             yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
+
+            //Fly from prisoner to prisoner, 
+            prisonerCamera.gameObject.SetActive(false);
+            Julia.gameObject.SetActive(true);
+            transitionJ(true);
+            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, turnSpeed, "rotation", Quaternion.LookRotation(turnDirection)).WaitForCompletion());
+            Vector3 endFlyPos = new Vector3(curPrisoner.gameObject.transform.position.x, (curPrisoner.gameObject.transform.position.y + 1f), curPrisoner.gameObject.transform.position.z);
+            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, flyThroughSpeed, "position", endFlyPos).WaitForCompletion());
+            prisonerCamera.gameObject.SetActive(true);
+            transitionJ(false);
+            Julia.gameObject.SetActive(false);
+
             //wait for in animation to finish
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
+            
+            //pan the camera out from pivot
             StartCoroutine(panFromHead(curPrisoner));
-            //--curPrisoner.startControlling(); This is done in pan from head now
         }
     }
 
@@ -152,6 +183,7 @@ public class PossessionMaster : MonoBehaviour {
         }
         return waitTime;
     }
+
     private IEnumerator panFromHead(Prisoner curPrisoner) {
         Vector3 cameraZoom = prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition;
         cameraZoom.z = curPrisoner.camZoom;

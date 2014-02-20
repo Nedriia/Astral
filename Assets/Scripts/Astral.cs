@@ -19,7 +19,7 @@ public class Astral : MonoBehaviour, Possessable {
 		eyes = gameObject.GetComponent<Animation>();
         possMess = GameObject.Find("Possession Master").GetComponent<PossessionMaster>();
         mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
-        mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
+        mouseRotatorUD = gameObject.GetComponentsInChildren<SimpleMouseRotator>()[1];
         characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
 	}
 
@@ -44,11 +44,11 @@ public class Astral : MonoBehaviour, Possessable {
     public float bodyTransition(bool entering) {
         float waitTime = 0;
         if (entering) {
-            eyes.Play();
-            waitTime = eyes["Eyes Open"].length;
+            //eyes.Play();
+            //waitTime = eyes["Eyes Open"].length;
         } else {
-            eyes.Play("Eyes Close");
-            waitTime = eyes["Eyes Close"].length;
+            //eyes.Play("Eyes Close");
+            //waitTime = eyes["Eyes Close"].length;
         }
         return waitTime;
     }
