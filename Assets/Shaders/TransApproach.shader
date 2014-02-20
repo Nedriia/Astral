@@ -6,6 +6,7 @@ Properties {
 SubShader {
  Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
  Cull Off
+ ZWrite On
  //AlphaTest Less 0.7
  Fog { Mode Off }
  Blend SrcAlpha OneMinusSrcAlpha
