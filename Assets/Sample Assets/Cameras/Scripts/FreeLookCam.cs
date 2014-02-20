@@ -87,5 +87,8 @@ public class FreeLookCam : AbstractTargetFollower
 	
 	}
 
-
+    public float LookAngle {
+        set { lookAngle = value; }
+        get { return lookAngle; }
+    }
 }

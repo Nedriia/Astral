@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Prisoner : MonoBehaviour, Possessable {
     
     public FreeLookCam prisonerCamera;
+    public ProtectCameraFromWallClip protFrmWalls;
+    public float camPivVert = 2f, camPivHor = 0f, camZoom = -1f;
 
 	protected int health;
 	protected float speed;
 	protected float jumpVelocity;
-	protected bool isPossessed;
+    protected bool isPossessed, isdead;
 	protected GameObject selectedItem;
 
     private Animation eyes;
@@ -17,11 +19,12 @@ public class Prisoner : MonoBehaviour, Possessable {
 	//inventory
 	
 	// Use this for initialization
-	private void Start () {
+	protected virtual void Start () {
 		health = 100;
 		speed = 5.0f;
 		jumpVelocity = 10.0f;
 		isPossessed = false;
+        isdead = false;
         eyes = prisonerCamera.gameObject.GetComponent<Animation>();
         userControl = gameObject.GetComponent<ThirdPersonUserControl>();
         prisonerAnimator = gameObject.GetComponent<Animator>();
@@ -29,7 +32,8 @@ public class Prisoner : MonoBehaviour, Possessable {
 	}
 	
 	// Update is called once per frame
-	private void Update () {
+	protected virtual void Update () {
+        Debug.DrawRay(transform.position, transform.forward*1, Color.cyan);
 		if (Input.GetKeyDown(KeyCode.R))
 		{
 			//deleteFromInventory ();
@@ -53,11 +57,11 @@ public class Prisoner : MonoBehaviour, Possessable {
     public float bodyTransition(bool entering) {
         float waitTime = 0;
         if (entering) {
-            eyes.Play();
-            waitTime = eyes["Prisoner Eyes Open"].length;
+            //eyes.Play();
+            //waitTime = eyes["Prisoner Eyes Open"].length;
         } else {
-            eyes.Play("Prisoner Eyes Close");
-            waitTime = eyes["Prisoner Eyes Close"].length;
+            //eyes.Play("Prisoner Eyes Close");
+            //waitTime = eyes["Prisoner Eyes Close"].length;
         }
         return waitTime;
     }
@@ -65,12 +69,55 @@ public class Prisoner : MonoBehaviour, Possessable {
 
     public void startControlling() {
         userControl.enabled = true;
+        prisonerCamera.enabled = true;
+        protFrmWalls.enabled = true;
     }
 
     public void stopControlling() {
+        prisonerCamera.enabled = false;
         userControl.enabled = false;
+        protFrmWalls.enabled = false;
         prisonerAnimator.SetFloat("Forward", 0);
         prisonerAnimator.SetFloat("Turn", 0);
+    }
+	
+	//Kills the prisoner
+	public void Die() {
+		//Get prisoner components
+		Rigidbody prisonerbody = this.gameObject.GetComponent<Rigidbody>();
+		Animator prisoneranim = this.gameObject.GetComponent<Animator>();
+		ThirdPersonCharacter thirdperson = this.gameObject.GetComponent<ThirdPersonCharacter>();
+		
+		//Modify the rigidbody to act like a ragdoll
+		prisonerbody.constraints = RigidbodyConstraints.None;
+		prisonerbody.angularDrag = 1f;
+		prisonerbody.useGravity = true;
+		prisonerbody.isKinematic = false;
+		prisonerbody.AddTorque(new Vector3(150, 0, 0));
+		
+		//Disable the prisoner animator and the thirdpersoncharacter and prisoner scripts
+		prisoneranim.enabled = false;
+		thirdperson.enabled = false;
+		this.enabled = false;
+        isdead = true;
+		//Remove the prisoner from the prisoner inventory
+		GameObject.Find("Possession Master").GetComponent<PossessionMaster>().getInventory().Remove(this);
+		
+		/*foreach (Transform child in prisoner.transform) {
+			foreach (Transform childc in child.transform) {
+				if (childc.renderer != null)
+					childc.renderer.material.color = new Color(139, 69, 19);
+			}
+		}*/
+	}
+	
+
+    public Animator PrisonerAnimator {
+        get { return prisonerAnimator; }
+    }
+
+    public bool IsDead {
+        get { return isdead; }
     }
 	/*
 	private void onTriggerEnter(Collider other) {

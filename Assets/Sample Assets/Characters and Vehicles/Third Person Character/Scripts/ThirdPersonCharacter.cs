@@ -57,7 +57,10 @@ public class ThirdPersonCharacter : MonoBehaviour {
 	    } else {
             Debug.LogError(" collider cannot be cast to CapsuleCollider");
 	    }
-	    SetUpAnimator();
+            SetUpAnimator();
+        
+        //keeps the prisoners from looking dumb
+        Move(Vector3.zero, false, false, gameObject.transform.position + gameObject.transform.forward * 100);       
 	}
 	
 	
@@ -302,9 +305,13 @@ public class ThirdPersonCharacter : MonoBehaviour {
 		// Used for the head look feature.
 		animator.SetLookAtPosition( lookPos );
 	}
+
+	public float MoveSpeedMultiplier{
+		set { moveSpeedMultiplier = value;}
+		get { return moveSpeedMultiplier; }
+	}
 	
-	
-	
+        
 	void SetUpAnimator()
 	{
 		// this is a ref to the animator component on the root.

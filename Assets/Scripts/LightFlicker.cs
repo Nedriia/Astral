@@ -12,7 +12,7 @@ public class LightFlicker : MonoBehaviour {
 	public float maxFlickerDuration; //The max length of time the light is in the opposite state, in seconds
 	public int minFlicker; //The minimum amount of times the light flickers
 	public int maxFlicker; //The maximum amount of time the light flickers
-	public float dimAmount; //The amount to dim the light by if dim is on
+	public float dimAmount; //The amount to dim the light by if dim is on; if this value is negative, the light will get brighter!
 	public bool dimLight; //Tells if the light should be dimmed or not
 	
 	private Light lightAffected; //The light reference this is affecting
@@ -22,11 +22,20 @@ public class LightFlicker : MonoBehaviour {
 	
 	//Use this for initialization
 	private void Start() {
-		lightAffected = gameObject.GetComponent<Light>();
+		resetFlicker();
+	}
+	
+	public void resetFlicker() {
+		lightAffected = this.gameObject.GetComponent<Light>();
 		originalIntensity = lightAffected.intensity;
 		
 		nextFlicker = Time.time + randomInitialDuration();
 		flicker = 0;
+	}
+	
+	//Resets the light back to its original intensity - used for the Light prisoner
+	public void resetIntensity() {
+		lightAffected.intensity = originalIntensity;
 	}
 	
 	//Choose a random initial duration in the min and max range
@@ -42,7 +51,7 @@ public class LightFlicker : MonoBehaviour {
 	//Checks the value to add to the intensity of the next flicker if dim is selected (+ for flicker = true, - for flicker = false)
 	private float getDimValue() {
 		//If the light previously dimmed, brighten it
-		if (lightAffected.intensity < originalIntensity) return dimAmount;
+		if (lightAffected.intensity != originalIntensity) return dimAmount;
 		else return -dimAmount;
 	}
 	
