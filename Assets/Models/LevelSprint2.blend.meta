@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: c3e88c803c974c541a5f6c943b1a2c1b
+labels:
+- Architecture
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
