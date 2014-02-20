@@ -2410,16 +2410,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccb033d5bd880a41a542eee161e1dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prisonerCamera: {fileID: 0}
-  protFrmWalls: {fileID: 0}
+  prisonerCamera: {fileID: 11400002, guid: c7e3b82d7ff4fda47ac41fa942593acb, type: 2}
+  protFrmWalls: {fileID: 11400000, guid: c7e3b82d7ff4fda47ac41fa942593acb, type: 2}
   camPivVert: 1.29999995
   camPivHor: 0
   camZoom: -.5
   MAXFEAR: 4
   MAXTIMESCREAM: 2
   SCARERATE: 1
+  SCAREDECRATE: 3
   scaredPercentage: .400000006
   terrifiedPercentage: .600000024
+  lightDec1: .300000012
+  lightDec2: .5
+  lightDec3: .800000012
+  currentFear: 0
+  currentTimeScream: 0
+  scareInc: 0
+  shakeTime: 0
+  cooldown: 0
   scareDec: 0
 --- !u!114 &11400002
 MonoBehaviour:

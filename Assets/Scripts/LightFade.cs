@@ -37,13 +37,13 @@ public class LightFade : MonoBehaviour {
 		//Fade to 0 if you're taking the light
 		if (take == true) {
 			tweenSequence = new Sequence(new SequenceParms().Loops(1).OnComplete(onTakeComplete));
-			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", 0));
+			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2f), "intensity", 0));
 		}
 		//Otherwise fade to the original intensity
 		else {
 			lightAffected.enabled = true;
 			tweenSequence = new Sequence(new SequenceParms().Loops(1).OnComplete(onPutComplete));
-			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2), "intensity", intensity));
+			tweenSequence.Append(HOTween.To(lightAffected, (totalDuration / 2f), "intensity", intensity));
 		}
 		
 		restart();

@@ -1293,8 +1293,8 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 95: {fileID: 9500002}
-  - 114: {fileID: 11400000}
   - 111: {fileID: 11100000}
+  - 114: {fileID: 11400006}
   m_Layer: 10
   m_Name: Light Prisoner
   m_TagString: Prisoner
@@ -2342,7 +2342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100170}
   m_LocalRotation: {x: 0, y: -.622845709, z: 0, w: .782344759}
-  m_LocalPosition: {x: 12.5705996, y: -3.65586185, z: -70.3016815}
+  m_LocalPosition: {x: 12.5705996, y: -3.65586185, z: -57.0994225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400060}
@@ -2461,22 +2461,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe00cf7379916084c90e8065eb73a84f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prisonerCamera: {fileID: 0}
-  protFrmWalls: {fileID: 0}
-  camPivVert: 2
-  camPivHor: 0
-  camZoom: -1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2522,6 +2506,38 @@ MonoBehaviour:
     jumpRepeatDelayTime: .25
     runCycleLegOffset: .200000003
     groundStickyEffect: 5
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0409b10eff349e34bb0c7471c184ca30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prisonerCamera: {fileID: 11400002, guid: c7e3b82d7ff4fda47ac41fa942593acb, type: 2}
+  protFrmWalls: {fileID: 11400000, guid: c7e3b82d7ff4fda47ac41fa942593acb, type: 2}
+  camPivVert: 2
+  camPivHor: 0
+  camZoom: -1
+  specialflicker:
+    minInitDur: 0
+    maxInitDur: 0
+    minFlickDur: 0
+    maxFlickDur: 0
+    minFlickNum: 0
+    maxFlickNum: 0
+    dimAmount: 0
+    dimLight: 0
+  specialfade:
+    fadeDuration: 0
+  specialdim:
+    dimAmount: 0
+    dimTime: 0
+    brightenAmount: 0
+    brightenTime: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

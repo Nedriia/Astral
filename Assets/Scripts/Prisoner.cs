@@ -54,7 +54,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 	}
 
     //true for in, false for out, return amount of time to wait
-    public float bodyTransition(bool entering) {
+    public virtual float bodyTransition(bool entering) {
         float waitTime = 0;
         if (entering) {
             //eyes.Play();

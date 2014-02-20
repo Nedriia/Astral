@@ -3,19 +3,34 @@ using System;
 using System.Collections;
 
 //The light prisoner
-public class LightAbility : MonoBehaviour {
+public class LightPrisoner : Prisoner {
 	public specialFlicker specialflicker; //A special flicker
 	public specialFade specialfade; //A special fade
+	public specialDim specialdim; //The special dim
 
 	private GameObject lightHolder; //The game object holding the light that the prisoner has attached
 	private Light lightStored; //The light the prisoner has stored. The prisoner can start with light
 	private LightFade lightStoredFade; //The prisoner's light fade
 	
 	//Use this for initialization
-	private void Start() {
+	protected override void Start() {
+		base.Start();
 		lightHolder = GameObject.Find("Light Prisoner/StoredLight");
 		lightStored = lightHolder.GetComponent<Light>();
 		lightStoredFade = null;
+	}
+	
+	//Disable the light when exiting possession form
+	public override float bodyTransition(bool entering) {
+		//Do stuff here
+		if (entering == true) {
+		
+		}
+		else {
+		
+		}
+	
+		return base.bodyTransition(entering);
 	}
 	
 	//NOTE: Probably will be switched to raycasting later; this is just a quick test to get the algorithm down
@@ -23,9 +38,15 @@ public class LightAbility : MonoBehaviour {
 		//Get the light of the object
 		AbsorbableLight light = other.gameObject.GetComponent<AbsorbableLight>();
 		
-		//If there is indeed a light and the light prisoner doesn't have one, make it flicker brighter to indicate that the light prisoner can take it
-		if (lightStored.enabled == false && light != null) {
-			light.indicateTake(this);
+		//If there is indeed a light and the light prisoner doesn't have one, make it dim to indicate that the light prisoner can take it
+		if (light != null) {
+			if (lightStored.enabled == false) {
+				light.indicateTake(this);
+			}
+			//Check for indicating if you can put the light
+			else {
+				light.indicatePut(this);
+			}
 		}
 	}
 	
@@ -36,9 +57,13 @@ public class LightAbility : MonoBehaviour {
 		
 		//If there is a light, and the Player pressed the L button, store the light if the light is enabled and put the light back if the light is disabled
 		if (light != null) {
-			//If you put the light back and are still standing on it, check for enabling it again
-			if (lightStored.enabled == false && light.getSpecialFlicker == null) {
+			//If you put the light back and are still standing on it, check for indicating if it can be taken
+			if (lightStored.enabled == false) {
 				light.indicateTake(this);
+			}
+			//Check for indicating if you can put the light
+			else {
+				light.indicatePut(this);
 			}
 			
 			//Check if the player presses L
@@ -70,8 +95,10 @@ public class LightAbility : MonoBehaviour {
 		AbsorbableLight light = other.gameObject.GetComponent<AbsorbableLight>();
 		
 		//If there is indeed a light and it is enabled, disable its flicker
-		if (light != null && light.getSpecialFlicker != null) {
-			light.stopTake();
+		if (light != null) {
+			if (lightStored.enabled == false)
+				light.stopTake(this);
+			else light.stopPut(this);
 		}
 	}
 	
@@ -87,8 +114,17 @@ public class LightAbility : MonoBehaviour {
 	}
 	
 	//Update is called once per frame
-	private void Update() {
+	protected override void Update() {
+		base.Update();
+	}
 	
+	[Serializable]
+	public class specialDim {
+		public float dimAmount;
+		public float dimTime;
+		
+		public float brightenAmount;
+		public float brightenTime;
 	}
 	
 	[Serializable]
