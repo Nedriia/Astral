@@ -57,6 +57,11 @@ public class AbsorbableLight : MonoBehaviour {
 		get { return originalIntensity; }
 	}
 	
+	//Tells if the light has a light actually inside it
+	public bool containsLight {
+		get { return hasLight; }
+	}
+	
 	//Gets the special flicker
 	public LightFlicker getSpecialFlicker {
 		get { return flicker; }
