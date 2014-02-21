@@ -23,14 +23,13 @@ public class ProtectCameraFromWallClip : MonoBehaviour
     private RayHitComparer rayHitComparer;              // variable to compare raycast hit distances
 
 
-	void Start() {
+	void OnEnable() {
 
         // find the camera in the object hierarchy
 		cam = GetComponentInChildren<Camera>().transform;
 		pivot = cam.parent;
 		originalDist = cam.localPosition.magnitude;
 		currentDist = originalDist;
-
         // create a new RayHitComparer
         rayHitComparer = new RayHitComparer();
 	}
@@ -109,4 +108,5 @@ public class ProtectCameraFromWallClip : MonoBehaviour
 			return ((RaycastHit)x).distance.CompareTo(((RaycastHit)y).distance);
 		}	
 	}
+
 }

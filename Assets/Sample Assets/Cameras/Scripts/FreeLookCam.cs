@@ -52,7 +52,7 @@ public class FreeLookCam : AbstractTargetFollower
 		// Read the user input
 		var x = CrossPlatformInput.GetAxis ("Mouse X");
 		var y = CrossPlatformInput.GetAxis ("Mouse Y");
-
+	
 		// smooth the user input
 		if (turnSmoothing > 0)
 		{
@@ -87,5 +87,8 @@ public class FreeLookCam : AbstractTargetFollower
 	
 	}
 
-
+    public float LookAngle {
+        set { lookAngle = value; }
+        get { return lookAngle; }
+    }
 }
