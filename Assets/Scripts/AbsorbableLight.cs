@@ -2,13 +2,12 @@
 using System.Collections;
 using Holoville.HOTween;
 
-//Placed on all lights that the light prisoner can absorb. It must have the same effect regardless of what the light has attached to it
-//So, what we need to do is have each light flicker in the SAME way when the light prisoner is under, and we must disable all the other properties when this happens
-//If everything works out fine, we should just have to include this in a light and it'll work
+//Placed on all lights that the Light Prisoner can absorb
 public class AbsorbableLight : MonoBehaviour {
 	private Light lightAffected; //The light absorbed or put back into
 	private float originalIntensity; //The original intensity of the light
 	private bool hasLight; //Checks if the light is actually in the source or not
+	private Wire wire; //The wire for the light
 	
 	private LightFlicker flicker; //The light's special flicker that indicates when the prisoner can put light
 	private LightFade fade; //The light's special fade that gets added when the prisoner takes the light
@@ -18,25 +17,42 @@ public class AbsorbableLight : MonoBehaviour {
 	private LightFlicker originalFlicker; //The light's original flicker
 	private LightFade originalFade; //The light's original fade
 	private ToggleLight toggle; //The light's toggle
-	private Renderer wireRenderer; //The mesh renderer of the wire, which has the material of the wire
+	//private Material wireMaterial; //The material of the wire; we will set the shader's alpha to max to make it glow and set it to 0 to turn off the glow
+	
+	//Constants for the shaders
+	private Shader glowShader;
+	private Shader noGlowShader;
 	
 	//Use this for initialization
 	private void Start() {
+		//Get the light
 		lightAffected = this.gameObject.GetComponent<Light>();
-		if (lightAffected != null) 
-		{
+		
+		//If the light is found, get the original intensity and whether the light has 
+		if (lightAffected != null) {
 			originalIntensity = lightAffected.intensity;
 			hasLight = lightAffected.enabled;
 		}
 		
+		//Get the Light's wire
+		wire = this.gameObject.GetComponentInChildren<Wire>();
+		
+		//Set the special effects that occur when the light prisoner interacts with the light
 		flicker = null;
 		fade = null;
 		dimmer = null;
 		
+		//Find the original effects that the light has
 		originalFlicker = this.gameObject.GetComponent<LightFlicker>();
 		originalFade = this.gameObject.GetComponent<LightFade>();
 		toggle = this.gameObject.GetComponent<ToggleLight>();
-		wireRenderer = this.gameObject.GetComponentInChildren<Renderer>();
+		
+		//Renderer wireRenderer = this.gameObject.GetComponentInChildren<Renderer>();
+		
+		//Set the material
+		//if (wireRenderer != null) {
+		//	  wireMaterial = wireRenderer.material;
+		//}
 	}
 	
 	//Gets the light affected
@@ -69,7 +85,7 @@ public class AbsorbableLight : MonoBehaviour {
 		
 			dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.dimTime, "intensity", originalIntensity - lightPrisoner.specialdim.dimAmount);
 			dimmer.autoKillOnComplete = true;
-			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, .2f);
+			if (wire != null) wire.changeWireShader(lightAffected, true);
 		}
 	}
 	
@@ -90,7 +106,7 @@ public class AbsorbableLight : MonoBehaviour {
 			//Add a flicker
 			//flicker = this.gameObject.AddComponent("LightFlicker") as LightFlicker;
 			//lightPrisoner.specialflicker.setFlicker(flicker);
-			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, .2f);
+			if (wire != null) wire.changeWireShader(lightAffected, true);
 		}
 	}
 	
@@ -101,7 +117,7 @@ public class AbsorbableLight : MonoBehaviour {
 		if (dimmer != null) dimmer.Complete();
 		dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.dimTime, "intensity", originalIntensity);
 		dimmer.autoKillOnComplete = true;
-		if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, 0f);
+		if (wire != null) wire.changeWireShader(lightAffected, false);
 	}
 	
 	public void stopPut(LightPrisoner lightPrisoner) {
@@ -113,7 +129,7 @@ public class AbsorbableLight : MonoBehaviour {
 			dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.brightenTime, "intensity", originalIntensity);
 			dimmer.autoKillOnComplete = true;
 			//Destroy(flicker);
-			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, 0f);
+			if (wire != null) wire.changeWireShader(lightAffected, false);
 		}
 	}
 	
@@ -127,6 +143,21 @@ public class AbsorbableLight : MonoBehaviour {
 		}
 		if (toggle != null) toggle.enabled = enabled;
 	}
+	
+	//Changes the wire's shader from Transparent/Diffuse to a glow and vice versa
+	/*private void changeWireShader(bool into) {
+		if (wireMaterial != null) {
+			if (into == true) {
+				wireMaterial.shader = glowShader;
+				wireMaterial.SetColor("_GlowColor", lightAffected.color);
+				wireMaterial.color = lightAffected.color;
+			}
+			else {
+				wireMaterial.shader = noGlowShader;
+				wireMaterial.color = Color.black;
+			}
+		}
+	}*/
 	
 	//Checks if the light can be taken
 	public bool canBeTaken() {
@@ -181,6 +212,14 @@ public class AbsorbableLight : MonoBehaviour {
 	
 	//Update is called once per frame
 	private void Update() {
-		
+		//Change the transparency of the wire depending on the distance the light prisoner is from it
+		/*if (PossessionMaster.CurrentlyPossesing != null && wireMaterial != null) {
+			//Use just the X and Z positions so it doesn't depend on the Y value you are from it
+			Vector2 wireDist = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z);
+			Vector2 prisonerDist = new Vector2(PossessionMaster.CurrentlyPossesing.gameObject.transform.position.x, PossessionMaster.CurrentlyPossesing.gameObject.transform.position.z);
+			
+			float distWire = Vector2.Distance(wireDist, prisonerDist);
+			if (distWire > 0) wireMaterial.color = new Color(wireMaterial.color.r, wireMaterial.color.g, wireMaterial.color.b, 1f - (distWire / 8));
+		}*/
 	}
 }
