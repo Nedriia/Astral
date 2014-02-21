@@ -125,7 +125,9 @@ public class PossessionMaster : MonoBehaviour {
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
 
             //pan the camera out from pivot
-            StartCoroutine(panHead(true, curPrisoner));
+            yield return StartCoroutine(panHead(true, curPrisoner));
+            curPrisoner.startControlling();
+            canSwap = true;
 
         //Prisoner to Prisoner
         } else if (!astralForm && (currentlyPossessing != null)) {
@@ -154,7 +156,9 @@ public class PossessionMaster : MonoBehaviour {
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
             
             //pan the camera out from pivot
-            StartCoroutine(panHead(true, curPrisoner));
+            yield return StartCoroutine(panHead(true, curPrisoner));
+            curPrisoner.startControlling();
+            canSwap = true;
         }
     }
 
@@ -208,8 +212,8 @@ public class PossessionMaster : MonoBehaviour {
     public IEnumerator selectSwap(bool enter, Prisoner highlighted) {
         if (enter) {
             if (astralForm) {
-                julia.gameObject.rigidbody.useGravity = false;
                 julia.stopControlling();
+                julia.gameObject.rigidbody.isKinematic = true;
             } else {
                 currentlyPossessing.stopControlling();
                 //pan the camera in
@@ -223,21 +227,24 @@ public class PossessionMaster : MonoBehaviour {
                 prisonerCamera.gameObject.SetActive(false);
                 julia.gameObject.transform.position = currentlyPossessing.gameObject.transform.GetChild(0).transform.position;
                 julia.gameObject.SetActive(true);
-                julia.gameObject.rigidbody.useGravity = false;
+
                 julia.stopControlling();
+                julia.gameObject.rigidbody.isKinematic = true;
 
             }
 
             Vector3 up = julia.gameObject.transform.position;
             up.y += selectionSwapSettings.popUp;
-        
+
+            //rotate to look at
+            Vector3 turnDirection = highlighted.gameObject.transform.GetChild(0).position - up;
+            turnDirection.Normalize();
+            julia.gameObject.transform.GetChild(0).GetChild(0).rotation = Quaternion.LookRotation(turnDirection);
+
             //popUp
             yield return StartCoroutine(HOTween.To(julia.gameObject.transform, selectionSwapSettings.popUpSpeed, new TweenParms().Prop("position", up).Ease(EaseType.EaseOutQuad)).WaitForCompletion());
 
-            //rotate to look at
-            Vector3 turnDirection = highlighted.gameObject.transform.GetChild(0).position - julia.gameObject.transform.position;
-            turnDirection.Normalize();
-            HOTween.To(julia.gameObject.transform, selectionSwapSettings.rotateSpeed, "rotation", Quaternion.LookRotation(turnDirection));
+            //HOTween.To(julia.gameObject.transform, selectionSwapSettings.rotateSpeed, "rotation", Quaternion.LookRotation(turnDirection));
 
             //zoom in on prisoner
             float distance = Vector3.Distance(PossessionMaster.AstralForm ? julia.gameObject.transform.position : PossessionMaster.CurrentlyPossesing.gameObject.transform.position, highlighted.gameObject.transform.position);
@@ -247,24 +254,25 @@ public class PossessionMaster : MonoBehaviour {
             //zoom back to normal
             yield return StartCoroutine(HOTween.To(julia.gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Camera>(), selectionSwapSettings.zoomSpeed, "fieldOfView", origFovJulia).WaitForCompletion());
 
+            if(!astralForm)
+                //fade in astral effect
+                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 0);
+
             //fall back down
             Vector3 down = julia.gameObject.transform.position;
             down.y -= selectionSwapSettings.popUp;
             yield return StartCoroutine(HOTween.To(julia.gameObject.transform, selectionSwapSettings.popDownSpeed, new TweenParms().Prop("position", down).Ease(EaseType.EaseOutQuad)).WaitForCompletion());
 
             if (astralForm) {
-                julia.gameObject.rigidbody.useGravity = true;
+                julia.gameObject.rigidbody.isKinematic = false;
                 julia.startControlling();
             } else {
-                julia.gameObject.rigidbody.useGravity = true;
+                julia.gameObject.rigidbody.isKinematic = false;
                 julia.stopControlling();
                 julia.gameObject.SetActive(false);
                 transitionP(currentlyPossessing, true);
 
-                //fade in astral effect
-                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 0);
-
-                //pan the camera out
+                //pan the camera in
                 yield return StartCoroutine(panHead(true, currentlyPossessing));
                 currentlyPossessing.startControlling();
             }
@@ -284,11 +292,8 @@ public class PossessionMaster : MonoBehaviour {
         if (panOut) {
             cameraZoom.z = curPrisoner.camZoom;
             yield return StartCoroutine(HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), panOutSpeed, "localPosition", cameraZoom).WaitForCompletion());
-            curPrisoner.startControlling();
-            canSwap = true;
         } else {
             cameraZoom.z = 0;
-            Debug.Log(curPrisoner.gameObject.transform.GetChild(0).position + ": " + curPrisoner.gameObject.transform.GetChild(0).name);
             yield return StartCoroutine(HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), panInSpeed, "localPosition", cameraZoom ).WaitForCompletion());
         }
     }

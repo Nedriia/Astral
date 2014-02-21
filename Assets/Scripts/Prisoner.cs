@@ -5,7 +5,7 @@ public class Prisoner : MonoBehaviour, Possessable {
     
     public FreeLookCam prisonerCamera;
     public ProtectCameraFromWallClip protFrmWalls;
-    public Transform head;
+    public Transform focusPoint;
     public float camPivVert = 2f, camPivHor = 0f, camZoom = -1f;
 
 	protected int health;
@@ -26,7 +26,7 @@ public class Prisoner : MonoBehaviour, Possessable {
 		jumpVelocity = 10.0f;
 		isPossessed = false;
         isdead = false;
-        head = transform.Find("Head").transform;
+        focusPoint = transform.Find("Focus Point").transform;
         eyes = prisonerCamera.gameObject.GetComponent<Animation>();
         userControl = gameObject.GetComponent<ThirdPersonUserControl>();
         prisonerAnimator = gameObject.GetComponent<Animator>();

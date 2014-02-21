@@ -47,10 +47,10 @@ public class ControlManager : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.G)) {
             if (!selectionMode) {
-                StartCoroutine(possMaster.selectSwap(true, possMaster.getInventory()[0]));
+                StartCoroutine(possMaster.selectSwap(true, possMaster.getInventory()[1]));
                 selectionMode = true;
             } else {
-                StartCoroutine(possMaster.selectSwap(false, possMaster.getInventory()[0]));
+                StartCoroutine(possMaster.selectSwap(false, possMaster.getInventory()[1]));
                 selectionMode = false;
             }
         }
