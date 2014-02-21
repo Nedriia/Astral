@@ -64,9 +64,12 @@ public class LightFlicker : MonoBehaviour {
 	//Update is called once per frame
 	private void Update() {
 		//Turn the light on and off based on a timer
-		if (Time.time >= nextFlicker) {
+		if (lightAffected.enabled == true && Time.time >= nextFlicker) {
 			//Switch the light on/off if dim isn't selected
-			if (dimLight == false) lightAffected.enabled = !lightAffected.enabled;
+			if (dimLight == false) {
+				if (lightAffected.intensity == 0f) lightAffected.intensity = originalIntensity;
+				else lightAffected.intensity = 0f;
+			}
 			else lightAffected.intensity += getDimValue();
 			
 			//Add 1 to the flicker counter, then mod it with the number of flickers that range from the min to the max

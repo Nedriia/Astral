@@ -19,6 +19,8 @@ public class PossessionMaster : MonoBehaviour {
 	void Start () {
         Julia = GameObject.Find("Julia").GetComponent<Astral>();
         prisonerCamera = GameObject.Find("Prisoner Camera Rig").GetComponent<FreeLookCam>();
+        prisonerCamera.GetComponent<FreeLookCam>().enabled = true;
+        prisonerCamera.GetComponent<ProtectCameraFromWallClip>().enabled = false;
         prisonerInventory = new List<Prisoner>();
         canSwap = true;
         //we are starting in a prisoner

@@ -2532,12 +2532,12 @@ MonoBehaviour:
     dimAmount: 0
     dimLight: 0
   specialfade:
-    fadeDuration: 0
+    fadeDuration: 1
   specialdim:
-    dimAmount: 0
-    dimTime: 0
-    brightenAmount: 0
-    brightenTime: 0
+    dimAmount: 1
+    dimTime: 1.5
+    brightenAmount: 1
+    brightenTime: 2
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

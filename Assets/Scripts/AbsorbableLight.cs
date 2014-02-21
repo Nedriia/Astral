@@ -2,13 +2,12 @@
 using System.Collections;
 using Holoville.HOTween;
 
-//Placed on all lights that the light prisoner can absorb. It must have the same effect regardless of what the light has attached to it
-//So, what we need to do is have each light flicker in the SAME way when the light prisoner is under, and we must disable all the other properties when this happens
-//If everything works out fine, we should just have to include this in a light and it'll work
+//Placed on all lights that the Light Prisoner can absorb
 public class AbsorbableLight : MonoBehaviour {
 	private Light lightAffected; //The light absorbed or put back into
 	private float originalIntensity; //The original intensity of the light
 	private bool hasLight; //Checks if the light is actually in the source or not
+	private Wire wire; //The wire for the light
 	
 	private LightFlicker flicker; //The light's special flicker that indicates when the prisoner can put light
 	private LightFade fade; //The light's special fade that gets added when the prisoner takes the light
@@ -18,25 +17,34 @@ public class AbsorbableLight : MonoBehaviour {
 	private LightFlicker originalFlicker; //The light's original flicker
 	private LightFade originalFade; //The light's original fade
 	private ToggleLight toggle; //The light's toggle
-	private Renderer wireRenderer; //The mesh renderer of the wire, which has the material of the wire
+	
+	//Constants for the shaders
+	private Shader glowShader;
+	private Shader noGlowShader;
 	
 	//Use this for initialization
 	private void Start() {
+		//Get the light
 		lightAffected = this.gameObject.GetComponent<Light>();
-		if (lightAffected != null) 
-		{
+		
+		//If the light is found, get the original intensity and whether the light has 
+		if (lightAffected != null) {
 			originalIntensity = lightAffected.intensity;
 			hasLight = lightAffected.enabled;
 		}
 		
+		//Get the Light's wire
+		wire = this.gameObject.GetComponentInChildren<Wire>();
+		
+		//Set the special effects that occur when the light prisoner interacts with the light
 		flicker = null;
 		fade = null;
 		dimmer = null;
 		
+		//Find the original effects that the light has
 		originalFlicker = this.gameObject.GetComponent<LightFlicker>();
 		originalFade = this.gameObject.GetComponent<LightFade>();
 		toggle = this.gameObject.GetComponent<ToggleLight>();
-		wireRenderer = this.gameObject.GetComponentInChildren<Renderer>();
 	}
 	
 	//Gets the light affected
@@ -49,6 +57,11 @@ public class AbsorbableLight : MonoBehaviour {
 		get { return originalIntensity; }
 	}
 	
+	//Tells if the light has a light actually inside it
+	public bool containsLight {
+		get { return hasLight; }
+	}
+	
 	//Gets the special flicker
 	public LightFlicker getSpecialFlicker {
 		get { return flicker; }
@@ -57,6 +70,11 @@ public class AbsorbableLight : MonoBehaviour {
 	//Gets the special dim
 	public Tweener getSpecialDim {
 		get { return dimmer; }
+	}
+	
+	//Gets the light's wire
+	public Wire getWire {
+		get { return wire; }
 	}
 	
 	//Makes the light dim when light prisoner goes under it without light stored
@@ -69,7 +87,7 @@ public class AbsorbableLight : MonoBehaviour {
 		
 			dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.dimTime, "intensity", originalIntensity - lightPrisoner.specialdim.dimAmount);
 			dimmer.autoKillOnComplete = true;
-			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, .2f);
+			if (wire != null) wire.changeWireShader(lightAffected, true);
 		}
 	}
 	
@@ -90,7 +108,7 @@ public class AbsorbableLight : MonoBehaviour {
 			//Add a flicker
 			//flicker = this.gameObject.AddComponent("LightFlicker") as LightFlicker;
 			//lightPrisoner.specialflicker.setFlicker(flicker);
-			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, .2f);
+			if (wire != null) wire.changeWireShader(lightAffected, true);
 		}
 	}
 	
@@ -101,7 +119,7 @@ public class AbsorbableLight : MonoBehaviour {
 		if (dimmer != null) dimmer.Complete();
 		dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.dimTime, "intensity", originalIntensity);
 		dimmer.autoKillOnComplete = true;
-		if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, 0f);
+		if (wire != null) wire.changeWireShader(lightAffected, false);
 	}
 	
 	public void stopPut(LightPrisoner lightPrisoner) {
@@ -113,7 +131,7 @@ public class AbsorbableLight : MonoBehaviour {
 			dimmer = HOTween.To(lightAffected, lightPrisoner.specialdim.brightenTime, "intensity", originalIntensity);
 			dimmer.autoKillOnComplete = true;
 			//Destroy(flicker);
-			if (wireRenderer != null) wireRenderer.material.color = new Color(wireRenderer.material.color.r, wireRenderer.material.color.g, wireRenderer.material.color.b, 0f);
+			if (wire != null) wire.changeWireShader(lightAffected, false);
 		}
 	}
 	
