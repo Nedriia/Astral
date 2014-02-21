@@ -22,7 +22,7 @@ public class ControlManager : MonoBehaviour {
         bool prisonerGrounded = (PossessionMaster.CurrentlyPossesing == null) ? false : PossessionMaster.CurrentlyPossesing.PrisonerAnimator.GetBool("OnGround");
 
         //Entering into astral
-        if (Input.GetKeyUp(KeyCode.E) && !PossessionMaster.AstralForm && possMaster.CanSwap && prisonerGrounded) {
+        if (Input.GetKeyUp(KeyCode.E) && !PossessionMaster.AstralForm && possMaster.CanSwap && prisonerGrounded && !selectionMode) {
             StartCoroutine(possMaster.enterAstral());
         }
 
@@ -45,7 +45,7 @@ public class ControlManager : MonoBehaviour {
             julia.addPrisoner();
         }
 
-        if (Input.GetKeyUp(KeyCode.G)) {
+        if (Input.GetKeyUp(KeyCode.G) && possMaster.CanSwap) {
             if (!selectionMode) {
                 StartCoroutine(possMaster.selectSwap(true, possMaster.getInventory()[1]));
                 selectionMode = true;

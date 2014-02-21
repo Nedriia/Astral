@@ -31,10 +31,10 @@ public class SimpleMouseRotator : MonoBehaviour {
 	void Start () {
 		originalRotation = transform.localRotation;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+        Debug.Log(originalRotation.eulerAngles);
 		// we make initial calculations from the original local rotation
 		transform.localRotation = originalRotation;
 

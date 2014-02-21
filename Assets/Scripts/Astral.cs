@@ -37,7 +37,7 @@ public class Astral : MonoBehaviour, Possessable {
 
 	// Update is called once per frame
 	void Update () {
-
+        Debug.DrawRay(transform.position, transform.forward * 1, Color.cyan);
 	}
 
     //true for in, false for out, return amount of time to wait
