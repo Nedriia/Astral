@@ -1,8 +1,6 @@
-Shader "TransApproach/BumpedSpecular" {
+Shader "TransApproach/Bumped" {
 Properties {
 	_Color ("Main Color", Color) = (1,1,1,1)
-	_SpecColor ("Specular Color", Color) = (0.5, 0.5, 0.5, 1)
-	_Shininess ("Shininess", Range (0.03, 1)) = 0.078125
 	_MainTex ("Base (RGB) Gloss (A)", 2D) = "white" {}
 	_BumpMap ("Normalmap", 2D) = "bump" {}
 	_Opacity ("Opacity", Range(0.1, 1.0)) = 0.5
@@ -24,7 +22,6 @@ SubShader {
 sampler2D _MainTex;
 sampler2D _BumpMap;
 fixed4 _Color;
-half _Shininess;
 uniform float _Opacity;
 
  struct Input {
@@ -44,7 +41,6 @@ uniform float _Opacity;
    o.Albedo = c.rgba;
    o.Gloss = c.a;
    o.Alpha = IN.fooAlpha;
-   o.Specular = _Shininess;
    o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
  }
  ENDCG
