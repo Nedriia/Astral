@@ -17,7 +17,6 @@ public class AbsorbableLight : MonoBehaviour {
 	private LightFlicker originalFlicker; //The light's original flicker
 	private LightFade originalFade; //The light's original fade
 	private ToggleLight toggle; //The light's toggle
-	//private Material wireMaterial; //The material of the wire; we will set the shader's alpha to max to make it glow and set it to 0 to turn off the glow
 	
 	//Constants for the shaders
 	private Shader glowShader;
@@ -46,13 +45,6 @@ public class AbsorbableLight : MonoBehaviour {
 		originalFlicker = this.gameObject.GetComponent<LightFlicker>();
 		originalFade = this.gameObject.GetComponent<LightFade>();
 		toggle = this.gameObject.GetComponent<ToggleLight>();
-		
-		//Renderer wireRenderer = this.gameObject.GetComponentInChildren<Renderer>();
-		
-		//Set the material
-		//if (wireRenderer != null) {
-		//	  wireMaterial = wireRenderer.material;
-		//}
 	}
 	
 	//Gets the light affected
@@ -73,6 +65,11 @@ public class AbsorbableLight : MonoBehaviour {
 	//Gets the special dim
 	public Tweener getSpecialDim {
 		get { return dimmer; }
+	}
+	
+	//Gets the light's wire
+	public Wire getWire {
+		get { return wire; }
 	}
 	
 	//Makes the light dim when light prisoner goes under it without light stored
@@ -144,21 +141,6 @@ public class AbsorbableLight : MonoBehaviour {
 		if (toggle != null) toggle.enabled = enabled;
 	}
 	
-	//Changes the wire's shader from Transparent/Diffuse to a glow and vice versa
-	/*private void changeWireShader(bool into) {
-		if (wireMaterial != null) {
-			if (into == true) {
-				wireMaterial.shader = glowShader;
-				wireMaterial.SetColor("_GlowColor", lightAffected.color);
-				wireMaterial.color = lightAffected.color;
-			}
-			else {
-				wireMaterial.shader = noGlowShader;
-				wireMaterial.color = Color.black;
-			}
-		}
-	}*/
-	
 	//Checks if the light can be taken
 	public bool canBeTaken() {
 		return (lightAffected != null && hasLight == true && fade == null);
@@ -212,14 +194,6 @@ public class AbsorbableLight : MonoBehaviour {
 	
 	//Update is called once per frame
 	private void Update() {
-		//Change the transparency of the wire depending on the distance the light prisoner is from it
-		/*if (PossessionMaster.CurrentlyPossesing != null && wireMaterial != null) {
-			//Use just the X and Z positions so it doesn't depend on the Y value you are from it
-			Vector2 wireDist = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z);
-			Vector2 prisonerDist = new Vector2(PossessionMaster.CurrentlyPossesing.gameObject.transform.position.x, PossessionMaster.CurrentlyPossesing.gameObject.transform.position.z);
-			
-			float distWire = Vector2.Distance(wireDist, prisonerDist);
-			if (distWire > 0) wireMaterial.color = new Color(wireMaterial.color.r, wireMaterial.color.g, wireMaterial.color.b, 1f - (distWire / 8));
-		}*/
+		
 	}
 }

@@ -9,6 +9,7 @@ public class LightPrisoner : Prisoner {
 	public specialDim specialdim; //The special dim
 
 	private GameObject lightHolder; //The game object holding the light that the prisoner has attached
+	private AbsorbableLight light; //The last absorbable light the Light Prisoner touched
 	private Light lightStored; //The light the prisoner has stored. The prisoner can start with light
 	private LightFade lightStoredFade; //The prisoner's light fade
 	
@@ -24,10 +25,18 @@ public class LightPrisoner : Prisoner {
 	public override float bodyTransition(bool entering) {
 		//Do stuff here
 		if (entering == true) {
-		
+			//if (light != null) {
+			//	if (lightStored.enabled == false) 
+			//		light.indicateTake(this);
+			//	else light.indicatePut(this);
+			//}
 		}
 		else {
-		
+			//if (light != null) {
+			//	if (lightStored.enabled == false)
+			//		light.stopTake(this);
+			//	else light.stopPut(this);
+			//}
 		}
 	
 		return base.bodyTransition(entering);
@@ -36,10 +45,10 @@ public class LightPrisoner : Prisoner {
 	//NOTE: Probably will be switched to raycasting later; this is just a quick test to get the algorithm down
 	private void OnTriggerEnter(Collider other) {
 		//Get the light of the object
-		AbsorbableLight light = other.gameObject.GetComponent<AbsorbableLight>();
+		light = other.gameObject.GetComponent<AbsorbableLight>();
 		
 		//If there is indeed a light and the light prisoner doesn't have one, make it dim to indicate that the light prisoner can take it
-		if (light != null) {
+		if (light != null) {// && isPossessed == true) {
 			if (lightStored.enabled == false) {
 				light.indicateTake(this);
 			}
@@ -53,10 +62,10 @@ public class LightPrisoner : Prisoner {
 	//Take the light from the light source and store it
 	private void OnTriggerStay(Collider other) {
 		//Get the light of the object
-		AbsorbableLight light = other.gameObject.GetComponent<AbsorbableLight>();
+		light = other.gameObject.GetComponent<AbsorbableLight>();
 		
 		//If there is a light, and the Player pressed the L button, store the light if the light is enabled and put the light back if the light is disabled
-		if (light != null) {
+		if (light != null) {// && isPossessed == true) {
 			//If you put the light back and are still standing on it, check for indicating if it can be taken
 			if (lightStored.enabled == false) {
 				light.indicateTake(this);
@@ -92,10 +101,10 @@ public class LightPrisoner : Prisoner {
 	//Disable the light when the prisoner walks out of it
 	private void OnTriggerExit(Collider other) {
 		//Get the light of the object
-		AbsorbableLight light = other.gameObject.GetComponent<AbsorbableLight>();
+		light = other.gameObject.GetComponent<AbsorbableLight>();
 		
 		//If there is indeed a light and it is enabled, disable its flicker
-		if (light != null) {
+		if (light != null) {// && isPossessed == true) {
 			if (lightStored.enabled == false)
 				light.stopTake(this);
 			else light.stopPut(this);

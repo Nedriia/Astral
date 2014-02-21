@@ -49,5 +49,6 @@ public class Wire : MonoBehaviour {
 			float distWire = Vector2.Distance(wireDist, prisonerDist);
 			if (distanceFade > 0) wireMaterial.color = new Color(wireMaterial.color.r, wireMaterial.color.g, wireMaterial.color.b, 1f - (distWire / distanceFade));
 		}
+		else if (wireMaterial.color.a != 0f) wireMaterial.color = new Color(wireMaterial.color.r, wireMaterial.color.g, wireMaterial.color.b, 0f);
 	}
 }

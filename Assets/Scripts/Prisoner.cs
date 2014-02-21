@@ -57,9 +57,11 @@ public class Prisoner : MonoBehaviour, Possessable {
     public virtual float bodyTransition(bool entering) {
         float waitTime = 0;
         if (entering) {
+			isPossessed = true;
             //eyes.Play();
             //waitTime = eyes["Prisoner Eyes Open"].length;
         } else {
+			isPossessed = false;
             //eyes.Play("Prisoner Eyes Close");
             //waitTime = eyes["Prisoner Eyes Close"].length;
         }
