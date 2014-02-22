@@ -42,6 +42,15 @@ ModelImporter:
     100072: Sphere_001
     100074: Sphere_003
     100076: white_plane
+    100078: Cylinder_003
+    100080: handelTop1
+    100082: handelTop2
+    100084: handelTop3
+    100086: bolts
+    100088: ball1
+    100090: ball2
+    100092: handle3
+    100094: ball3
     400000: Circle
     400002: Circle_001
     400004: Circle_002
@@ -81,6 +90,15 @@ ModelImporter:
     400072: Sphere_001
     400074: Sphere_003
     400076: white_plane
+    400078: Cylinder_003
+    400080: handelTop1
+    400082: handelTop2
+    400084: handelTop3
+    400086: bolts
+    400088: ball1
+    400090: ball2
+    400092: handle3
+    400094: ball3
     2300000: Circle
     2300002: Circle_002
     2300004: Circle_003
@@ -116,6 +134,15 @@ ModelImporter:
     2300064: Sphere_001
     2300066: Sphere_003
     2300068: white_plane
+    2300070: Cylinder_003
+    2300072: handelTop1
+    2300074: handelTop2
+    2300076: handelTop3
+    2300078: bolts
+    2300080: ball1
+    2300082: ball2
+    2300084: handle3
+    2300086: ball3
     3300000: Circle
     3300002: Circle_002
     3300004: Circle_003
@@ -151,6 +178,15 @@ ModelImporter:
     3300064: Sphere_001
     3300066: Sphere_003
     3300068: white_plane
+    3300070: Cylinder_003
+    3300072: handelTop1
+    3300074: handelTop2
+    3300076: handelTop3
+    3300078: bolts
+    3300080: ball1
+    3300082: ball2
+    3300084: handle3
+    3300086: ball3
     4300000: white_plane
     4300002: image_002
     4300004: image_001
@@ -189,6 +225,15 @@ ModelImporter:
     4300070: image
     4300072: Circle
     4300074: GENERATOR_BOX
+    4300076: handelTop1
+    4300078: Cylinder_003
+    4300080: handelTop3
+    4300082: handelTop2
+    4300084: bolts
+    4300086: ball1
+    4300088: ball2
+    4300090: handle3
+    4300092: ball3
     7400000: Default Take
     9500000: //RootNode
     13700000: Circle_001
