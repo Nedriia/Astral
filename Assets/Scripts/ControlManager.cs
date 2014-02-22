@@ -27,18 +27,22 @@ public class ControlManager : MonoBehaviour {
         }
 
         //Swapping
-        if (Input.GetKeyUp(KeyCode.Q) && possMaster.CanSwap) {
-            if (PossessionMaster.AstralForm && (possMaster.getInventory().Count >= 1)) {
-                StartCoroutine(possMaster.swap(possMaster.getInventory()[0]));
-            } else if ((possMaster.getInventory().Count > 1) && prisonerGrounded) {
-                ++curPosIndex;
-                if (curPosIndex >= possMaster.getInventory().Count) {
-                    curPosIndex = 0;
-                    StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
-                } else {
-                    StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
-                }
-            }
+        //if (Input.GetKeyUp(KeyCode.Q) && possMaster.CanSwap) {
+        //    if (PossessionMaster.AstralForm && (possMaster.getInventory().Count >= 1)) {
+        //        StartCoroutine(possMaster.swap(possMaster.getInventory()[0]));
+        //    } else if ((possMaster.getInventory().Count > 1) && prisonerGrounded) {
+        //        ++curPosIndex;
+        //        if (curPosIndex >= possMaster.getInventory().Count) {
+        //            curPosIndex = 0;
+        //            StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
+        //        } else {
+        //            StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
+        //        }
+        //    }
+        //}
+
+        if (Input.GetKeyUp(KeyCode.Q) && possMaster.CanSwap && Astral.CurrentlyTargeting.name == "Prisoner") {
+            StartCoroutine(possMaster.swap(Astral.CurrentlyTargeting.GetComponent<Prisoner>()));
         }
 
         if (Input.GetKeyUp(KeyCode.R) && julia.CurrentlyViewing != null && !possMaster.getInventory().Contains(julia.CurrentlyViewing) && !julia.CurrentlyViewing.IsDead) {

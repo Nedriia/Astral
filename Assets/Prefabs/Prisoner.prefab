@@ -2482,7 +2482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prisonerCamera: {fileID: 11400002, guid: c7e3b82d7ff4fda47ac41fa942593acb, type: 2}
-  protFrmWalls: {fileID: 0}
+  protFrmWalls: {fileID: 11400000, guid: c7e3b82d7ff4fda47ac41fa942593acb, type: 2}
   focusPoint: {fileID: 0}
   camPivVert: 2
   camPivHor: 0

@@ -5,6 +5,7 @@ using System.Collections;
 public class Astral : MonoBehaviour, Possessable {
 
     public PossessionMaster possMess;
+    public Texture2D flash;
 
     private Prisoner currentlyViewing;
 	private Animation eyes;
@@ -12,6 +13,7 @@ public class Astral : MonoBehaviour, Possessable {
     private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
     private FirstPersonCharacter characterMover;
     private bool disabledOnSceneStart = true;
+    private static GameObject currentlyTargeting;
 
 	// Use this for initialization
 	void Start () {
@@ -37,7 +39,15 @@ public class Astral : MonoBehaviour, Possessable {
 
 	// Update is called once per frame
 	void Update () {
-        Debug.DrawRay(transform.position, transform.forward * 1, Color.cyan);
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
+       
+        if (Physics.Raycast(ray, out hit)) {
+            Debug.DrawLine(ray.origin, hit.point);
+            Debug.Log(hit.collider.gameObject.name);
+            currentlyTargeting = hit.collider.gameObject;
+        }
 	}
 
     //true for in, false for out, return amount of time to wait
@@ -55,6 +65,10 @@ public class Astral : MonoBehaviour, Possessable {
 
     public Prisoner CurrentlyViewing {
         get { return currentlyViewing; }
+    }
+
+    public static GameObject CurrentlyTargeting {
+        get { return currentlyTargeting; }
     }
 
     public void addPrisoner() {

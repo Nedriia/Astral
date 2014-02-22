@@ -51,6 +51,7 @@ public class PossessionMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 	}
 
     public bool CanSwap {
@@ -107,8 +108,9 @@ public class PossessionMaster : MonoBehaviour {
         //julia to prisoner
         if ( astralForm && (currentlyPossessing == null)) {
             canSwap = false;
-            julia.transform.GetComponent<SimpleMouseRotator>().enabled = false;
-            julia.transform.GetChild(0).GetChild(0).GetComponent<SimpleMouseRotator>().enabled = false;
+
+            //make sure that she can't move any longer
+            julia.stopControlling();
 
             yield return StartCoroutine(astralTurnTowardPivot(curPrisoner, true));
 
