@@ -8,7 +8,7 @@ public class Astral : MonoBehaviour, Possessable {
     public Texture2D flash;
 
     private Prisoner currentlyViewing;
-	private Animation eyes;
+	private Animation anim;
     //used for disabling and enabling movement
     private SimpleMouseRotator mouseRotatorLR, mouseRotatorUD;
     private FirstPersonCharacter characterMover;
@@ -18,7 +18,7 @@ public class Astral : MonoBehaviour, Possessable {
 	// Use this for initialization
 	void Start () {
         disabledOnSceneStart = false;
-		eyes = gameObject.GetComponent<Animation>();
+		anim = gameObject.GetComponent<Animation>();
         possMess = GameObject.Find("Possession Master").GetComponent<PossessionMaster>();
         mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
         mouseRotatorUD = gameObject.GetComponentsInChildren<SimpleMouseRotator>()[1];
@@ -29,7 +29,7 @@ public class Astral : MonoBehaviour, Possessable {
     //adding them here will grab them when we enable her
     void OnEnable() {
         if (disabledOnSceneStart) {
-            eyes = gameObject.GetComponent<Animation>();
+            anim = gameObject.GetComponent<Animation>();
             mouseRotatorLR = gameObject.GetComponent<SimpleMouseRotator>();
             mouseRotatorUD = gameObject.GetComponentInChildren<SimpleMouseRotator>();
             characterMover = gameObject.GetComponentInChildren<FirstPersonCharacter>();
@@ -43,6 +43,14 @@ public class Astral : MonoBehaviour, Possessable {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
        
+		RaycastHit[] hits = Physics.SphereCastAll(ray, 0.3f);
+
+		//for(int i=0; i < hits.Length ; ++i){
+			//if(hits[i].collider.tag == "Prisoner"){
+			//	currentlyTargeting = hits[i].collider.gameObject;
+			//}
+		//}
+
         if (Physics.Raycast(ray, out hit)) {
             Debug.DrawLine(ray.origin, hit.point);
             Debug.Log(hit.collider.gameObject.name);
@@ -54,11 +62,13 @@ public class Astral : MonoBehaviour, Possessable {
     public float bodyTransition(bool entering) {
         float waitTime = 0;
         if (entering) {
-            //eyes.Play();
-            //waitTime = eyes["Eyes Open"].length;
+			gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<AmplifyColorEffect>().LutTexture = flash;
+            anim.Play();
+			waitTime = anim["FlashIn"].length;
         } else {
-            //eyes.Play("Eyes Close");
-            //waitTime = eyes["Eyes Close"].length;
+			gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<AmplifyColorEffect>().LutTexture = flash;
+			anim.Play("FlashOut");
+			waitTime = anim["FlashOut"].length;
         }
         return waitTime;
     }
