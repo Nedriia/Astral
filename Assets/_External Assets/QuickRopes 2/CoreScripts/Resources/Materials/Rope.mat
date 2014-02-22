@@ -19,7 +19,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1115.47998, y: 1}
+          m_Scale: {x: 3, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -27,6 +27,13 @@ Material:
         second:
           m_Texture: {fileID: 2800000, guid: 7c5cdadd5ede8ac4baca46175ebb0272, type: 3}
           m_Scale: {x: 20, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _GlowTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -42,18 +49,15 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _GlowTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _Shininess
         second: .078125
+      data:
+        first:
+          name: _GlowStrength
+        second: 1
       data:
         first:
           name: _EmissionLM
@@ -62,10 +66,6 @@ Material:
         first:
           name: _Parallax
         second: .0199999996
-      data:
-        first:
-          name: _GlowStrength
-        second: 1
     m_Colors:
       data:
         first:

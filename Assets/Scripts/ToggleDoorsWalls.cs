@@ -24,14 +24,14 @@ public class ToggleDoorsWalls : MonoBehaviour {
 		if (PossessionMaster.AstralForm ) {
 			//Camera.main.renderingPath = RenderingPath.Forward;
 			foreach(GameObject i in tagList) {
-				i.renderer.material.shader = transAppShader;
+				if (i.renderer != null) i.renderer.material.shader = transAppShader;
 			}
 			Physics.IgnoreLayerCollision(playerLayer, hideLayer, true);
 		}
 		else {
 			//Camera.main.renderingPath = RenderingPath.DeferredLighting;
 			foreach(GameObject i in tagList) {
-				i.renderer.material.shader = diffuseShader;
+				if (i.renderer != null) i.renderer.material.shader = diffuseShader;
 			}
 			Physics.IgnoreLayerCollision(playerLayer, hideLayer, false);
 		}
