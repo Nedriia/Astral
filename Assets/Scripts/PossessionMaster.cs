@@ -5,28 +5,45 @@ using Holoville.HOTween;
 
 public class PossessionMaster : MonoBehaviour {
 
-    public Astral Julia;
+    public Astral julia;
     public FreeLookCam prisonerCamera;
     public Prisoner startingPosPrisoner;
-    public float flyThroughSpeed, turnSpeed;
+    public float flyThroughSpeed;                              //how fast to the possessing prisoner
+    public float turnSpeed;                                    //how fast we turn to look at the prisoner
+    public float panOutSpeed = 0.5f;                           //how fast we pan from the head of the prisoner we just entered
+    public float panInSpeed = 0.5f;                            //how fast we pan in from the head of the prisoner we are possessing
+    public SelectionSwapSettings selectionSwapSettings;
 
+    [System.Serializable]
+    public class SelectionSwapSettings{
+        public float popUp = 1.5f;
+        public float popUpSpeed = 0.5f;
+        public float popDownSpeed = 0.5f;
+        public float aeFadeSpeed = 1.5f;
+        public float rotateSpeed = 0.5f;
+        public float zoomMultiple = 2f;
+        public float zoomSpeed = 0.5f;
+
+    }
     private List<Prisoner> prisonerInventory;
     private static Prisoner currentlyPossessing;
     private static bool astralForm;
     private bool canSwap;
+    private AmplifyColorEffect astralEffect;
+    private float origFovJulia;
 
 	// Use this for initialization
 	void Start () {
-        Julia = GameObject.Find("Julia").GetComponent<Astral>();
+        julia = GameObject.Find("Julia").GetComponent<Astral>();
+        origFovJulia = julia.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Camera>().fieldOfView;
         prisonerCamera = GameObject.Find("Prisoner Camera Rig").GetComponent<FreeLookCam>();
-        prisonerCamera.GetComponent<FreeLookCam>().enabled = true;
-        prisonerCamera.GetComponent<ProtectCameraFromWallClip>().enabled = false;
+        astralEffect = julia.gameObject.transform.GetChild(0).GetChild(0).GetComponent<AmplifyColorEffect>();
         prisonerInventory = new List<Prisoner>();
         canSwap = true;
         //we are starting in a prisoner
         if (startingPosPrisoner != null) {
             StartCoroutine(possesionStart(true));
-        //we are staring in Julia
+        //we are staring in julia
         } else {
             StartCoroutine(possesionStart(false));
         }
@@ -53,7 +70,7 @@ public class PossessionMaster : MonoBehaviour {
     //enters astral form when in prisoner
     public IEnumerator enterAstral() {
         canSwap = false;
-        //Prisoner to Julia
+        //Prisoner to julia
         Vector3 juliaNewPosition = currentlyPossessing.transform.position;
         CapsuleCollider prisonerCapsule = currentlyPossessing.GetComponent<CapsuleCollider>();
         Vector3 capsuleStart = currentlyPossessing.transform.position, capsuleEnd = Vector3.zero;
@@ -79,76 +96,78 @@ public class PossessionMaster : MonoBehaviour {
         juliaNewPosition.y += 1;
         yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
         prisonerCamera.gameObject.SetActive(false);
-        Julia.gameObject.SetActive(true);
-        Julia.transform.position = juliaNewPosition; 
+        julia.gameObject.SetActive(true);
+        julia.transform.position = juliaNewPosition; 
         yield return new WaitForSeconds(transitionJ(true));
-        Julia.startControlling();
+        julia.startControlling();
         canSwap = true;
     }
 
     //swaps to the specified prisoner
     public IEnumerator swap( Prisoner curPrisoner ) {
-        //Julia to prisoner
+        //julia to prisoner
         if ( astralForm && (currentlyPossessing == null)) {
             canSwap = false;
-            Vector3 turnDirection =  curPrisoner.gameObject.transform.position - Julia.gameObject.transform.position;
-            turnDirection.Normalize();
-            Julia.stopControlling();
-            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, turnSpeed, "rotation", Quaternion.LookRotation(turnDirection)).WaitForCompletion());
+
+            //make sure that she can't move any longer
+            julia.stopControlling();
+
+            yield return StartCoroutine(astralTurnTowardPivot(curPrisoner, true));
 
             //Fly from current position to prisoner
-            Vector3 endFlyPos = new Vector3(curPrisoner.gameObject.transform.position.x, (curPrisoner.gameObject.transform.position.y + 1f), curPrisoner.gameObject.transform.position.z);
-            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, flyThroughSpeed, "position", endFlyPos).WaitForCompletion());
+            yield return StartCoroutine(HOTween.To(julia.gameObject.transform, flyThroughSpeed, "position", curPrisoner.focusPoint.position).WaitForCompletion());
 
             //wait for julia out animation to finish
             yield return new WaitForSeconds(transitionJ(false));
-            Julia.gameObject.SetActive(false);
+            julia.gameObject.SetActive(false);
 
             //wait for prisoner in animation to finish
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
 
             //pan the camera out from pivot
-            StartCoroutine(panFromHead(curPrisoner));
+            yield return StartCoroutine(panHead(true, curPrisoner));
+            curPrisoner.startControlling();
+            canSwap = true;
 
         //Prisoner to Prisoner
         } else if (!astralForm && (currentlyPossessing != null)) {
             canSwap = false;
-            Julia.gameObject.transform.position = currentlyPossessing.transform.position;
-            Vector3 turnDirection = curPrisoner.gameObject.transform.position - currentlyPossessing.gameObject.transform.position;
-            turnDirection.Normalize();
-            Julia.transform.GetComponent<SimpleMouseRotator>().enabled = false;
+            julia.gameObject.transform.position = currentlyPossessing.transform.position;
+            julia.transform.GetComponent<SimpleMouseRotator>().enabled = false;
 
             //wait for prisoner out animation to finish
             yield return new WaitForSeconds(transitionP(currentlyPossessing, false));
 
             //Fly from prisoner to prisoner, 
             prisonerCamera.gameObject.SetActive(false);
-            Julia.gameObject.SetActive(true);
+            julia.gameObject.SetActive(true);
             transitionJ(true);
-            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, turnSpeed, "rotation", Quaternion.LookRotation(turnDirection)).WaitForCompletion());
-            Vector3 endFlyPos = new Vector3(curPrisoner.gameObject.transform.position.x, (curPrisoner.gameObject.transform.position.y + 1f), curPrisoner.gameObject.transform.position.z);
-            yield return StartCoroutine(HOTween.To(Julia.gameObject.transform, flyThroughSpeed, "position", endFlyPos).WaitForCompletion());
+            StartCoroutine(astralTurnTowardPivot(curPrisoner, false));
+            yield return StartCoroutine(HOTween.To(julia.gameObject.transform, flyThroughSpeed, "position", curPrisoner.gameObject.transform.GetChild(0).position).WaitForCompletion());
             prisonerCamera.gameObject.SetActive(true);
             transitionJ(false);
-            Julia.gameObject.SetActive(false);
+            julia.gameObject.SetActive(false);
 
             //wait for in animation to finish
             yield return new WaitForSeconds(transitionP(curPrisoner, true));
             
             //pan the camera out from pivot
-            StartCoroutine(panFromHead(curPrisoner));
+            yield return StartCoroutine(panHead(true, curPrisoner));
+            curPrisoner.startControlling();
+            canSwap = true;
         }
     }
+
 
     //transtions in or out of julia
     private float transitionJ(bool enter) {
         float waitTime = 0;
         if (enter) {
-            waitTime = Julia.bodyTransition(true);
+            waitTime = julia.bodyTransition(true);
             astralForm = true;
         } else {
-            Julia.stopControlling();
-            waitTime = Julia.bodyTransition(false);
+            julia.stopControlling();
+            waitTime = julia.bodyTransition(false);
             astralForm = false;
         }
         return waitTime;
@@ -186,25 +205,129 @@ public class PossessionMaster : MonoBehaviour {
         return waitTime;
     }
 
-    private IEnumerator panFromHead(Prisoner curPrisoner) {
-        Vector3 cameraZoom = prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition;
-        cameraZoom.z = curPrisoner.camZoom;
-        yield return StartCoroutine( HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), 0.5f, "localPosition", cameraZoom).WaitForCompletion());
-        curPrisoner.startControlling();
+    public IEnumerator selectSwap(bool enter, Prisoner highlighted) {
+        canSwap = false;
+        if (enter) {
+            if (astralForm) {
+                julia.stopControlling();
+                julia.gameObject.rigidbody.isKinematic = true;
+            } else {
+                currentlyPossessing.stopControlling();
+                //pan the camera in
+                yield return StartCoroutine(panHead(false, currentlyPossessing));
+
+                //fade out astral effect
+                astralEffect.BlendAmount = 0;
+                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 0.7f);
+
+                //disable prisoner camera, enable julia camera
+                prisonerCamera.gameObject.SetActive(false);
+                julia.gameObject.transform.position = currentlyPossessing.gameObject.transform.GetChild(0).transform.position;
+                julia.gameObject.SetActive(true);
+
+                julia.stopControlling();
+                julia.gameObject.rigidbody.isKinematic = true;
+
+            }
+            if (astralForm) {
+                StartCoroutine(astralTurnTowardPivot(highlighted, true));
+            } else {
+                StartCoroutine(astralTurnTowardPivot(highlighted, false));
+            }
+
+            Vector3 upAir = julia.gameObject.transform.position;
+            upAir.y += selectionSwapSettings.popUp;
+
+            //popUp
+            yield return StartCoroutine(HOTween.To(julia.gameObject.transform, selectionSwapSettings.popUpSpeed, new TweenParms().Prop("position", upAir).Ease(EaseType.EaseOutQuad)).WaitForCompletion());
+
+            //zoom in on prisoner
+            float distance = Vector3.Distance(PossessionMaster.AstralForm ? julia.gameObject.transform.position : PossessionMaster.CurrentlyPossesing.gameObject.transform.position, highlighted.gameObject.transform.position);
+            yield return StartCoroutine(HOTween.To(julia.gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Camera>(), selectionSwapSettings.zoomSpeed, "fieldOfView", origFovJulia - (distance * selectionSwapSettings.zoomMultiple)).WaitForCompletion());
+            
+        } else {
+            //zoom back to normal
+            yield return StartCoroutine(HOTween.To(julia.gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Camera>(), selectionSwapSettings.zoomSpeed, "fieldOfView", origFovJulia).WaitForCompletion());
+
+            if(!astralForm)
+                //fade in astral effect
+                HOTween.To(astralEffect, selectionSwapSettings.aeFadeSpeed, "BlendAmount", 0);
+
+            //fall back down
+            Vector3 down = julia.gameObject.transform.position;
+            down.y -= selectionSwapSettings.popUp;
+            yield return StartCoroutine(HOTween.To(julia.gameObject.transform, selectionSwapSettings.popDownSpeed, new TweenParms().Prop("position", down).Ease(EaseType.EaseOutQuad)).WaitForCompletion());
+
+            if (astralForm) {
+                julia.gameObject.rigidbody.isKinematic = false;
+                julia.startControlling();
+            } else {
+                julia.gameObject.rigidbody.isKinematic = false;
+                julia.stopControlling();
+                julia.gameObject.SetActive(false);
+                transitionP(currentlyPossessing, true);
+
+                //pan the camera in
+                yield return StartCoroutine(panHead(true, currentlyPossessing));
+                currentlyPossessing.startControlling();
+            }
+
+        }
         canSwap = true;
     }
+
+    //overloaded to account for if we are first starting selection, or stopping selection
+    //public IEnumerator selectSwap(bool enter, Prisoner highlighted) {}
+
+    //this function is used to panFrom the head when we arrive on a prisoner
+    private IEnumerator panHead(bool panOut, Prisoner curPrisoner) {
+        Vector3 cameraZoom = prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).localPosition;
+        //this is used to set the vert look on prisoner entrance
+        //prisonerCamera.gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(5, 0, 0);
+        if (panOut) {
+            cameraZoom.z = curPrisoner.camZoom;
+            yield return StartCoroutine(HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), panOutSpeed, "localPosition", cameraZoom).WaitForCompletion());
+        } else {
+            cameraZoom.z = 0;
+            yield return StartCoroutine(HOTween.To(prisonerCamera.gameObject.transform.GetChild(0).GetChild(0), panInSpeed, "localPosition", cameraZoom ).WaitForCompletion());
+        }
+    }
+
+    private IEnumerator astralTurnTowardPivot(Prisoner prisoner, bool tween) {
+        Vector3 horizontalShift = julia.gameObject.transform.position, verticalShift = julia.gameObject.transform.GetChild(0).GetChild(0).position;
+
+        horizontalShift.y = prisoner.gameObject.transform.GetChild(0).position.y;
+        verticalShift.y += selectionSwapSettings.popUp;
+
+        //rotate to look at
+        Vector3 horizontalTurn = prisoner.focusPoint.position - horizontalShift, verticalTurn = prisoner.focusPoint.position - verticalShift;
+
+        Debug.Log(prisoner.gameObject.transform.GetChild(0).name);
+        horizontalTurn.Normalize();
+        verticalTurn.Normalize();
+
+        if (tween) {
+            HOTween.To(julia.gameObject.transform.GetChild(0).GetChild(0), selectionSwapSettings.rotateSpeed, "rotation", Quaternion.LookRotation(verticalTurn));
+            yield return StartCoroutine(HOTween.To(julia.gameObject.transform, selectionSwapSettings.rotateSpeed, "rotation", Quaternion.LookRotation(horizontalTurn)).WaitForCompletion());
+        } else {
+            julia.gameObject.transform.rotation = Quaternion.LookRotation(horizontalTurn);
+            julia.gameObject.transform.GetChild(0).GetChild(0).transform.rotation = Quaternion.LookRotation(verticalTurn);
+        }
+    }
+
+    //We call this on the start of our game
     private IEnumerator possesionStart(bool startAsPrisoner) {
         if (startAsPrisoner) {
-            Julia.gameObject.SetActive(false);
+            julia.gameObject.SetActive(false);
             astralForm = false;
             yield return new WaitForSeconds(transitionP(startingPosPrisoner, true));
             currentlyPossessing.startControlling();
         } else {
             astralForm = true;
             prisonerCamera.gameObject.SetActive(false);
-            Julia.stopControlling();
+            julia.stopControlling();
             yield return new WaitForSeconds(transitionJ(true));
-            Julia.startControlling();
+            julia.startControlling();
         }
     }
 }

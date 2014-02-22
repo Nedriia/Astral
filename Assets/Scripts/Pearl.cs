@@ -24,6 +24,7 @@ public class Pearl : Prisoner
 	public bool isCrawling, isFleeing, fleeCooldown, isHeartCooldown;
 	public float currentFear, currentTimeScream, scareInc, shakeTime, cooldown, heartBeatPitch, heartCooldown;
 	public float scareDec;
+    
 	private NavMeshAgent navAgent;
 	private ThirdPersonCharacter thirdPChar;
 	private ThirdPersonUserControl thirdPControl;
@@ -44,7 +45,7 @@ public class Pearl : Prisoner
 		thirdPChar = GetComponent<ThirdPersonCharacter> ();
 		thirdPControl = GetComponent<ThirdPersonUserControl> ();
 		posMast = GameObject.Find ("Possession Master").GetComponent<PossessionMaster> ();
-		ampColor = Camera.main.GetComponent<AmplifyColorEffect> ();
+		ampColor = prisonerCamera.gameObject.transform.GetChild(0).GetChild(0).GetComponent<AmplifyColorEffect> ();
 		heartBeat = GetComponent<AudioSource> ();
 		heartBeatPitch = heartBeat.pitch;
 	}

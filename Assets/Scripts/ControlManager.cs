@@ -22,29 +22,43 @@ public class ControlManager : MonoBehaviour {
         bool prisonerGrounded = (PossessionMaster.CurrentlyPossesing == null) ? false : PossessionMaster.CurrentlyPossesing.PrisonerAnimator.GetBool("OnGround");
 
         //Entering into astral
-        if (Input.GetKeyUp(KeyCode.E) && !PossessionMaster.AstralForm && possMaster.CanSwap && prisonerGrounded) {
+        if (Input.GetKeyUp(KeyCode.E) && !PossessionMaster.AstralForm && possMaster.CanSwap && prisonerGrounded && !selectionMode) {
             StartCoroutine(possMaster.enterAstral());
         }
 
         //Swapping
-        if (Input.GetKeyUp(KeyCode.Q) && possMaster.CanSwap) {
-            if (PossessionMaster.AstralForm && (possMaster.getInventory().Count >= 1)) {
-                StartCoroutine(possMaster.swap(possMaster.getInventory()[0]));
-            } else if ((possMaster.getInventory().Count > 1) && prisonerGrounded) {
-                ++curPosIndex;
-                if (curPosIndex >= possMaster.getInventory().Count) {
-                    curPosIndex = 0;
-                    StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
-                } else {
-                    StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
-                }
-            }
+        //if (Input.GetKeyUp(KeyCode.Q) && possMaster.CanSwap) {
+        //    if (PossessionMaster.AstralForm && (possMaster.getInventory().Count >= 1)) {
+        //        StartCoroutine(possMaster.swap(possMaster.getInventory()[0]));
+        //    } else if ((possMaster.getInventory().Count > 1) && prisonerGrounded) {
+        //        ++curPosIndex;
+        //        if (curPosIndex >= possMaster.getInventory().Count) {
+        //            curPosIndex = 0;
+        //            StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
+        //        } else {
+        //            StartCoroutine(possMaster.swap(possMaster.getInventory()[curPosIndex]));
+        //        }
+        //    }
+        //}
+
+        if (Input.GetKeyUp(KeyCode.Q) && possMaster.CanSwap && Astral.CurrentlyTargeting.tag == "Prisoner") {
+            StartCoroutine(possMaster.swap(Astral.CurrentlyTargeting.GetComponent<Prisoner>()));
+            Debug.Log("hellO");
         }
 
         if (Input.GetKeyUp(KeyCode.R) && julia.CurrentlyViewing != null && !possMaster.getInventory().Contains(julia.CurrentlyViewing) && !julia.CurrentlyViewing.IsDead) {
             julia.addPrisoner();
         }
 
+        if (Input.GetKeyUp(KeyCode.G) && possMaster.CanSwap) {
+            if (!selectionMode) {
+                StartCoroutine(possMaster.selectSwap(true, possMaster.getInventory()[1]));
+                selectionMode = true;
+            } else {
+                StartCoroutine(possMaster.selectSwap(false, possMaster.getInventory()[1]));
+                selectionMode = false;
+            }
+        }
         if (Input.GetKeyUp(KeyCode.T)) {
             if (selectionMode) {
                 julia.gameObject.rigidbody.useGravity = true;

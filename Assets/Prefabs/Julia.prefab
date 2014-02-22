@@ -32,6 +32,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 65: {fileID: 6500002}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -56,8 +57,8 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400012}
   - 195: {fileID: 19500000}
-  - 111: {fileID: 11100000}
   - 65: {fileID: 6500000}
+  - 111: {fileID: 11100000}
   m_Layer: 8
   m_Name: Julia
   m_TagString: Player
@@ -95,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: -.707106829}
-  m_LocalPosition: {x: 23.753231, y: 2.66238785, z: -58.3623505}
+  m_LocalPosition: {x: 6.445364, y: 1.83310819, z: 4.55342674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -218,12 +219,12 @@ Animation:
   m_GameObject: {fileID: 100008}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 0d24463213189b84294e0768f3938aef, type: 2}
+  m_Animation: {fileID: 7400000, guid: 5e549ddc852054091acd00feb3c6f403, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 0d24463213189b84294e0768f3938aef, type: 2}
-  - {fileID: 7400000, guid: f59c6f6dea61d864c9d567990cfab437, type: 2}
+  - {fileID: 7400000, guid: c6caa8e2935434fef80b731432920fc2, type: 2}
+  - {fileID: 7400000, guid: 5e549ddc852054091acd00feb3c6f403, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &11400000
@@ -351,6 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possMess: {fileID: 0}
+  flash: {fileID: 2800000, guid: 351871b2ce0ed034885b7986a30db291, type: 3}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,7 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QualityLevel: 1
-  BlendAmount: .699999988
+  BlendAmount: 1
   LutTexture: {fileID: 2800000, guid: fbc730437c35303498361db5f4e2c5ef, type: 3}
   LutBlendTexture: {fileID: 2800000, guid: 812292f80d4fc994395eb8a10baca246, type: 3}
   MaskTexture: {fileID: 0}
@@ -373,6 +375,50 @@ MonoBehaviour:
   VolumeCollisionMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -923714165, guid: 19b0cf21764734b05961b2e048d1c7c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blurMode: 0
+  _reuseDepth: 0
+  _rerenderResolution: 1
+  _highPrecsion: 0
+  settings:
+    downsampleSteps: 2
+    baseResolution: 4
+    downsampleResolution: 4
+    iterations: 3
+    blurSpread: .600000024
+    innerStrength: 1
+    outerStrength: 1
+    boostStrength: 1
+    blendMode: 0
+    downsampleBlendMode: 100
+    falloff:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    falloffScale: 1
+    radius: 4
+    normalize: 1
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
