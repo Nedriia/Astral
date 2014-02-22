@@ -310,6 +310,11 @@ public class ThirdPersonCharacter : MonoBehaviour {
 		set { moveSpeedMultiplier = value;}
 		get { return moveSpeedMultiplier; }
 	}
+
+	public float JumpPower{
+		set { jumpPower = value;}
+		get { return jumpPower; }
+	}
 	
         
 	void SetUpAnimator()
