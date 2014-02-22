@@ -40,25 +40,14 @@ public class Astral : MonoBehaviour, Possessable {
 	// Update is called once per frame
 	void Update () {
         RaycastHit hit;
+		LayerMask ignoreLights = (1 << 9) | (1 << 10);
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
-       
-		RaycastHit[] hits = Physics.SphereCastAll(ray, 0.5f);
 
-		for(int i=0; i < hits.Length ; ++i){
-			if(hits[i].collider.tag == "Prisoner"){
-				currentlyTargeting = hits[i].collider.gameObject;
-			}else{
-				currentlyTargeting = null;
-			}
+		if(Physics.SphereCast(ray, 0.5f, out hit, Mathf.Infinity, ignoreLights.value)){
+			currentlyTargeting = hit.collider.gameObject;
 		}
 
-        //if (Physics.Raycast(ray, out hit)) {
-        //    Debug.DrawLine(ray.origin, hit.point);
-        //    Debug.Log(hit.collider.gameObject.name);
-        //    currentlyTargeting = hit.collider.gameObject;
-        //}
-		Debug.Log (CurrentlyTargeting);
 	}
 
     //true for in, false for out, return amount of time to wait
