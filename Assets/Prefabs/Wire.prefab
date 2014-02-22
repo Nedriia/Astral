@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcc9771dafe1564eb65cb114394bf9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceFade: 0
+  distanceFade: 12
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
