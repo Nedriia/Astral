@@ -36,6 +36,7 @@ ModelImporter:
     100056: wall_hall_outside
     100058: Cube
     100060: wall_hall_outside_001
+    100062: SECRET_HOLE
     400000: ceiling
     400002: female_body_basemesh_001
     400004: floor
@@ -67,6 +68,7 @@ ModelImporter:
     400056: wall_hall_outside
     400058: Cube
     400060: wall_hall_outside_001
+    400062: SECRET_HOLE
     2300000: ceiling
     2300002: female_body_basemesh_001
     2300004: floor
@@ -97,6 +99,7 @@ ModelImporter:
     2300054: wall_hall_outside
     2300056: Cube
     2300058: wall_hall_outside_001
+    2300060: SECRET_HOLE
     3300000: ceiling
     3300002: female_body_basemesh_001
     3300004: floor
@@ -127,6 +130,7 @@ ModelImporter:
     3300054: wall_hall_outside
     3300056: Cube
     3300058: wall_hall_outside_001
+    3300060: SECRET_HOLE
     4300000: Plane
     4300002: wall_hall_hotel
     4300004: wall_hall_exit
@@ -154,6 +158,7 @@ ModelImporter:
     4300048: wall_hall_outside
     4300050: Cube
     4300052: wall_hall_outside_001
+    4300054: SECRET_HOLE
     7400000: Default Take
     9500000: //RootNode
   materials:
