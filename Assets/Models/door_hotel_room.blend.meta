@@ -1,0 +1,107 @@
+fileFormatVersion: 2
+guid: ae8cc0c2737e78644a0c7e958d59a45a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: black_keyhole_inside
+    100002: black_keyhole_outside
+    100004: door_frame
+    100006: //RootNode
+    100008: door_inside
+    100010: door_outside
+    100012: knob_inside
+    100014: knob_outside
+    100016: lock_inside
+    100018: lock_outside
+    400000: black_keyhole_inside
+    400002: black_keyhole_outside
+    400004: door_frame
+    400006: //RootNode
+    400008: door_inside
+    400010: door_outside
+    400012: knob_inside
+    400014: knob_outside
+    400016: lock_inside
+    400018: lock_outside
+    2300000: black_keyhole_inside
+    2300002: black_keyhole_outside
+    2300004: door_frame
+    2300006: door_inside
+    2300008: door_outside
+    2300010: knob_inside
+    2300012: knob_outside
+    2300014: lock_inside
+    2300016: lock_outside
+    3300000: black_keyhole_inside
+    3300002: black_keyhole_outside
+    3300004: door_frame
+    3300006: door_inside
+    3300008: door_outside
+    3300010: knob_inside
+    3300012: knob_outside
+    3300014: lock_inside
+    3300016: lock_outside
+    4300000: black_keyhole_outside
+    4300002: black_keyhole_inside
+    4300004: knob_inside
+    4300006: lock_inside
+    4300008: door_inside
+    4300010: lock_outside
+    4300012: knob_outside
+    4300014: door_frame
+    4300016: door_outside
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .649999976
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
